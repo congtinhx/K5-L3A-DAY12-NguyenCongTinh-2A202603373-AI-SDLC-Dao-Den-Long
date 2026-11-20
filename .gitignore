@@ -7,3 +7,4 @@ out/
 *.log
 docs/proof/ci/
 data/
+release/
