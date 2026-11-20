@@ -1,6 +1,6 @@
 # AGENTS.md — Đảo Đèn Lồng
 
-Game 3D (Three.js, trình duyệt), **3 Đêm**, + chế độ headless theo **Test Contract v1.1** (`docs/lab/ticket-02.txt`).
+Game 3D (Three.js, trình duyệt), **3 Đêm**, + chế độ headless theo **Test Contract v1.2** (`docs/lab/ticket-02.txt` + `ticket-03.txt`). Quyết định thiết kế: `docs/adr/`. Breaking changes: `CHANGELOG.md`.
 Không có dependency npm: Node ≥ 22.18 chạy TypeScript trực tiếp (type stripping). Three.js nạp từ CDN qua importmap.
 
 ## Lệnh
@@ -16,7 +16,9 @@ Không có dependency npm: Node ≥ 22.18 chạy TypeScript trực tiếp (type 
 - Luật game = `docs/notes/assumptions-phase2.md` (ưu tiên) + `assumptions-phase1.md`. **Không tự bịa luật**; luật mới phải ghi vào file assumptions trước.
 - **Thứ tự tick 12 bước** của Ticket-02 là bắt buộc — `Sim.step` chia đúng các bước có đánh số; giữ nguyên thứ tự khi sửa.
 - Bản đồ chuẩn chỉ ở `src/core/map.ts` (góc từ +X ngược kim đồng hồ: `(r·cosθ, y, r·sinθ)`).
-- Tên trạng thái cố định: Bóng Mực `spawning|wander|chase|recoil|stunned`; Gió Lạc `idle|chase|flee|removed`.
+- Tên trạng thái cố định: Bóng Mực `spawning|wander|chase|recoil|stunned|drain`; Gió Lạc `idle|chase|flee|removed`.
+- **Dầu đèn là số nguyên đơn vị 1/60** (`Lantern.fuelT`, 100 = 6000); chỉ chia 60 khi xuất. Vùng an toàn chỉ qua `Sim.isSafe(l)` (lit && fuel ≥ 30). Không còn thắng sớm: thắng/thua chỉ xét ở bước 11 (ADR-0001).
+- Ticket mới [THAY THẾ] luật cũ → viết ADR trong `docs/adr/`, thêm mục BREAKING vào `CHANGELOG.md`, ghi `test-changes-phaseN.md`.
 - So sánh biên khoảng cách/hình học luôn có sai số 1e-9 (đã gặp lỗi cộng dồn 0.1 ở Phase 2).
 - Số tuning chỉ đọc từ `game.contract.json` (không hard-code lại trong code).
 - `src/core/` thuần logic: không import `three`, DOM, `fs`; không `Math.random`/`Date.now` — mọi ngẫu nhiên qua `Rng` có seed.

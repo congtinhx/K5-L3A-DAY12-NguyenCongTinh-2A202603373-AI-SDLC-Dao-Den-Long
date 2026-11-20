@@ -47,3 +47,11 @@ Công cụ: Claude (Opus) trong Claude app, có shell trên máy và trình duy�
 
 **Token/chi phí (ước tính thô):** Phase 2 khoảng 600k token đầu vào (ngữ cảnh lớn + nhiều lượt gọi công cụ, ticket dài) và ~70k token đầu ra. Một lần in nhầm cả snapshot JSONL ra màn hình (~25k token lãng phí) — lần sau chỉ grep dòng event. Xem số chính xác ở trang usage.
 **Tiết kiệm:** sinh 25 scenario bằng một script; tính tay theo công thức đóng (nhảy, rơi, bục) thay vì chạy thử; không cố tối ưu bot khi đã rõ không kịp giờ.
+
+## Phase 3
+
+**Cách làm (30 phút):** lưu Ticket-03 → ADR-0001 + CHANGELOG + contract v1.2 trước khi code → sửa core bằng một script thay thế có kiểm tra "mỗi chuỗi khớp đúng 1 lần" (tránh sửa nhầm chỗ) → chạy test cũ để thấy đúng 8 test bị luật mới làm sai → tính tay lại / xóa có lý do → 18 scenario mới → UI → verify → tag.
+
+**AI sai ở đâu:** scenario `p3_refuel_prefers_receivable` có mô tả không khớp với điều nó thật sự kiểm (trạng thái "đèn đầy" không tới được) — phát hiện khi đọc lại kỳ vọng sau khi test đạt; đổi tên thành `p3_refuel_small` và ghi rõ giới hạn trong traceability.
+
+**Token (ước tính thô):** ~250k token đầu vào, ~35k đầu ra cho Phase 3. Tiết kiệm: sửa core bằng một lần patch có kiểm tra thay vì nhiều lượt; không chạy lại bot; chỉ chạy `npm test` 2 lần + verify 1 lần.

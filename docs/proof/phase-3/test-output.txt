@@ -1,0 +1,490 @@
+TAP version 13
+# Subtest: bad_inputs_move — Contract: move ngoài [-1,1] → mã 2
+ok 1 - bad_inputs_move — Contract: move ngoài [-1,1] → mã 2
+  ---
+  duration_ms: 1534.367819
+  type: 'test'
+  ...
+# Subtest: bad_inputs_order — Contract: tick không tăng → mã 2
+ok 2 - bad_inputs_order — Contract: tick không tăng → mã 2
+  ---
+  duration_ms: 623.181983
+  type: 'test'
+  ...
+# Subtest: bad_lantern_id — Scenario đèn không tồn tại → mã 2
+ok 3 - bad_lantern_id — Scenario đèn không tồn tại → mã 2
+  ---
+  duration_ms: 467.061445
+  type: 'test'
+  ...
+# Subtest: bad_scenario_json — Contract: scenario không phải JSON → mã 2
+ok 4 - bad_scenario_json — Contract: scenario không phải JSON → mã 2
+  ---
+  duration_ms: 443.570454
+  type: 'test'
+  ...
+# Subtest: cam_yaw_90 — Contract C: công thức xoay, yaw 90 + move [0,1] → +X
+ok 5 - cam_yaw_90 — Contract C: công thức xoay, yaw 90 + move [0,1] → +X
+  ---
+  duration_ms: 578.6857
+  type: 'test'
+  ...
+# Subtest: dawn_lose — Hết giờ → thua dawn
+ok 6 - dawn_lose — Hết giờ → thua dawn
+  ---
+  duration_ms: 488.882915
+  type: 'test'
+  ...
+# Subtest: default_start — Màn mặc định: 5 đèn chuẩn, 20 đom đóm, (0,0,0), 240 s
+ok 7 - default_start — Màn mặc định: 5 đèn chuẩn, 20 đom đóm, (0,0,0), 240 s
+  ---
+  duration_ms: 756.423988
+  type: 'test'
+  ...
+# Subtest: deposit_light — Nạp 10 → deposit + lantern_lit (relight false) cùng tick; điểm 10×5 + 100 = 150; fuel 100, sức chứa 12
+ok 8 - deposit_light — Nạp 10 → deposit + lantern_lit (relight false) cùng tick; điểm 10×5 + 100 = 150; fuel 100, sức chứa 12
+  ---
+  duration_ms: 966.965654
+  type: 'test'
+  ...
+# Subtest: deposit_not_lit_yet — Nạp 3 chưa đủ thì chưa thắp; điểm 3×5 = 15
+ok 9 - deposit_not_lit_yet — Nạp 3 chưa đủ thì chưa thắp; điểm 3×5 = 15
+  ---
+  duration_ms: 1250.031772
+  type: 'test'
+  ...
+# Subtest: deposit_partial — Nạp phần còn thiếu, giữ phần thừa
+ok 10 - deposit_partial — Nạp phần còn thiếu, giữ phần thừa
+  ---
+  duration_ms: 1242.599269
+  type: 'test'
+  ...
+# Subtest: hit_invuln_lose — Bị chạm: -1 lửa, rơi floor(50%), bất tử 90 tick; hết lửa thì thua
+ok 11 - hit_invuln_lose — Bị chạm: -1 lửa, rơi floor(50%), bất tử 90 tick; hết lửa thì thua
+  ---
+  duration_ms: 957.273502
+  type: 'test'
+  ...
+# Subtest: interact_boundary_in — interact_radius chuẩn 2.0: đúng 2.0 m tính là trong
+ok 12 - interact_boundary_in — interact_radius chuẩn 2.0: đúng 2.0 m tính là trong
+  ---
+  duration_ms: 869.655469
+  type: 'test'
+  ...
+# Subtest: interact_edge_only — Giữ interact không nạp lặp (chỉ cạnh false→true): còn 5 đom đóm và đèn L2 chưa thắp trong tầm nhưng không nạp thêm
+ok 13 - interact_edge_only — Giữ interact không nạp lặp (chỉ cạnh false→true): còn 5 đom đóm và đèn L2 chưa thắp trong tầm nhưng không nạp thêm
+  ---
+  duration_ms: 865.363462
+  type: 'test'
+  ...
+# Subtest: interact_nearest — Nhiều đèn trong tầm: chọn gần nhất
+ok 14 - interact_nearest — Nhiều đèn trong tầm: chọn gần nhất
+  ---
+  duration_ms: 640.901933
+  type: 'test'
+  ...
+# Subtest: interact_out_of_range — Ngoài 2.0 m (2.1) không nạp
+ok 15 - interact_out_of_range — Ngoài 2.0 m (2.1) không nạp
+  ---
+  duration_ms: 512.999829
+  type: 'test'
+  ...
+# Subtest: jump — Nhảy chuẩn: vy 7, g 20 → y(10) = (70 − 110/6)/60 = 0.861; đáp đất trước tick 60
+ok 16 - jump — Nhảy chuẩn: vy 7, g 20 → y(10) = (70 − 110/6)/60 = 0.861; đáp đất trước tick 60
+  ---
+  duration_ms: 460.002416
+  type: 'test'
+  ...
+# Subtest: move_forward — Contract C: move [0,1], yaw 0 → +Z, 6 m/s
+ok 17 - move_forward — Contract C: move [0,1], yaw 0 → +Z, 6 m/s
+  ---
+  duration_ms: 516.469329
+  type: 'test'
+  ...
+# Subtest: move_right_yaw0 — Contract C: move [1,0], yaw 0 → +X
+ok 18 - move_right_yaw0 — Contract C: move [1,0], yaw 0 → +X
+  ---
+  duration_ms: 690.239601
+  type: 'test'
+  ...
+# Subtest: normalize — Contract C: vector dài hơn 1 được chuẩn hóa
+ok 19 - normalize — Contract C: vector dài hơn 1 được chuẩn hóa
+  ---
+  duration_ms: 782.09767
+  type: 'test'
+  ...
+# Subtest: p2_charm_dash — AC-CHARM-2: có bùa → lướt lại ngay khi lướt trước kết thúc (tick 16); bấm giữa lúc lướt (tick 6) bị bỏ qua
+ok 20 - p2_charm_dash — AC-CHARM-2: có bùa → lướt lại ngay khi lướt trước kết thúc (tick 16); bấm giữa lúc lướt (tick 6) bị bỏ qua
+  ---
+  duration_ms: 561.435195
+  type: 'test'
+  ...
+# Subtest: p2_charm_respawn — AC-CHARM-3: bùa đã nhặt (còn 100 tick hồi) xuất hiện lại đúng tick 100
+ok 21 - p2_charm_respawn — AC-CHARM-3: bùa đã nhặt (còn 100 tick hồi) xuất hiện lại đúng tick 100
+  ---
+  duration_ms: 673.710174
+  type: 'test'
+  ...
+# Subtest: p2_charm_speed — AC-CHARM-1: nhặt Bùa Gió C1 ở (35,0,0) tick 1 → chạy 7.2 m/s: x = 34.6 + 9×0.12 = 35.68 ở tick 10
+ok 22 - p2_charm_speed — AC-CHARM-1: nhặt Bùa Gió C1 ở (35,0,0) tick 1 → chạy 7.2 m/s: x = 34.6 + 9×0.12 = 35.68 ở tick 10
+  ---
+  duration_ms: 557.541134
+  type: 'test'
+  ...
+# Subtest: p2_dash_air — AC-DASH-3: nhảy rồi lướt ở tick 6 → giữ độ cao 0.5 m trong lúc lướt
+ok 23 - p2_dash_air — AC-DASH-3: nhảy rồi lướt ở tick 6 → giữ độ cao 0.5 m trong lúc lướt
+  ---
+  duration_ms: 469.53875
+  type: 'test'
+  ...
+# Subtest: p2_dash_basic — AC-DASH-1: đứng yên quay +Z, lướt 12 tick × 14/60 = 2.8 m; hồi chiêu còn 71 tick ở tick 20
+ok 24 - p2_dash_basic — AC-DASH-1: đứng yên quay +Z, lướt 12 tick × 14/60 = 2.8 m; hồi chiêu còn 71 tick ở tick 20
+  ---
+  duration_ms: 522.043096
+  type: 'test'
+  ...
+# Subtest: p2_dash_cooldown_early — AC-DASH-2: bấm lại ở tick 90 (còn 1 tick hồi chiêu) → không lướt
+ok 25 - p2_dash_cooldown_early — AC-DASH-2: bấm lại ở tick 90 (còn 1 tick hồi chiêu) → không lướt
+  ---
+  duration_ms: 564.62572
+  type: 'test'
+  ...
+# Subtest: p2_dash_cooldown_ready — AC-DASH-2: hồi chiêu 90 tick tính từ lúc bắt đầu → lướt lại được ở tick 91
+ok 26 - p2_dash_cooldown_ready — AC-DASH-2: hồi chiêu 90 tick tính từ lúc bắt đầu → lướt lại được ở tick 91
+  ---
+  duration_ms: 502.681588
+  type: 'test'
+  ...
+# Subtest: p2_drifter_pulse_chase — AC-DRIFT-2: Tỏa Sáng trúng Gió Lạc đang chase → flee, không cướp
+ok 27 - p2_drifter_pulse_chase — AC-DRIFT-2: Tỏa Sáng trúng Gió Lạc đang chase → flee, không cướp
+  ---
+  duration_ms: 504.729057
+  type: 'test'
+  ...
+# Subtest: p2_drifter_pulse_drop — AC-DRIFT-3: Tỏa Sáng trúng Gió Lạc flee đang mang 3 → drifter_drop, 3 đom đóm rơi tại (3,0,0) nhặt lại được ở tick 21; Gió Lạc removed sau 120 tick
+ok 28 - p2_drifter_pulse_drop — AC-DRIFT-3: Tỏa Sáng trúng Gió Lạc flee đang mang 3 → drifter_drop, 3 đom đóm rơi tại (3,0,0) nhặt lại được ở tick 21; Gió Lạc removed sau 120 tick
+  ---
+  duration_ms: 447.012925
+  type: 'test'
+  ...
+# Subtest: p2_drifter_spawn — AC-DRIFT-4: Gió Lạc sinh ở tick 1200 Đêm 2, id D1, idle
+ok 29 - p2_drifter_spawn — AC-DRIFT-4: Gió Lạc sinh ở tick 1200 Đêm 2, id D1, idle
+  ---
+  duration_ms: 584.350732
+  type: 'test'
+  ...
+# Subtest: p2_drifter_steal — AC-DRIFT-1: mang 6, Gió Lạc cách 5 m → chase 7 m/s, chạm (≤1.2) ở tick 33, cướp 3, flee 240 tick rồi removed
+ok 30 - p2_drifter_steal — AC-DRIFT-1: mang 6, Gió Lạc cách 5 m → chase 7 m/s, chạm (≤1.2) ở tick 33, cướp 3, flee 240 tick rồi removed
+  ---
+  duration_ms: 986.163916
+  type: 'test'
+  ...
+# Subtest: p2_fall_last_flame — AC-FALL-2: rơi khi còn 1 lửa → thua no_flames ngay, không hồi sinh
+ok 31 - p2_fall_last_flame — AC-FALL-2: rơi khi còn 1 lửa → thua no_flames ngay, không hồi sinh
+  ---
+  duration_ms: 648.480843
+  type: 'test'
+  ...
+# Subtest: p2_fall_respawn — AC-FALL-1: bước khỏi mép 40 m, rơi 60 tick tới Y<−10 (tick 61): −1 lửa, mất 4 đom đóm; hồi sinh tick 121 ở (0,0,0), bất tử
+ok 32 - p2_fall_respawn — AC-FALL-1: bước khỏi mép 40 m, rơi 60 tick tới Y<−10 (tick 61): −1 lửa, mất 4 đom đóm; hồi sinh tick 121 ở (0,0,0), bất tử
+  ---
+  duration_ms: 560.266153
+  type: 'test'
+  ...
+# Subtest: p2_hit_drop_ring — Bị đánh: rơi floor(4/2)=2 đom đóm loại dropped trên vành 1.5–2.5 m (không tự nhặt lại), TTL 480
+ok 33 - p2_hit_drop_ring — Bị đánh: rơi floor(4/2)=2 đom đóm loại dropped trên vành 1.5–2.5 m (không tự nhặt lại), TTL 480
+  ---
+  duration_ms: 554.107947
+  type: 'test'
+  ...
+# Subtest: p2_launch_pad — AC-NIGHT-2: đứng trên bục (20,0,18) Đêm 2 → bay vy 14 + 24 m/s về đảo B, đáp trên đảo B (x > 42)
+ok 34 - p2_launch_pad — AC-NIGHT-2: đứng trên bục (20,0,18) Đêm 2 → bay vy 14 + 24 m/s về đảo B, đáp trên đảo B (x > 42)
+  ---
+  duration_ms: 621.023594
+  type: 'test'
+  ...
+# Subtest: p2_mote_spawn — Đom đóm: 20 lúc đầu, +1 ở tick 240
+ok 35 - p2_mote_spawn — Đom đóm: 20 lúc đầu, +1 ở tick 240
+  ---
+  duration_ms: 671.286348
+  type: 'test'
+  ...
+# Subtest: p2_n3_pad — AC-NIGHT-3: bục (0,3,13) bắn vy 12 + 8 m/s hướng −Z → đáp tầng 2 (Y=6) ở tick 50, z = 13 − 49×8/60 = 6.467
+ok 36 - p2_n3_pad — AC-NIGHT-3: bục (0,3,13) bắn vy 12 + 8 m/s hướng −Z → đáp tầng 2 (Y=6) ở tick 50, z = 13 − 49×8/60 = 6.467
+  ---
+  duration_ms: 500.591871
+  type: 'test'
+  ...
+# Subtest: p2_n3_ramp — AC-NIGHT-3: đi theo dốc 30° từ r=31 vào tâm 12 m → lên tầng 1 (Y=3) tại r=19
+ok 37 - p2_n3_ramp — AC-NIGHT-3: đi theo dốc 30° từ r=31 vào tâm 12 m → lên tầng 1 (Y=3) tại r=19
+  ---
+  duration_ms: 590.296718
+  type: 'test'
+  ...
+# Subtest: p2_n3_wall — AC-NIGHT-3: Đêm 3 vách tầng 1 (r=12, cao 3 m) chặn Mây đi từ tầng 0
+ok 38 - p2_n3_wall — AC-NIGHT-3: Đêm 3 vách tầng 1 (r=12, cao 3 m) chặn Mây đi từ tầng 0
+  ---
+  duration_ms: 776.087332
+  type: 'test'
+  ...
+# Subtest: p2_night2_start — AC-NIGHT-1: Đêm 2 có 6 đèn chuẩn, 270 s, bùa C1 (35,0,0), 20 đom đóm
+ok 39 - p2_night2_start — AC-NIGHT-1: Đêm 2 có 6 đèn chuẩn, 270 s, bùa C1 (35,0,0), 20 đom đóm
+  ---
+  duration_ms: 560.615487
+  type: 'test'
+  ...
+# Subtest: p2_night3_start — AC-NIGHT-1: Đêm 3 có 7 đèn chuẩn (L1 trên tầng 2), 300 s, 2 bùa
+ok 40 - p2_night3_start — AC-NIGHT-1: Đêm 3 có 7 đèn chuẩn (L1 trên tầng 2), 300 s, 2 bùa
+  ---
+  duration_ms: 538.206319
+  type: 'test'
+  ...
+# Subtest: p2_pause — AC-PAUSE-1: pause tick 11 → tick tăng, sim_tick/thời gian/vị trí đứng yên, state paused; tiếp tục tick 31
+ok 41 - p2_pause — AC-PAUSE-1: pause tick 11 → tick tăng, sim_tick/thời gian/vị trí đứng yên, state paused; tiếp tục tick 31
+  ---
+  duration_ms: 484.960707
+  type: 'test'
+  ...
+# Subtest: p2_pulse_3d — Tỏa Sáng đo 3D từ chân+0.8: Bóng Mực ở 4.9 m (3D 4.965) trúng, ở 4.95 m (3D 5.014) trượt
+ok 42 - p2_pulse_3d — Tỏa Sáng đo 3D từ chân+0.8: Bóng Mực ở 4.9 m (3D 4.965) trúng, ở 4.95 m (3D 5.014) trượt
+  ---
+  duration_ms: 421.314662
+  type: 'test'
+  ...
+# Subtest: p2_safe_evict — Vùng an toàn: Bóng Mực ở trong lúc đèn vừa sáng bị đưa ra mép 6 m trong đúng 30 tick, không gây hit
+ok 43 - p2_safe_evict — Vùng an toàn: Bóng Mực ở trong lúc đèn vừa sáng bị đưa ra mép 6 m trong đúng 30 tick, không gây hit
+  ---
+  duration_ms: 379.116726
+  type: 'test'
+  ...
+# Subtest: p2_wind — AC-NIGHT-4: Đêm 3 gió bắt đầu st 1800, đẩy đúng 2 m/s, hết sau 300 tick
+ok 44 - p2_wind — AC-NIGHT-4: Đêm 3 gió bắt đầu st 1800, đẩy đúng 2 m/s, hết sau 300 tick
+  ---
+  duration_ms: 576.702376
+  type: 'test'
+  ...
+# Subtest: p3_capacity_max — Sức chứa = 10 + 2×6 = 22 → tối đa 20
+ok 45 - p3_capacity_max — Sức chứa = 10 + 2×6 = 22 → tối đa 20
+  ---
+  duration_ms: 535.23247
+  type: 'test'
+  ...
+# Subtest: p3_capacity_pickup — Sức chứa 12 (1 lần thắp): mang 11 vẫn nhặt được
+ok 46 - p3_capacity_pickup — Sức chứa 12 (1 lần thắp): mang 11 vẫn nhặt được
+  ---
+  duration_ms: 443.526533
+  type: 'test'
+  ...
+# Subtest: p3_drain — Bóng Mực wander đi tới đèn yếu (fuel 25 < 30), cách 2 m ở tick 20 → drain; hút 5/s + hao 1/s; fuel_drain ở tick 80 với fuel (1500−80−300)/60 = 18.7
+ok 47 - p3_drain — Bóng Mực wander đi tới đèn yếu (fuel 25 < 30), cách 2 m ở tick 20 → drain; hút 5/s + hao 1/s; fuel_drain ở tick 80 với fuel (1500−80−300)/60 = 18.7
+  ---
+  duration_ms: 417.14972
+  type: 'test'
+  ...
+# Subtest: p3_drain_lantern_out — Đang drain mà đèn tắt → lantern_out, Bóng Mực về wander
+ok 48 - p3_drain_lantern_out — Đang drain mà đèn tắt → lantern_out, Bóng Mực về wander
+  ---
+  duration_ms: 471.877628
+  type: 'test'
+  ...
+# Subtest: p3_drain_pulse — Tỏa Sáng trúng Bóng Mực đang drain → +15 (thay vì +5), choáng
+ok 49 - p3_drain_pulse — Tỏa Sáng trúng Bóng Mực đang drain → +15 (thay vì +5), choáng
+  ---
+  duration_ms: 450.047735
+  type: 'test'
+  ...
+# Subtest: p3_drain_to_chase — Đang drain mà Mây vào trong 6 m → chase
+ok 50 - p3_drain_to_chase — Đang drain mà Mây vào trong 6 m → chase
+  ---
+  duration_ms: 469.078616
+  type: 'test'
+  ...
+# Subtest: p3_fuel_decay — Đèn sáng hao 1 fuel/giây: 100 → 90.0 sau 600 tick
+ok 51 - p3_fuel_decay — Đèn sáng hao 1 fuel/giây: 100 → 90.0 sau 600 tick
+  ---
+  duration_ms: 436.177241
+  type: 'test'
+  ...
+# Subtest: p3_lantern_out — fuel 1 → hết dầu ở tick 60: lantern_out, tắt, deposited 0, ever_lit true
+ok 52 - p3_lantern_out — fuel 1 → hết dầu ở tick 60: lantern_out, tắt, deposited 0, ever_lit true
+  ---
+  duration_ms: 439.399924
+  type: 'test'
+  ...
+# Subtest: p3_lose_dawn_threshold — Bình minh với 2/5 đèn sáng (< 3) → lost dawn
+ok 53 - p3_lose_dawn_threshold — Bình minh với 2/5 đèn sáng (< 3) → lost dawn
+  ---
+  duration_ms: 484.592902
+  type: 'test'
+  ...
+# Subtest: p3_no_early_win — Thắp đủ 5/5 đèn KHÔNG kết thúc Đêm; điểm 10×5 + 100 = 150
+ok 54 - p3_no_early_win — Thắp đủ 5/5 đèn KHÔNG kết thúc Đêm; điểm 10×5 + 100 = 150
+  ---
+  duration_ms: 513.667119
+  type: 'test'
+  ...
+# Subtest: p3_no_safe_low_fuel — Đèn fuel < 30 mất vùng an toàn: Bóng Mực chase đi xuyên vào gần đèn (đèn fuel 29) và chạm Mây
+ok 55 - p3_no_safe_low_fuel — Đèn fuel < 30 mất vùng an toàn: Bóng Mực chase đi xuyên vào gần đèn (đèn fuel 29) và chạm Mây
+  ---
+  duration_ms: 450.726479
+  type: 'test'
+  ...
+# Subtest: p3_refuel — Châm dầu: fuel 50 → (sau hao) 49.98, used = min(10, ceil(50.02/10)) = 6, fuel = 100, +30 điểm
+ok 56 - p3_refuel — Châm dầu: fuel 50 → (sau hao) 49.98, used = min(10, ceil(50.02/10)) = 6, fuel = 100, +30 điểm
+  ---
+  duration_ms: 385.412706
+  type: 'test'
+  ...
+# Subtest: p3_refuel_evict — Châm dầu đèn yếu lên ≥ 30 khi có Bóng Mực trong 6 m → đẩy ra mép trong 30 tick, không gây hit
+ok 57 - p3_refuel_evict — Châm dầu đèn yếu lên ≥ 30 khi có Bóng Mực trong 6 m → đẩy ra mép trong 30 tick, không gây hit
+  ---
+  duration_ms: 533.600168
+  type: 'test'
+  ...
+# Subtest: p3_refuel_small — Châm dầu nhỏ: đèn vừa thắp (100) hao 2 tick còn 99.97 → used = ceil(0.03/10) = 1, fuel 100; sức chứa 12 cho phép mang 12
+ok 58 - p3_refuel_small — Châm dầu nhỏ: đèn vừa thắp (100) hao 2 tick còn 99.97 → used = ceil(0.03/10) = 1, fuel 100; sức chứa 12 cho phép mang 12
+  ---
+  duration_ms: 549.583905
+  type: 'test'
+  ...
+# Subtest: p3_relight — Thắp lại đèn ever_lit chỉ cần 5: lantern_lit relight true, +5×5 + 40 = 65, relit_count 1, fuel 100 → 99.7 ở tick 20, sức chứa 12
+ok 59 - p3_relight — Thắp lại đèn ever_lit chỉ cần 5: lantern_lit relight true, +5×5 + 40 = 65, relit_count 1, fuel 100 → 99.7 ở tick 20, sức chứa 12
+  ---
+  duration_ms: 571.726042
+  type: 'test'
+  ...
+# Subtest: p3_safe_at_30 — Đúng fuel 30 vẫn còn vùng an toàn (tick 1 sau hao là 29.98 < 30 → mất): đèn fuel 40 thì chặn ở 6 m
+ok 60 - p3_safe_at_30 — Đúng fuel 30 vẫn còn vùng an toàn (tick 1 sau hao là 29.98 < 30 → mất): đèn fuel 40 thì chặn ở 6 m
+  ---
+  duration_ms: 525.97534
+  type: 'test'
+  ...
+# Subtest: p3_win_dawn — Bình minh với 3/5 đèn sáng (≥ ceil(0.6×5)) → won dawn_survived; điểm 3×(50 + floor(99.0)) + 3×50 = 597
+ok 61 - p3_win_dawn — Bình minh với 3/5 đèn sáng (≥ ceil(0.6×5)) → won dawn_survived; điểm 3×(50 + floor(99.0)) + 3×50 = 597
+  ---
+  duration_ms: 557.577075
+  type: 'test'
+  ...
+# Subtest: p3_win_need_night2 — Đêm 2 cần ceil(0.6×6) = 4: 4 đèn sáng lúc bình minh → thắng
+ok 62 - p3_win_need_night2 — Đêm 2 cần ceil(0.6×6) = 4: 4 đèn sáng lúc bình minh → thắng
+  ---
+  duration_ms: 577.279882
+  type: 'test'
+  ...
+# Subtest: pickup_boundary — Biên pickup chuẩn: 1.0 nhặt, 1.01 không
+ok 63 - pickup_boundary — Biên pickup chuẩn: 1.0 nhặt, 1.01 không
+  ---
+  duration_ms: 659.34443
+  type: 'test'
+  ...
+# Subtest: pickup_capacity — Đầy 10 thì không nhặt
+ok 64 - pickup_capacity — Đầy 10 thì không nhặt
+  ---
+  duration_ms: 859.072873
+  type: 'test'
+  ...
+# Subtest: pickup_multi_order — Nhặt nhiều con cùng tick: gần trước, hòa theo id, dừng khi đầy
+ok 65 - pickup_multi_order — Nhặt nhiều con cùng tick: gần trước, hòa theo id, dừng khi đầy
+  ---
+  duration_ms: 879.278821
+  type: 'test'
+  ...
+# Subtest: pickup_walk — Nhặt khi XZ ≤ 1.0: đi 4.0 m = 40 tick; nhặt không cộng điểm
+ok 66 - pickup_walk — Nhặt khi XZ ≤ 1.0: đi 4.0 m = 40 tick; nhặt không cộng điểm
+  ---
+  duration_ms: 587.593923
+  type: 'test'
+  ...
+# Subtest: pulse_cooldown — Cooldown chuẩn 180 tick, chi phí 3: pulse tick 1, bấm tick 101 bị bỏ, pulse lại tick 181
+ok 67 - pulse_cooldown — Cooldown chuẩn 180 tick, chi phí 3: pulse tick 1, bấm tick 101 bị bỏ, pulse lại tick 181
+  ---
+  duration_ms: 490.62801
+  type: 'test'
+  ...
+# Subtest: pulse_not_enough_light — Thiếu ánh sáng (carried 2 < 3) thì không pulse
+ok 68 - pulse_not_enough_light — Thiếu ánh sáng (carried 2 < 3) thì không pulse
+  ---
+  duration_ms: 509.191101
+  type: 'test'
+  ...
+# Subtest: pulse_out_of_radius — Bóng Mực ngoài 5 m (3D từ chân+0.8) không choáng; pulse vẫn tốn 3
+ok 69 - pulse_out_of_radius — Bóng Mực ngoài 5 m (3D từ chân+0.8) không choáng; pulse vẫn tốn 3
+  ---
+  duration_ms: 473.804676
+  type: 'test'
+  ...
+# Subtest: pulse_stun_push — Pulse chuẩn: choáng 120 tick, đẩy 4 m trong 15 tick, +5; hết choáng thì đuổi (4 m/s)
+ok 70 - pulse_stun_push — Pulse chuẩn: choáng 120 tick, đẩy 4 m trong 15 tick, +5; hết choáng thì đuổi (4 m/s)
+  ---
+  duration_ms: 542.023361
+  type: 'test'
+  ...
+# Subtest: safe_radius — Bóng Mực không vào trong 6 m quanh đèn đã thắp; đặt sẵn lit không cộng điểm
+ok 71 - safe_radius — Bóng Mực không vào trong 6 m quanh đèn đã thắp; đặt sẵn lit không cộng điểm
+  ---
+  duration_ms: 508.070761
+  type: 'test'
+  ...
+# Subtest: shade_spawn — Lịch chuẩn: 2 Bóng Mực ở tick 300 (S1, S2), trạng thái spawning
+ok 72 - shade_spawn — Lịch chuẩn: 2 Bóng Mực ở tick 300 (S1, S2), trạng thái spawning
+  ---
+  duration_ms: 492.244328
+  type: 'test'
+  ...
+# Subtest: snapshot_cadence — Contract E: snapshot mỗi --snapshot-every, dòng end cuối
+ok 73 - snapshot_cadence — Contract E: snapshot mỗi --snapshot-every, dòng end cuối
+  ---
+  duration_ms: 699.639982
+  type: 'test'
+  ...
+# Subtest: Rng: cùng seed cùng chuỗi, khác seed khác chuỗi, trong [0,1)
+ok 74 - Rng: cùng seed cùng chuỗi, khác seed khác chuỗi, trong [0,1)
+  ---
+  duration_ms: 6.941384
+  type: 'test'
+  ...
+# Subtest: InputTimeline: trường vắng giữ giá trị cũ, mặc định khi chưa có frame
+ok 75 - InputTimeline: trường vắng giữ giá trị cũ, mặc định khi chưa có frame
+  ---
+  duration_ms: 0.610672
+  type: 'test'
+  ...
+# Subtest: parseInputs: lỗi định dạng ném FormatError
+ok 76 - parseInputs: lỗi định dạng ném FormatError
+  ---
+  duration_ms: 3.382768
+  type: 'test'
+  ...
+# Subtest: cmpId so theo số: S2 < S10
+ok 77 - cmpId so theo số: S2 < S10
+  ---
+  duration_ms: 0.440223
+  type: 'test'
+  ...
+# Subtest: Tuning trong game.contract.json khớp số chuẩn Ticket-02 + Ticket-03
+ok 78 - Tuning trong game.contract.json khớp số chuẩn Ticket-02 + Ticket-03
+  ---
+  duration_ms: 0.612721
+  type: 'test'
+  ...
+# Subtest: Bản đồ chuẩn: điểm sinh và đèn mỗi Đêm
+ok 79 - Bản đồ chuẩn: điểm sinh và đèn mỗi Đêm
+  ---
+  duration_ms: 0.78335
+  type: 'test'
+  ...
+# Subtest: Sim: 3 Đêm chạy được với seed, không lỗi, tất định
+ok 80 - Sim: 3 Đêm chạy được với seed, không lỗi, tất định
+  ---
+  duration_ms: 1359.037723
+  type: 'test'
+  ...
+1..80
+# tests 80
+# suites 0
+# pass 80
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms …
