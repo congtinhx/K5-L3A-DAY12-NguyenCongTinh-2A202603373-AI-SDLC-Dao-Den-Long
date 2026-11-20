@@ -41,7 +41,8 @@ if (!browser) { console.error('Không tìm thấy Chrome/Chromium/Edge. Đặt C
 let peak: number | null = null, sampler: ReturnType<typeof setInterval> | null = null, child: ReturnType<typeof spawn> | null = null;
 const finish = (code: number) => { if (sampler) clearInterval(sampler); try { child?.kill(); } catch { /* */ } server.close(); setTimeout(() => { try { fs.rmSync(profile, { recursive: true, force: true }); } catch { /* */ } process.exit(code); }, 500); };
 const server = createServer({
-  onBenchStart: () => { sampler = setInterval(() => { const m = browserRssMb(); if (m !== null) peak = Math.max(peak ?? 0, m); }, 250); },
+  // trang báo ở giây 2.5 của khởi động → bắt đầu đo RSS sau 0.5 s, đúng lúc bắt đầu khoảng đo
+  onBenchStart: () => { setTimeout(() => { sampler = setInterval(() => { const m = browserRssMb(); if (m !== null) peak = Math.max(peak ?? 0, m); }, 250); }, 500); },
   onBench: (r) => {
     const result = {
       contract_version: '1.3',

@@ -522,7 +522,7 @@ function frame(now: number): void {
 // ---------- benchmark (Ticket-04 §1) ----------
 // Cảnh chuẩn: Đêm 1, 200 Bóng Mực wander rải đều trên đảo (seed), 100 đom đóm, L1–L3 sáng fuel 100; không input;
 // camera bay vòng tâm (0,0,0) bán kính 30 m, Y = 15 m, bắt đầu (30,15,0), ngược kim đồng hồ nhìn từ trên, 15 s/vòng.
-const bench = { on: params.has('bench'), seed: Number(params.get('seed') ?? 42), duration: Number(params.get('duration') ?? 30), t0: -1, first: -1, startedMeasure: false, dts: [] as number[], last: -1, done: false, longAt: [] as number[] };
+const bench = { on: params.has('bench'), seed: Number(params.get('seed') ?? 42), duration: Number(params.get('duration') ?? 30), t0: -1, first: -1, startedMeasure: false, dts: [] as number[], last: -1, done: false, longAt: [] as number[], pinged: false };
 function startBench(): void {
   const rng = new Rng(bench.seed);
   const disc = (): [number, number] => { const r = 38 * Math.sqrt(rng.next()), a = rng.next() * 2 * Math.PI; return [r * Math.cos(a), r * Math.sin(a)]; };
@@ -532,6 +532,7 @@ function startBench(): void {
     lanterns: [{ id: 'L1', lit: true, fuel: 100 }, { id: 'L2', lit: true, fuel: 100 }, { id: 'L3', lit: true, fuel: 100 }] });
   sim.bench = true;
   night = 1; buildWorld(); show('bench');
+  sync(0, 0); renderer.compile(scene, camera); // biên dịch shader trong lúc khởi động, không để rơi vào khoảng đo
 }
 function benchFrame(now: number): void {
   if (bench.first < 0) { bench.first = now; bench.t0 = now; }
@@ -540,8 +541,9 @@ function benchFrame(now: number): void {
   camera.position.set(30 * Math.cos(th), 15, 30 * Math.sin(th));
   camera.lookAt(0, 0, 0);
   if (bench.done) return;
+  if (t >= 2.5 && !bench.pinged) { bench.pinged = true; void fetch('api/bench-start', { method: 'POST' }).catch(() => {}); } // báo launcher trong lúc khởi động
   if (t >= 3) {
-    if (!bench.startedMeasure) { bench.startedMeasure = true; bench.last = now; void fetch('api/bench-start', { method: 'POST' }).catch(() => {}); return; }
+    if (!bench.startedMeasure) { bench.startedMeasure = true; bench.last = now; return; }
     const dtm = now - bench.last; bench.dts.push(dtm); bench.last = now;
     if (dtm > 33 && bench.longAt.length < 80) bench.longAt.push(Math.round((t - 3) * 1000)); // chẩn đoán: thời điểm khung chậm (ms từ lúc bắt đầu đo)
     if (t >= 3 + bench.duration) finishBench();
