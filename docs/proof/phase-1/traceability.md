@@ -23,6 +23,8 @@ Mọi scenario nằm ở `tests/scenarios/<tên>.json` (kỳ vọng tính tay t�
 | Chơi được Đêm 1 từ đầu tới thắng | Bot tự chơi (tools/bot.ts) → inputs → phát lại qua CLI | `tests/fixtures/bot-win-seed42.inputs.json`, verify-report.md | Đạt |
 | Nhân vật đi, nhảy, camera 3D, HUD | `jump` scenario; ảnh chụp bản web | `img/hud-start.jpg` | Đạt |
 | Mây đội nón lá treo đèn lồng nhỏ; vàng cam = tốt, tím đen = nguy hiểm | Ảnh chụp | `img/hud-start.jpg` | Đạt |
-| Đảo sáng dần khi thắp đèn | Code `src/render/main.ts` (hemi/fog theo litCount) | — | **Chưa có ảnh** (chưa đạt về bằng chứng) |
-| Chơi lại sau thắng/thua | Phím R gọi `newGame()` | — | **Chưa có clip** (chưa đạt về bằng chứng) |
+| Đảo sáng dần khi thắp đèn | Ảnh khi đã thắp 1/5 đèn: đèn phát sáng vàng cam, vùng quanh đèn được chiếu sáng; so với `hud-start.jpg` (0 đèn, tối) | `img/lantern-lit-safe-zone.png` | Đạt |
+| Bóng Mực sợ đèn (hiển thị) | Cùng ảnh: vòng an toàn 6 m quanh đèn đã thắp, Bóng Mực (tím) đứng ngoài vòng | `img/lantern-lit-safe-zone.png` | Đạt |
+| HUD: mang đầy 10/10, tỏa sáng "sẵn sàng" khi đủ ánh sáng (so với "thiếu ánh sáng" khi 0/10) | Ảnh chụp khi chơi | `img/carry-full-pulse-ready.png`, `img/lantern-lit-safe-zone.png` | Đạt |
+| Chơi lại sau thắng/thua | Phím R gọi `newGame()` | — | **Chưa có ảnh/clip màn thắng/thua + chơi lại** (chưa đạt về bằng chứng; sẽ có trong video demo) |
 | Tốc độ headless | 18000 tick | verify-report.md | Đạt (~0.6 s) |

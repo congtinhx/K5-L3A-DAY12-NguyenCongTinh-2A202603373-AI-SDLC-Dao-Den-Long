@@ -10,9 +10,9 @@
 | Tỏa sáng xua Bóng Mực | Đạt |
 | Thắng/thua/điểm/HUD | Đạt |
 | Chơi lại | Đạt (phím R) — kiểm bằng mắt khi chơi, **chưa có clip** |
-| Đảo sáng dần khi thắp đèn | Code có (ánh sáng/sương theo số đèn) — **chưa có ảnh bằng chứng** khi đã thắp đèn |
+| Đảo sáng dần khi thắp đèn | Đạt (ảnh `lantern-lit-safe-zone.png`) |
 | game.contract.json + headless | Đạt (32 scenario + verify) |
 
 **Hỏng phase trước?** Không áp dụng (phase đầu).
 **Rủi ro còn lại:** 3 giả định chưa được trợ giảng xác nhận (`ta-questions-phase1.md`); máy chấm cần Node ≥ 22.18.
-**Cần chỉnh:** bổ sung ảnh/clip "đèn đã thắp" + "màn thắng/thua + chơi lại"; hỏi trợ giảng trên claude.ai.
+**Cần chỉnh:** bổ sung ảnh/clip "màn thắng/thua + chơi lại"; hỏi trợ giảng trên claude.ai.
