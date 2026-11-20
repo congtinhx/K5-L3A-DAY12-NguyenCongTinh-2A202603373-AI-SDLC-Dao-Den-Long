@@ -260,8 +260,9 @@ export class Sim {
     for (const s of this.shades) {
       if ((s.state === 'spawning' || s.state === 'stunned') && s.stateTicks > 0 && --s.stateTicks === 0) s.state = 'wander';
     }
-    for (const m of this.motes) if (m.kind === 'dropped') m.ttl--;
-    this.motes = this.motes.filter((m) => m.kind !== 'dropped' || m.ttl > 0);
+    let expired = false;
+    for (const m of this.motes) if (m.kind === 'dropped' && --m.ttl <= 0) expired = true;
+    if (expired) this.motes = this.motes.filter((m) => m.kind !== 'dropped' || m.ttl > 0);
     for (const d of this.drifters) {
       if (d.state === 'flee' && d.left > 0 && --d.left === 0) d.state = 'removed';
     }

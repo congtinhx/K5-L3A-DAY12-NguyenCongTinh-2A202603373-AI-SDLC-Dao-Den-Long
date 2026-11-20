@@ -52,6 +52,7 @@ const server = createServer({
       renderer: `three.js r170 WebGLRenderer trong ${path.basename(browser)} — ${r.gl_renderer ?? '?'}; viewport ${r.viewport ?? '?'}`,
       os: `${os.type()} ${os.release()} ${os.arch()} · ${os.cpus()[0]?.model ?? '?'} · RAM ${Math.round(os.totalmem() / 1073741824)} GB`,
       seed, duration_s: duration,
+      diag: { long_frames_over_33ms: r.long_frames, worst_frame_ms: r.worst_ms, long_frame_at_ms: r.long_frame_at_ms },
       note: peak === null ? 'peak_mem_mb = null: không đọc được RSS của tiến trình trình duyệt trên hệ điều hành này' : 'peak_mem_mb = tổng RSS các tiến trình trình duyệt của phiên bench (ps)',
     };
     fs.mkdirSync(path.dirname(path.resolve(out)), { recursive: true });

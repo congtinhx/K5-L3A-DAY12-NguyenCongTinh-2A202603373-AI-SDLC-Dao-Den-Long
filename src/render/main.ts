@@ -107,6 +107,7 @@ const moteCoreIM = inst(moteCoreGeo, moteCoreMat, MAX_MOTES), moteHaloIM = inst(
 shadeIM.setColorAt(0, new THREE.Color(C.shade));
 const dummy = new THREE.Object3D(), tmpM = new THREE.Matrix4(), eyeL = new THREE.Matrix4().makeTranslation(-0.25, 0.2, 0.7), eyeR = new THREE.Matrix4().makeTranslation(0.25, 0.2, 0.7);
 const colShade = new THREE.Color(C.shade), colStun = new THREE.Color(C.shadeStun);
+const tmpV = new THREE.Vector3();
 
 function floorMesh(f: Floor): THREE.Object3D {
   const top = (h: number) => (h > 0 ? C.sand : C.grass);
@@ -438,15 +439,19 @@ function hud(): void {
   cd('cd-dash', p.charm > 0 ? 0 : p.dashCd, sim.K.dashCd, p.dashCd === 0 || p.charm > 0);
   cd('cd-pulse', p.pulseCd, sim.K.pulseCd, p.pulseCd === 0 && p.carried >= tuning.pulse_cost);
   // Nhắc nạp ánh sáng khi đứng gần đèn chưa sáng
-  const near = sim.lanterns.filter((l) => (!l.lit || sim.fuel(l) < tuning.fuel_max) && Math.hypot(l.x - p.x, l.z - p.z) <= tuning.interact_radius).sort((a, b) => Math.hypot(a.x - p.x, a.z - p.z) - Math.hypot(b.x - p.x, b.z - p.z))[0];
+  let near: (typeof sim.lanterns)[number] | undefined, nearD = Infinity, target: (typeof sim.lanterns)[number] | undefined, targetD = Infinity;
+  for (const l of sim.lanterns) { // vòng lặp không cấp phát
+    const dl = Math.hypot(l.x - p.x, l.z - p.z);
+    if ((!l.lit || sim.fuel(l) < tuning.fuel_max) && dl <= tuning.interact_radius && dl < nearD) { near = l; nearD = dl; }
+    if ((!l.lit || sim.fuel(l) < tuning.low_fuel_threshold) && dl < targetD) { target = l; targetD = dl; }
+  }
   const pr = $('hud-prompt');
   pr.style.display = near ? 'block' : 'none';
   if (near) pr.textContent = near.lit ? `E — Châm dầu (${Math.floor(sim.fuel(near))}/${tuning.fuel_max})` : `E — Nạp ánh sáng (${near.deposited}/${near.everLit ? tuning.relight_cost : tuning.lantern_cost})`;
   // Mũi tên tới đèn chưa sáng gần nhất khi nó ở ngoài màn hình
-  const target = sim.lanterns.filter((l) => !l.lit || sim.fuel(l) < tuning.low_fuel_threshold).sort((a, b) => Math.hypot(a.x - p.x, a.z - p.z) - Math.hypot(b.x - p.x, b.z - p.z))[0];
   const arrow = $('hud-arrow');
   if (target) {
-    const v = new THREE.Vector3(target.x, target.y + 3, target.z).project(camera);
+    const v = tmpV.set(target.x, target.y + 3, target.z).project(camera);
     const behind = v.z > 1;
     let x = behind ? -v.x : v.x, y = behind ? -v.y : v.y;
     const off = behind || Math.abs(x) > 1 || Math.abs(y) > 1;
@@ -474,7 +479,7 @@ function hud(): void {
   // Mũi tên mép màn hình chỉ Bóng Mực vừa xuất hiện
   const sa = $('hud-shade-arrow'), sh = sim.shades.find((s) => s.id === shadeArrowId);
   if (sh && performance.now() < shadeArrowUntil) {
-    const v = new THREE.Vector3(sh.x, sh.y, sh.z).project(camera);
+    const v = tmpV.set(sh.x, sh.y, sh.z).project(camera);
     const behind = v.z > 1; let x = behind ? -v.x : v.x, y = behind ? -v.y : v.y;
     const kk = 0.8 / Math.max(Math.abs(x), Math.abs(y), 1e-6); if (behind || Math.abs(x) > 1 || Math.abs(y) > 1) { x *= kk; y *= kk; }
     sa.style.display = 'block'; sa.style.borderBottomColor = settings.cb ? '#00B3FF' : '#7A3CFF';
@@ -517,7 +522,7 @@ function frame(now: number): void {
 // ---------- benchmark (Ticket-04 §1) ----------
 // Cảnh chuẩn: Đêm 1, 200 Bóng Mực wander rải đều trên đảo (seed), 100 đom đóm, L1–L3 sáng fuel 100; không input;
 // camera bay vòng tâm (0,0,0) bán kính 30 m, Y = 15 m, bắt đầu (30,15,0), ngược kim đồng hồ nhìn từ trên, 15 s/vòng.
-const bench = { on: params.has('bench'), seed: Number(params.get('seed') ?? 42), duration: Number(params.get('duration') ?? 30), t0: -1, first: -1, startedMeasure: false, dts: [] as number[], last: -1, done: false };
+const bench = { on: params.has('bench'), seed: Number(params.get('seed') ?? 42), duration: Number(params.get('duration') ?? 30), t0: -1, first: -1, startedMeasure: false, dts: [] as number[], last: -1, done: false, longAt: [] as number[] };
 function startBench(): void {
   const rng = new Rng(bench.seed);
   const disc = (): [number, number] => { const r = 38 * Math.sqrt(rng.next()), a = rng.next() * 2 * Math.PI; return [r * Math.cos(a), r * Math.sin(a)]; };
@@ -537,7 +542,8 @@ function benchFrame(now: number): void {
   if (bench.done) return;
   if (t >= 3) {
     if (!bench.startedMeasure) { bench.startedMeasure = true; bench.last = now; void fetch('api/bench-start', { method: 'POST' }).catch(() => {}); return; }
-    bench.dts.push(now - bench.last); bench.last = now;
+    const dtm = now - bench.last; bench.dts.push(dtm); bench.last = now;
+    if (dtm > 33 && bench.longAt.length < 80) bench.longAt.push(Math.round((t - 3) * 1000)); // chẩn đoán: thời điểm khung chậm (ms từ lúc bắt đầu đo)
     if (t >= 3 + bench.duration) finishBench();
   }
 }
@@ -556,6 +562,7 @@ function finishBench(): void {
     frame_ms_p95: Math.round(p95 * 100) / 100, frames: N,
     first_frame_epoch_ms: performance.timeOrigin + bench.first, load_ms_page: Math.round(bench.first),
     gl_renderer: dbg ? gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) : gl.getParameter(gl.RENDERER), viewport: `${innerWidth}×${innerHeight}`,
+    long_frames: dts.filter((d) => d > 33).length, long_frame_at_ms: bench.longAt, worst_ms: Math.round(sorted[N - 1]),
   };
   caption(`Bench xong: ${JSON.stringify(r)}`, 600000);
   (window as unknown as { __bench: typeof r }).__bench = r;
