@@ -70,6 +70,10 @@ server.listen(0, '127.0.0.1', () => {
     '--window-size=1280,720', '--window-position=0,0', '--force-device-scale-factor=1', `--app=${url}`,
     '--disable-gpu-vsync', '--disable-frame-rate-limit', // tắt vsync
     '--disable-background-timer-throttling', '--disable-renderer-backgrounding', '--disable-backgrounding-occluded-windows',
+    // profile trắng → tắt việc nền của Chrome lúc khởi động (cập nhật component, Safe Browsing, sync…) — cờ chuẩn của công cụ đo (Lighthouse)
+    '--disable-background-networking', '--disable-component-update', '--disable-sync', '--disable-default-apps', '--no-pings',
+    '--metrics-recording-only', '--disable-client-side-phishing-detection', '--disable-domain-reliability',
+    '--disable-features=Translate,OptimizationHints,MediaRouter,DialMediaRouteProvider,AutofillServerCommunication',
   ], { stdio: 'ignore' });
   child.on('exit', () => { if (!fs.existsSync(out)) { console.error('Trình duyệt đóng trước khi có kết quả'); finish(1); } });
 });

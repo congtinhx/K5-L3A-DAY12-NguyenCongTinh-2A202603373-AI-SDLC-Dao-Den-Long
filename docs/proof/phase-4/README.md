@@ -15,3 +15,13 @@
 - Phân tích: avg cao nhưng 1 % khung tệ nhất ~137 ms → giật do GC: mỗi tick 200 Bóng Mực × 2 lần `filter/map/sort` tạo ~24 000 mảng/giây; HUD ghi `innerHTML` mỗi khung.
 - Sửa: tìm đèn gần nhất bằng vòng lặp không cấp phát (headless giữ nguyên từng byte — đã `cmp` 21 600 tick Đêm 1 và 3; sim 0.55 → 0.39 ms/tick); HUD chỉ ghi DOM khi nội dung đổi; launcher thêm `--force-device-scale-factor=1` để viewport đúng 1280 px.
 - **Lần 2:** `bench.json` ở gốc repo (tác giả chạy lại sau khi sửa).
+
+### Các lần đo trên máy tác giả (cùng máy, Windows 11, Chrome, Iris Xe, cắm sạc)
+| Lần | Thay đổi trước lần đo | avg_fps | p1_low_fps | p95 ms | load_ms | Khung > 33 ms |
+|---|---|---|---|---|---|---|
+| 1 | — (viewport 1026×620 do scale 125 %) | 73.1 | 7.3 | 24.9 | 3951 | — |
+| 2 | tìm đèn không cấp phát, HUD cache, scale factor 1 | 128.2 | 15.7 | 13.7 | 6146 | — |
+| 3 | bỏ cấp phát còn lại + ghi chẩn đoán | 125.6 | 28.7 | 16.5 | 2941 | 6 (4 trong 0.6 s đầu, 2 ở ~10 s) |
+| 4 | biên dịch shader + báo launcher trong lúc khởi động | 118.1 | 17.8 | 17.2 | 4232 | 46 — **tất cả trong 3.5 s đầu của khoảng đo**, đều ~55 ms, sau đó không còn |
+
+**Phân tích:** avg_fps và load_ms đạt ngưỡng ổn định. p1_low dao động 15.7–28.7 giữa các lần gần như cùng code, và khung chậm dồn vào vài giây đầu → khớp với việc Chrome chạy **profile trắng** (thư mục tạm mới mỗi lần) và làm việc nền lúc khởi động. Đã thêm các cờ tắt việc nền chuẩn (`--disable-background-networking`, `--disable-component-update`, …) vào launcher. Phần còn lại của 30 s đo chạy ổn định ~118–128 FPS. Ngưỡng chính thức đo trên máy chấm của giảng viên.
