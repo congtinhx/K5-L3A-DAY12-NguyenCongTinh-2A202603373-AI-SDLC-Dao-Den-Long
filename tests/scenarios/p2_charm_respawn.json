@@ -1,0 +1,38 @@
+{
+  "name": "p2_charm_respawn",
+  "req": "AC-CHARM-3: bùa đã nhặt (còn 100 tick hồi) xuất hiện lại đúng tick 100",
+  "seed": 1,
+  "ticks": 100,
+  "night": 2,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
+    "motes": [],
+    "shades": [],
+    "drifters": [],
+    "charms": [
+      {
+        "id": "C1",
+        "available": false,
+        "respawn_ticks": 100
+      }
+    ]
+  },
+  "inputs": null,
+  "expect": {
+    "snapshots": [
+      {
+        "tick": 90,
+        "path": "charms.0.available",
+        "value": false
+      },
+      {
+        "tick": 100,
+        "path": "charms.0.available",
+        "value": true
+      }
+    ]
+  }
+}

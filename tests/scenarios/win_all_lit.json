@@ -1,6 +1,6 @@
 {
   "name": "win_all_lit",
-  "req": "Thắp đèn cuối → thắng; điểm = 100 + floor(99.98)×1 + 3×50 = 349",
+  "req": "Thắng: 10×10 + 100 + floor(99.98)×2 + 3×50 = 548",
   "seed": 1,
   "ticks": 100,
   "scenario": {
@@ -68,7 +68,8 @@
     "end": {
       "ticks": 1,
       "state": "won",
-      "score": 349
+      "score": 548
     }
-  }
+  },
+  "changed_in_phase2": "Điểm chuẩn (+10/đom đóm nạp, giây ×2)"
 }

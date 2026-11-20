@@ -1,0 +1,68 @@
+{
+  "name": "p2_hit_drop_ring",
+  "req": "Bị đánh: rơi floor(4/2)=2 đom đóm loại dropped trên vành 1.5–2.5 m (không tự nhặt lại), TTL 480",
+  "seed": 1,
+  "ticks": 10,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
+    "motes": [],
+    "shades": [
+      {
+        "id": "S1",
+        "pos": [
+          0.5,
+          0,
+          0
+        ]
+      }
+    ],
+    "drifters": [],
+    "player": {
+      "carried": 4
+    }
+  },
+  "inputs": null,
+  "expect": {
+    "events": [
+      {
+        "tick": 1,
+        "name": "player_hit",
+        "data": {
+          "by": "shade",
+          "flames": 2,
+          "dropped": 2
+        }
+      }
+    ],
+    "snapshots": [
+      {
+        "tick": 10,
+        "path": "motes_active",
+        "value": 2
+      },
+      {
+        "tick": 10,
+        "path": "motes.0.kind",
+        "value": "dropped"
+      },
+      {
+        "tick": 10,
+        "path": "motes.0.ttl_s",
+        "value": 7.85
+      },
+      {
+        "tick": 10,
+        "path": "player.carried",
+        "value": 2
+      },
+      {
+        "tick": 10,
+        "path": "shades.0.state",
+        "value": "recoil"
+      }
+    ]
+  }
+}

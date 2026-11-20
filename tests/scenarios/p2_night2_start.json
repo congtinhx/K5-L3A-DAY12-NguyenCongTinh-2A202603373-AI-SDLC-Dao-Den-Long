@@ -1,0 +1,60 @@
+{
+  "name": "p2_night2_start",
+  "req": "AC-NIGHT-1: Đêm 2 có 6 đèn chuẩn, 330 s, bùa C1 (35,0,0), 20 đom đóm",
+  "seed": 1,
+  "ticks": 0,
+  "night": 2,
+  "scenario": null,
+  "inputs": null,
+  "expect": {
+    "events": [
+      {
+        "tick": 0,
+        "name": "night_start",
+        "data": {
+          "night": 2
+        }
+      }
+    ],
+    "snapshots": [
+      {
+        "tick": 0,
+        "path": "lanterns.length",
+        "value": 6
+      },
+      {
+        "tick": 0,
+        "path": "lanterns.3.pos",
+        "value": [
+          70,
+          0,
+          20
+        ]
+      },
+      {
+        "tick": 0,
+        "path": "time_left_s",
+        "value": 330
+      },
+      {
+        "tick": 0,
+        "path": "charms.0.pos",
+        "value": [
+          35,
+          0,
+          0
+        ]
+      },
+      {
+        "tick": 0,
+        "path": "motes_active",
+        "value": 20
+      },
+      {
+        "tick": 0,
+        "path": "night",
+        "value": 2
+      }
+    ]
+  }
+}

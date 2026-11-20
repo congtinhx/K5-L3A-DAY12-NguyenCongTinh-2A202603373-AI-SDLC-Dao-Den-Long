@@ -1,0 +1,73 @@
+{
+  "name": "p2_drifter_steal",
+  "req": "AC-DRIFT-1: mang 6, Gió Lạc cách 5 m → chase 7 m/s, chạm (≤1.2) ở tick 33, cướp 3, flee 240 tick rồi removed",
+  "seed": 1,
+  "ticks": 280,
+  "night": 2,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
+    "motes": [],
+    "shades": [],
+    "drifters": [
+      {
+        "id": "D1",
+        "pos": [
+          5,
+          0,
+          0
+        ]
+      }
+    ],
+    "player": {
+      "carried": 6
+    },
+    "charms": []
+  },
+  "inputs": null,
+  "expect": {
+    "events": [
+      {
+        "tick": 33,
+        "name": "drifter_steal",
+        "data": {
+          "drifter_id": "D1",
+          "amount": 3,
+          "carried": 3
+        }
+      }
+    ],
+    "event_count": {
+      "drifter_steal": 1
+    },
+    "snapshots": [
+      {
+        "tick": 10,
+        "path": "drifters.0.state",
+        "value": "chase"
+      },
+      {
+        "tick": 270,
+        "path": "drifters.0.state",
+        "value": "flee"
+      },
+      {
+        "tick": 280,
+        "path": "drifters.0.state",
+        "value": "removed"
+      },
+      {
+        "tick": 280,
+        "path": "drifters.0.stolen",
+        "value": 3
+      },
+      {
+        "tick": 280,
+        "path": "player.carried",
+        "value": 3
+      }
+    ]
+  }
+}

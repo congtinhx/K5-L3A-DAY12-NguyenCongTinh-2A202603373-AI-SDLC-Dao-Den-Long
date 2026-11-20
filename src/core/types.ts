@@ -4,25 +4,35 @@ export interface ScoreTuning {
 export interface Tuning {
   player_speed: number; carry_capacity: number; lantern_cost: number; lantern_count_night1: number;
   pickup_radius: number; interact_radius: number; pulse_cost: number; pulse_radius: number;
-  night1_duration_s: number; flames: number; invuln_s: number; hit_drop_ratio: number;
+  night1_duration_s: number; night2_duration_s: number; night3_duration_s: number;
+  flames: number; invuln_s: number; hit_drop_ratio: number;
   pulse_stun_s: number; pulse_push_m: number; pulse_cooldown_s: number; safe_radius: number;
-  shade_speed: number; shade_hit_radius: number; fall_enabled: boolean; score: ScoreTuning;
+  shade_speed: number; shade_hit_radius: number; fall_enabled: boolean;
+  dash_speed: number; dash_duration_s: number; dash_cooldown_s: number;
+  score: ScoreTuning;
 }
 export type Vec3 = [number, number, number];
 export interface InputState {
-  move: [number, number]; cam_yaw_deg: number; jump: boolean; interact: boolean; pulse: boolean; dash: boolean;
+  move: [number, number]; cam_yaw_deg: number; jump: boolean; interact: boolean; pulse: boolean; dash: boolean; pause: boolean;
 }
 export interface InputFrame {
-  tick: number; move?: [number, number]; cam_yaw_deg?: number; jump?: boolean; interact?: boolean; pulse?: boolean; dash?: boolean;
+  tick: number; move?: [number, number]; cam_yaw_deg?: number;
+  jump?: boolean; interact?: boolean; pulse?: boolean; dash?: boolean; pause?: boolean;
 }
+export type ShadeState = 'spawning' | 'wander' | 'chase' | 'recoil' | 'stunned';
+export type DrifterState = 'idle' | 'chase' | 'flee' | 'removed';
 export interface ScenarioSpec {
-  player?: { pos?: Vec3; carried?: number; flames?: number };
+  player?: { pos?: Vec3; carried?: number; flames?: number; invuln_ticks?: number; dash_cd_ticks?: number; pulse_cd_ticks?: number; charm_ticks?: number };
   random_motes?: boolean;
   random_shades?: boolean;
+  random_drifters?: boolean;
+  wind_enabled?: boolean;
   motes?: Vec3[];
-  shades?: { id?: string; pos: Vec3 }[];
+  shades?: { id?: string; pos: Vec3; state?: ShadeState; state_ticks_left?: number }[];
+  drifters?: { id?: string; pos: Vec3; state?: DrifterState; stolen?: number }[];
+  charms?: { id?: string; pos?: Vec3; available?: boolean; respawn_ticks?: number }[];
   lanterns?: { id: string; pos?: Vec3; deposited?: number; lit?: boolean }[];
   time_left_s?: number;
 }
 export interface GameEvent { tick: number; name: string; data: Record<string, unknown> }
-export type GameState = 'playing' | 'won' | 'lost';
+export type GameState = 'playing' | 'paused' | 'won' | 'lost';

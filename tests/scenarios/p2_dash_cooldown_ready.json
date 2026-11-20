@@ -1,0 +1,46 @@
+{
+  "name": "p2_dash_cooldown_ready",
+  "req": "AC-DASH-2: hồi chiêu 90 tick tính từ lúc bắt đầu → lướt lại được ở tick 91",
+  "seed": 1,
+  "ticks": 120,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
+    "motes": [],
+    "shades": [],
+    "drifters": []
+  },
+  "inputs": {
+    "frames": [
+      {
+        "tick": 0,
+        "dash": true
+      },
+      {
+        "tick": 1,
+        "dash": false
+      },
+      {
+        "tick": 90,
+        "dash": true
+      }
+    ]
+  },
+  "expect": {
+    "events": [
+      {
+        "tick": 1,
+        "name": "dash"
+      },
+      {
+        "tick": 91,
+        "name": "dash"
+      }
+    ],
+    "event_count": {
+      "dash": 2
+    }
+  }
+}

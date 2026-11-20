@@ -1,0 +1,40 @@
+{
+  "name": "p2_dash_cooldown_early",
+  "req": "AC-DASH-2: bấm lại ở tick 90 (còn 1 tick hồi chiêu) → không lướt",
+  "seed": 1,
+  "ticks": 120,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
+    "motes": [],
+    "shades": [],
+    "drifters": []
+  },
+  "inputs": {
+    "frames": [
+      {
+        "tick": 0,
+        "dash": true
+      },
+      {
+        "tick": 1,
+        "dash": false
+      },
+      {
+        "tick": 89,
+        "dash": true
+      },
+      {
+        "tick": 90,
+        "dash": false
+      }
+    ]
+  },
+  "expect": {
+    "event_count": {
+      "dash": 1
+    }
+  }
+}

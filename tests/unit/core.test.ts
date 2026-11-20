@@ -6,6 +6,7 @@ import { Rng } from '../../src/core/rng.ts';
 import { InputTimeline } from '../../src/core/inputs.ts';
 import { Sim, cmpId, emptyInput } from '../../src/core/sim.ts';
 import { parseTuning } from '../../src/core/tuning.ts';
+import { getMap, groundTop } from '../../src/core/map.ts';
 import { FormatError, parseInputs } from '../../src/core/validate.ts';
 
 const contract = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, '..', '..', 'game.contract.json'), 'utf8'));
@@ -38,17 +39,32 @@ test('cmpId so theo số: S2 < S10', () => {
   assert.ok(cmpId('S2', 'S10') < 0);
 });
 
-test('Tuning đọc từ game.contract.json khớp số trong assumptions', () => {
-  assert.equal(T.player_speed, 6);
-  assert.equal(T.lantern_count_night1, 5);
-  assert.equal(T.fall_enabled, false);
+test('Tuning trong game.contract.json khớp số chuẩn Ticket-02', () => {
+  assert.equal(contract.contract_version, '1.1');
+  assert.deepEqual([T.player_speed, T.pickup_radius, T.interact_radius, T.pulse_cost, T.pulse_radius, T.pulse_cooldown_s, T.pulse_stun_s],
+    [6, 1, 2, 3, 5, 3, 2]);
+  assert.deepEqual([T.dash_speed, T.dash_duration_s, T.dash_cooldown_s, T.shade_speed, T.fall_enabled], [14, 0.2, 1.5, 4, true]);
+  assert.deepEqual([T.night1_duration_s, T.night2_duration_s, T.night3_duration_s], [300, 330, 360]);
+  assert.deepEqual(T.score, { per_mote: 10, per_lantern: 100, per_stun: 5, per_second_left: 2, per_flame_left: 50 });
 });
 
-test('Sim: game mặc định không bao giờ có player_hit by fall (fall_enabled=false)', () => {
-  const sim = new Sim(T, 9);
-  const inp = { ...emptyInput(), move: [0, 1] as [number, number] };
-  for (let i = 0; i < 2000 && sim.state === 'playing'; i++) {
-    for (const e of sim.step(inp)) assert.notEqual((e.data as { by?: string }).by, 'fall');
+test('Bản đồ chuẩn: điểm sinh và đèn mỗi Đêm', () => {
+  const m1 = getMap(1), m2 = getMap(2), m3 = getMap(3);
+  assert.deepEqual([m1.moteSpawns.length, m1.shadeSpawns.length, m1.lanterns.length], [24, 12, 5]);
+  assert.deepEqual([m2.moteSpawns.length, m2.shadeSpawns.length, m2.lanterns.length], [24, 16, 6]);
+  assert.deepEqual([m3.moteSpawns.length, m3.shadeSpawns.length, m3.lanterns.length], [30, 16, 7]);
+  // góc từ +X ngược kim đồng hồ: Đêm 1 Bóng Mực điểm đầu ở 15°
+  assert.ok(Math.abs(m1.shadeSpawns[0][0] - 37 * Math.cos(Math.PI / 12)) < 1e-9 && m1.shadeSpawns[0][2] > 0);
+  assert.equal(groundTop(m3, 0, 18), 3);
+  assert.equal(groundTop(m3, 0, -18), 0);
+  assert.equal(groundTop(m3, 0, 5), 6);
+  assert.equal(groundTop(m2, 35, 0), 0);
+  assert.equal(groundTop(m2, 35, 3), -Infinity);
+});
+
+test('Sim: 3 Đêm chạy được với seed, không lỗi, tất định', () => {
+  for (const night of [1, 2, 3]) {
+    const run = () => { const s = new Sim(T, 5, night); for (let i = 0; i < 3000 && s.state === 'playing'; i++) s.step(emptyInput()); return JSON.stringify(s.snapshot()); };
+    assert.equal(run(), run());
   }
-  assert.ok(Math.hypot(sim.player.x, sim.player.z) <= 40 + 1e-9);
 });

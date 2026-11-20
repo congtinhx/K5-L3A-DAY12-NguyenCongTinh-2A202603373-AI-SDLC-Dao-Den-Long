@@ -1,0 +1,68 @@
+{
+  "name": "p2_charm_dash",
+  "req": "AC-CHARM-2: có bùa → lướt lại ngay khi lướt trước kết thúc (tick 16); bấm giữa lúc lướt (tick 6) bị bỏ qua",
+  "seed": 1,
+  "ticks": 30,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
+    "motes": [],
+    "shades": [],
+    "drifters": [],
+    "player": {
+      "charm_ticks": 600
+    }
+  },
+  "inputs": {
+    "frames": [
+      {
+        "tick": 0,
+        "dash": true
+      },
+      {
+        "tick": 1,
+        "dash": false
+      },
+      {
+        "tick": 5,
+        "dash": true
+      },
+      {
+        "tick": 6,
+        "dash": false
+      },
+      {
+        "tick": 15,
+        "dash": true
+      }
+    ]
+  },
+  "expect": {
+    "events": [
+      {
+        "tick": 1,
+        "name": "dash"
+      },
+      {
+        "tick": 16,
+        "name": "dash"
+      }
+    ],
+    "event_count": {
+      "dash": 2
+    },
+    "snapshots": [
+      {
+        "tick": 30,
+        "path": "player.pos",
+        "value": [
+          0,
+          0,
+          5.6
+        ]
+      }
+    ]
+  }
+}

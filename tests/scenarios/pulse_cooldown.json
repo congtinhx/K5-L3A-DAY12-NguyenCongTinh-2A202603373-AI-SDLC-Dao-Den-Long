@@ -1,8 +1,8 @@
 {
   "name": "pulse_cooldown",
-  "req": "Cooldown 60 tick",
+  "req": "Cooldown chuẩn 180 tick, chi phí 3: pulse tick 1, bấm tick 101 bị bỏ, pulse lại tick 181",
   "seed": 1,
-  "ticks": 80,
+  "ticks": 190,
   "scenario": {
     "random_motes": false,
     "random_shades": false,
@@ -23,19 +23,19 @@
         "pulse": false
       },
       {
-        "tick": 30,
+        "tick": 100,
         "pulse": true
       },
       {
-        "tick": 31,
+        "tick": 101,
         "pulse": false
       },
       {
-        "tick": 70,
+        "tick": 180,
         "pulse": true
       },
       {
-        "tick": 71,
+        "tick": 181,
         "pulse": false
       }
     ]
@@ -47,7 +47,7 @@
         "name": "pulse"
       },
       {
-        "tick": 71,
+        "tick": 181,
         "name": "pulse"
       }
     ],
@@ -56,10 +56,11 @@
     },
     "snapshots": [
       {
-        "tick": 80,
+        "tick": 190,
         "path": "player.carried",
-        "value": 6
+        "value": 4
       }
     ]
-  }
+  },
+  "changed_in_phase2": "pulse_cooldown 1 s → 3 s, pulse_cost 2 → 3"
 }

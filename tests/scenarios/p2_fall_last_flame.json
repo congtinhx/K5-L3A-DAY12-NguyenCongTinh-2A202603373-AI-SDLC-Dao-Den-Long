@@ -1,0 +1,58 @@
+{
+  "name": "p2_fall_last_flame",
+  "req": "AC-FALL-2: rơi khi còn 1 lửa → thua no_flames ngay, không hồi sinh",
+  "seed": 1,
+  "ticks": 200,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
+    "motes": [],
+    "shades": [],
+    "drifters": [],
+    "player": {
+      "pos": [
+        0,
+        0,
+        39.95
+      ],
+      "flames": 1
+    }
+  },
+  "inputs": {
+    "frames": [
+      {
+        "tick": 0,
+        "move": [
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  "expect": {
+    "events": [
+      {
+        "tick": 61,
+        "name": "player_hit",
+        "data": {
+          "by": "fall",
+          "flames": 0
+        }
+      },
+      {
+        "tick": 61,
+        "name": "game_over",
+        "data": {
+          "result": "lost",
+          "reason": "no_flames"
+        }
+      }
+    ],
+    "end": {
+      "ticks": 61,
+      "state": "lost"
+    }
+  }
+}

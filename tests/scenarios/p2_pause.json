@@ -1,0 +1,101 @@
+{
+  "name": "p2_pause",
+  "req": "AC-PAUSE-1: pause tick 11 → tick tăng, sim_tick/thời gian/vị trí đứng yên, state paused; tiếp tục tick 31",
+  "seed": 1,
+  "ticks": 40,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
+    "motes": [],
+    "shades": [],
+    "drifters": []
+  },
+  "inputs": {
+    "frames": [
+      {
+        "tick": 0,
+        "move": [
+          0,
+          1
+        ]
+      },
+      {
+        "tick": 10,
+        "pause": true
+      },
+      {
+        "tick": 11,
+        "pause": false
+      },
+      {
+        "tick": 30,
+        "pause": true
+      },
+      {
+        "tick": 31,
+        "pause": false
+      }
+    ]
+  },
+  "expect": {
+    "events": [
+      {
+        "tick": 11,
+        "name": "paused",
+        "data": {}
+      },
+      {
+        "tick": 31,
+        "name": "resumed",
+        "data": {}
+      }
+    ],
+    "snapshots": [
+      {
+        "tick": 20,
+        "path": "state",
+        "value": "paused"
+      },
+      {
+        "tick": 20,
+        "path": "sim_tick",
+        "value": 10
+      },
+      {
+        "tick": 20,
+        "path": "time_left_s",
+        "value": 299.833
+      },
+      {
+        "tick": 20,
+        "path": "player.pos",
+        "value": [
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "tick": 40,
+        "path": "state",
+        "value": "playing"
+      },
+      {
+        "tick": 40,
+        "path": "sim_tick",
+        "value": 20
+      },
+      {
+        "tick": 40,
+        "path": "player.pos",
+        "value": [
+          0,
+          0,
+          2
+        ]
+      }
+    ]
+  }
+}

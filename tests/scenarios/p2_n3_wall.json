@@ -1,13 +1,25 @@
 {
-  "name": "island_clamp",
-  "req": "Biên đảo 40 m (fall_enabled=false)",
+  "name": "p2_n3_wall",
+  "req": "AC-NIGHT-3: Đêm 3 vách tầng 1 (r=12, cao 3 m) chặn Mây đi từ tầng 0",
   "seed": 1,
-  "ticks": 500,
+  "ticks": 60,
+  "night": 3,
   "scenario": {
     "random_motes": false,
     "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
     "motes": [],
-    "shades": []
+    "shades": [],
+    "drifters": [],
+    "player": {
+      "pos": [
+        0,
+        0,
+        10
+      ]
+    },
+    "charms": []
   },
   "inputs": {
     "frames": [
@@ -23,17 +35,14 @@
   "expect": {
     "snapshots": [
       {
-        "tick": 500,
+        "tick": 60,
         "path": "player.pos",
         "value": [
           0,
           0,
-          40
+          11.9
         ]
       }
-    ],
-    "absent": [
-      "player_hit"
     ]
   }
 }

@@ -34,7 +34,11 @@ for (const file of fs.readdirSync(dir).filter((f) => f.endsWith('.json')).sort()
       const snap = snaps.get(s.tick);
       assert.ok(snap, `không có snapshot tick ${s.tick}`);
       const v = getPath(snap, s.path);
-      assert.ok(approxEqual(v, s.value, false), `tick ${s.tick} ${s.path} = ${JSON.stringify(v)}, mong đợi ${JSON.stringify(s.value)}`);
+      const shown = `tick ${s.tick} ${s.path} = ${JSON.stringify(v)}`;
+      if ('gt' in s) assert.ok(v > s.gt, `${shown}, mong đợi > ${s.gt}`);
+      if ('lt' in s) assert.ok(v < s.lt, `${shown}, mong đợi < ${s.lt}`);
+      if ('norm' in s) assert.ok(Math.abs(Math.hypot(...v) - s.norm) <= 1e-3, `${shown}, mong đợi độ dài ${s.norm}`);
+      if ('value' in s) assert.ok(approxEqual(v, s.value, false), `${shown}, mong đợi ${JSON.stringify(s.value)}`);
     }
   });
 }

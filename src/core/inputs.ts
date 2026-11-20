@@ -16,6 +16,7 @@ export class InputTimeline {
       if (f.interact !== undefined) this.state.interact = f.interact;
       if (f.pulse !== undefined) this.state.pulse = f.pulse;
       if (f.dash !== undefined) this.state.dash = f.dash;
+      if (f.pause !== undefined) this.state.pause = f.pause;
     }
     return this.state;
   }

@@ -1,0 +1,55 @@
+{
+  "name": "p2_night3_start",
+  "req": "AC-NIGHT-1: Đêm 3 có 7 đèn chuẩn (L1 trên tầng 2), 360 s, 2 bùa",
+  "seed": 1,
+  "ticks": 0,
+  "night": 3,
+  "scenario": null,
+  "inputs": null,
+  "expect": {
+    "events": [
+      {
+        "tick": 0,
+        "name": "night_start",
+        "data": {
+          "night": 3
+        }
+      }
+    ],
+    "snapshots": [
+      {
+        "tick": 0,
+        "path": "lanterns.length",
+        "value": 7
+      },
+      {
+        "tick": 0,
+        "path": "lanterns.0.pos",
+        "value": [
+          0,
+          6,
+          6
+        ]
+      },
+      {
+        "tick": 0,
+        "path": "time_left_s",
+        "value": 360
+      },
+      {
+        "tick": 0,
+        "path": "charms.length",
+        "value": 2
+      },
+      {
+        "tick": 0,
+        "path": "charms.1.pos",
+        "value": [
+          -30,
+          0,
+          25
+        ]
+      }
+    ]
+  }
+}

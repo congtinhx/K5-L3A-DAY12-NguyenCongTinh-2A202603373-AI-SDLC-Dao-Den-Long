@@ -1,0 +1,100 @@
+{
+  "name": "p2_drifter_pulse_drop",
+  "req": "AC-DRIFT-3: Tỏa Sáng trúng Gió Lạc flee đang mang 3 → drifter_drop, 3 đom đóm rơi tại (3,0,0) nhặt lại được ở tick 21; Gió Lạc removed sau 120 tick",
+  "seed": 1,
+  "ticks": 130,
+  "night": 2,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
+    "motes": [],
+    "shades": [],
+    "drifters": [
+      {
+        "id": "D1",
+        "pos": [
+          3,
+          0,
+          0
+        ],
+        "state": "flee",
+        "stolen": 3
+      }
+    ],
+    "player": {
+      "carried": 3
+    },
+    "charms": []
+  },
+  "inputs": {
+    "frames": [
+      {
+        "tick": 0,
+        "pulse": true
+      },
+      {
+        "tick": 1,
+        "pulse": false,
+        "move": [
+          1,
+          0
+        ]
+      }
+    ]
+  },
+  "expect": {
+    "events": [
+      {
+        "tick": 1,
+        "name": "drifter_drop",
+        "data": {
+          "drifter_id": "D1",
+          "amount": 3
+        }
+      },
+      {
+        "tick": 21,
+        "name": "mote_picked",
+        "data": {
+          "carried": 3
+        }
+      }
+    ],
+    "event_count": {
+      "mote_picked": 3
+    },
+    "snapshots": [
+      {
+        "tick": 10,
+        "path": "motes_active",
+        "value": 3
+      },
+      {
+        "tick": 10,
+        "path": "motes.0.kind",
+        "value": "dropped"
+      },
+      {
+        "tick": 10,
+        "path": "motes.0.ttl_s",
+        "value": 7.85
+      },
+      {
+        "tick": 10,
+        "path": "motes.0.pos",
+        "value": [
+          3,
+          0,
+          0
+        ]
+      },
+      {
+        "tick": 130,
+        "path": "drifters.0.state",
+        "value": "removed"
+      }
+    ]
+  }
+}

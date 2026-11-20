@@ -1,0 +1,68 @@
+{
+  "name": "p2_drifter_pulse_chase",
+  "req": "AC-DRIFT-2: Tỏa Sáng trúng Gió Lạc đang chase → flee, không cướp",
+  "seed": 1,
+  "ticks": 60,
+  "night": 2,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
+    "motes": [],
+    "shades": [],
+    "drifters": [
+      {
+        "id": "D1",
+        "pos": [
+          5,
+          0,
+          0
+        ]
+      }
+    ],
+    "player": {
+      "carried": 8
+    },
+    "charms": []
+  },
+  "inputs": {
+    "frames": [
+      {
+        "tick": 20,
+        "pulse": true
+      }
+    ]
+  },
+  "expect": {
+    "events": [
+      {
+        "tick": 21,
+        "name": "pulse",
+        "data": {
+          "stunned_ids": []
+        }
+      }
+    ],
+    "absent": [
+      "drifter_steal"
+    ],
+    "snapshots": [
+      {
+        "tick": 30,
+        "path": "drifters.0.state",
+        "value": "flee"
+      },
+      {
+        "tick": 30,
+        "path": "drifters.0.stolen",
+        "value": 0
+      },
+      {
+        "tick": 30,
+        "path": "player.carried",
+        "value": 5
+      }
+    ]
+  }
+}

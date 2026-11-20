@@ -1,0 +1,77 @@
+{
+  "name": "p2_fall_respawn",
+  "req": "AC-FALL-1: bước khỏi mép 40 m, rơi 60 tick tới Y<−10 (tick 61): −1 lửa, mất 4 đom đóm; hồi sinh tick 121 ở (0,0,0), bất tử",
+  "seed": 1,
+  "ticks": 130,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
+    "motes": [],
+    "shades": [],
+    "drifters": [],
+    "player": {
+      "pos": [
+        0,
+        0,
+        39.95
+      ],
+      "carried": 4
+    }
+  },
+  "inputs": {
+    "frames": [
+      {
+        "tick": 0,
+        "move": [
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  "expect": {
+    "events": [
+      {
+        "tick": 61,
+        "name": "player_hit",
+        "data": {
+          "by": "fall",
+          "flames": 2,
+          "dropped": 0,
+          "lost": 4
+        }
+      }
+    ],
+    "event_count": {
+      "player_hit": 1
+    },
+    "snapshots": [
+      {
+        "tick": 130,
+        "path": "player.pos",
+        "value": [
+          0,
+          0,
+          0.9
+        ]
+      },
+      {
+        "tick": 130,
+        "path": "player.invuln",
+        "value": true
+      },
+      {
+        "tick": 130,
+        "path": "player.flames",
+        "value": 2
+      },
+      {
+        "tick": 130,
+        "path": "player.carried",
+        "value": 0
+      }
+    ]
+  }
+}

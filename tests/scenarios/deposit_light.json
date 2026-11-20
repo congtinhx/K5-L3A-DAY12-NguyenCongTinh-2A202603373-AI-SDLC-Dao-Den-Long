@@ -1,6 +1,6 @@
 {
   "name": "deposit_light",
-  "req": "Nạp 10 vào đèn → deposit + lantern_lit cùng tick, +100",
+  "req": "Nạp 10 → deposit + lantern_lit cùng tick; điểm 10×10 + 100 = 200",
   "seed": 1,
   "ticks": 10,
   "scenario": {
@@ -53,7 +53,7 @@
       {
         "tick": 10,
         "path": "score",
-        "value": 100
+        "value": 200
       },
       {
         "tick": 10,
@@ -66,5 +66,6 @@
         "value": true
       }
     ]
-  }
+  },
+  "changed_in_phase2": "Điểm chuẩn: +10 mỗi đom đóm NẠP (Phase 1 cộng khi nhặt)"
 }

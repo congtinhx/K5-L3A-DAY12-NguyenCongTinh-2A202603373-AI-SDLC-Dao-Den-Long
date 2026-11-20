@@ -1,6 +1,6 @@
 {
   "name": "pickup_boundary",
-  "req": "Biên bán kính: 1.5 nhặt, 1.51 không",
+  "req": "Biên pickup chuẩn: 1.0 nhặt, 1.01 không",
   "seed": 1,
   "ticks": 10,
   "scenario": {
@@ -8,14 +8,14 @@
     "random_shades": false,
     "motes": [
       [
-        1.5,
+        1.0,
         0,
         0
       ],
       [
         0,
         0,
-        -1.51
+        -1.01
       ]
     ],
     "shades": []
@@ -41,5 +41,6 @@
         "value": "M2"
       }
     ]
-  }
+  },
+  "changed_in_phase2": "pickup_radius 1.5 → 1.0"
 }

@@ -1,6 +1,6 @@
 {
   "name": "default_start",
-  "req": "R0 màn mặc định: 5 đèn, 60 đom đóm, bắt đầu (0,0,0), 300 s",
+  "req": "Màn mặc định: 5 đèn chuẩn, 20 đom đóm, (0,0,0), 300 s",
   "seed": 7,
   "ticks": 0,
   "scenario": null,
@@ -12,6 +12,15 @@
       "state": "playing",
       "score": 0
     },
+    "events": [
+      {
+        "tick": 0,
+        "name": "night_start",
+        "data": {
+          "night": 1
+        }
+      }
+    ],
     "snapshots": [
       {
         "tick": 0,
@@ -43,14 +52,34 @@
       },
       {
         "tick": 0,
+        "path": "lanterns.1.pos",
+        "value": [
+          23.8,
+          0,
+          7.7
+        ]
+      },
+      {
+        "tick": 0,
         "path": "motes_active",
-        "value": 60
+        "value": 20
       },
       {
         "tick": 0,
         "path": "time_left_s",
         "value": 300
+      },
+      {
+        "tick": 0,
+        "path": "night",
+        "value": 1
+      },
+      {
+        "tick": 0,
+        "path": "player.grounded",
+        "value": true
       }
     ]
-  }
+  },
+  "changed_in_phase2": "Ticket-02: 20 đom đóm ban đầu (không còn 60)"
 }

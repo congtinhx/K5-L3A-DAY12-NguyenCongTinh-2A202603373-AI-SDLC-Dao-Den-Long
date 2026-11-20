@@ -1,6 +1,6 @@
 {
   "name": "shade_spawn",
-  "req": "Bóng Mực tự sinh ở 10 s, id S1",
+  "req": "Lịch chuẩn: 2 Bóng Mực ở tick 300 (S1, S2), trạng thái spawning",
   "seed": 3,
   "ticks": 700,
   "scenario": {
@@ -11,15 +11,40 @@
   "expect": {
     "events": [
       {
-        "tick": 600,
+        "tick": 300,
         "name": "shade_spawned",
         "data": {
           "id": "S1"
         }
+      },
+      {
+        "tick": 300,
+        "name": "shade_spawned",
+        "data": {
+          "id": "S2"
+        }
       }
     ],
     "event_count": {
-      "shade_spawned": 1
-    }
-  }
+      "shade_spawned": 2
+    },
+    "snapshots": [
+      {
+        "tick": 290,
+        "path": "shades.length",
+        "value": 0
+      },
+      {
+        "tick": 300,
+        "path": "shades.0.state",
+        "value": "spawning"
+      },
+      {
+        "tick": 350,
+        "path": "shades.1.state",
+        "value": "spawning"
+      }
+    ]
+  },
+  "changed_in_phase2": "Lịch chuẩn: 2 con tại tick 300 (Phase 1: 1 con tại tick 600)"
 }

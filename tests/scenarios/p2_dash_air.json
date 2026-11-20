@@ -1,0 +1,45 @@
+{
+  "name": "p2_dash_air",
+  "req": "AC-DASH-3: nhảy rồi lướt ở tick 6 → giữ độ cao 0.5 m trong lúc lướt",
+  "seed": 1,
+  "ticks": 10,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
+    "motes": [],
+    "shades": [],
+    "drifters": []
+  },
+  "inputs": {
+    "frames": [
+      {
+        "tick": 0,
+        "jump": true
+      },
+      {
+        "tick": 5,
+        "dash": true
+      }
+    ]
+  },
+  "expect": {
+    "snapshots": [
+      {
+        "tick": 10,
+        "path": "player.pos",
+        "value": [
+          0,
+          0.5,
+          1.167
+        ]
+      },
+      {
+        "tick": 10,
+        "path": "player.grounded",
+        "value": false
+      }
+    ]
+  }
+}

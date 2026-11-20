@@ -1,8 +1,8 @@
 {
   "name": "pulse_stun_push",
-  "req": "Pulse: tốn 2, choáng 180 tick, đẩy 4 m, +20; hết choáng thì đuổi tiếp",
+  "req": "Pulse chuẩn: choáng 120 tick, đẩy 4 m trong 15 tick, +5; hết choáng thì đuổi (4 m/s)",
   "seed": 1,
-  "ticks": 200,
+  "ticks": 130,
   "scenario": {
     "random_motes": false,
     "random_shades": false,
@@ -11,7 +11,7 @@
       {
         "id": "S1",
         "pos": [
-          5,
+          4,
           0,
           0
         ]
@@ -50,7 +50,7 @@
         "tick": 10,
         "path": "shades.0.pos",
         "value": [
-          9,
+          6.667,
           0,
           0
         ]
@@ -63,32 +63,42 @@
       {
         "tick": 10,
         "path": "player.carried",
-        "value": 3
+        "value": 2
       },
       {
         "tick": 10,
         "path": "score",
-        "value": 20
+        "value": 5
       },
       {
-        "tick": 180,
+        "tick": 20,
+        "path": "shades.0.pos",
+        "value": [
+          8,
+          0,
+          0
+        ]
+      },
+      {
+        "tick": 120,
         "path": "shades.0.state",
         "value": "stunned"
       },
       {
-        "tick": 190,
+        "tick": 130,
         "path": "shades.0.state",
         "value": "chase"
       },
       {
-        "tick": 190,
+        "tick": 130,
         "path": "shades.0.pos",
         "value": [
-          8.417,
+          7.333,
           0,
           0
         ]
       }
     ]
-  }
+  },
+  "changed_in_phase2": "Số chuẩn: cost 3, bán kính 5 m 3D (Bóng Mực dời từ 5 m về 4 m vì 3D tới tâm (0,0.8,0) là 5.06 > 5), choáng 120, đẩy dần 15 tick, +5, tốc độ 4 m/s"
 }

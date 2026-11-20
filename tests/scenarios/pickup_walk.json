@@ -1,6 +1,6 @@
 {
   "name": "pickup_walk",
-  "req": "Nhặt khi khoảng cách ≤ 1.5: đi 3.5 m = 35 tick",
+  "req": "Nhặt khi XZ ≤ 1.0: đi 4.0 m = 40 tick; nhặt không cộng điểm",
   "seed": 1,
   "ticks": 40,
   "scenario": {
@@ -29,7 +29,7 @@
   "expect": {
     "events": [
       {
-        "tick": 35,
+        "tick": 40,
         "name": "mote_picked",
         "data": {
           "carried": 1
@@ -43,7 +43,7 @@
       {
         "tick": 40,
         "path": "score",
-        "value": 10
+        "value": 0
       },
       {
         "tick": 40,
@@ -51,5 +51,6 @@
         "value": 0
       }
     ]
-  }
+  },
+  "changed_in_phase2": "pickup 1.5 → 1.0 (tick 35 → 40); điểm chỉ cộng khi nạp"
 }

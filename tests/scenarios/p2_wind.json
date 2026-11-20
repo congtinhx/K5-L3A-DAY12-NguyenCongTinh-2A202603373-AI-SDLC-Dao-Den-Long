@@ -1,0 +1,41 @@
+{
+  "name": "p2_wind",
+  "req": "AC-NIGHT-4: Đêm 3 gió bắt đầu st 1800, đẩy đúng 2 m/s, hết sau 300 tick",
+  "seed": 2,
+  "ticks": 2110,
+  "night": 3,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "random_drifters": false,
+    "motes": [],
+    "shades": [],
+    "drifters": [],
+    "charms": []
+  },
+  "inputs": null,
+  "expect": {
+    "snapshots": [
+      {
+        "tick": 1790,
+        "path": "wind.active",
+        "value": false
+      },
+      {
+        "tick": 1800,
+        "path": "wind.active",
+        "value": true
+      },
+      {
+        "tick": 1810,
+        "path": "player.vel",
+        "norm": 2
+      },
+      {
+        "tick": 2100,
+        "path": "wind.active",
+        "value": false
+      }
+    ]
+  }
+}

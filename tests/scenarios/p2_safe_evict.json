@@ -1,0 +1,70 @@
+{
+  "name": "p2_safe_evict",
+  "req": "Vùng an toàn: Bóng Mực ở trong lúc đèn vừa sáng bị đưa ra mép 6 m trong đúng 30 tick, không gây hit",
+  "seed": 1,
+  "ticks": 60,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
+    "motes": [],
+    "shades": [
+      {
+        "id": "S1",
+        "pos": [
+          3,
+          0,
+          1
+        ]
+      }
+    ],
+    "drifters": [],
+    "player": {
+      "carried": 10
+    },
+    "lanterns": [
+      {
+        "id": "L1",
+        "pos": [
+          0,
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  "inputs": {
+    "frames": [
+      {
+        "tick": 0,
+        "interact": true
+      }
+    ]
+  },
+  "expect": {
+    "events": [
+      {
+        "tick": 1,
+        "name": "lantern_lit",
+        "data": {
+          "lantern_id": "L1"
+        }
+      }
+    ],
+    "absent": [
+      "player_hit"
+    ],
+    "snapshots": [
+      {
+        "tick": 30,
+        "path": "shades.0.pos",
+        "value": [
+          6,
+          0,
+          1
+        ]
+      }
+    ]
+  }
+}

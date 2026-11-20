@@ -1,6 +1,6 @@
 {
   "name": "pulse_not_enough_light",
-  "req": "Thiếu ánh sáng (carried < 2) thì không pulse",
+  "req": "Thiếu ánh sáng (carried 2 < 3) thì không pulse",
   "seed": 1,
   "ticks": 10,
   "scenario": {
@@ -18,7 +18,7 @@
       }
     ],
     "player": {
-      "carried": 1
+      "carried": 2
     }
   },
   "inputs": {
@@ -37,8 +37,9 @@
       {
         "tick": 10,
         "path": "player.carried",
-        "value": 1
+        "value": 2
       }
     ]
-  }
+  },
+  "changed_in_phase2": "pulse_cost 2 → 3 (carried 1 → 2 để vẫn kiểm đúng biên)"
 }

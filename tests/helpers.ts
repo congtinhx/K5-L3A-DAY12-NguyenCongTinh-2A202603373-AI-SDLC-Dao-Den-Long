@@ -7,14 +7,14 @@ export const ROOT = path.resolve(import.meta.dirname, '..');
 export const CLI = path.join(ROOT, 'src', 'headless', 'cli.ts');
 
 export interface CliCase {
-  name: string; seed: number; ticks: number; snapshot_every?: number;
+  name: string; seed: number; ticks: number; night?: number; snapshot_every?: number;
   scenario?: unknown; inputs?: unknown; scenario_raw?: string; inputs_raw?: string;
 }
 
 export function runCli(c: CliCase): { code: number; out: string; stderr: string } {
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'ddl-'));
   const out = path.join(tmp, 'out.jsonl');
-  const args = [CLI, '--seed', String(c.seed), '--night', '1', '--ticks', String(c.ticks), '--out', out];
+  const args = [CLI, '--seed', String(c.seed), '--night', String(c.night ?? 1), '--ticks', String(c.ticks), '--out', out];
   if (c.snapshot_every) args.push('--snapshot-every', String(c.snapshot_every));
   const sc = c.scenario_raw ?? (c.scenario ? JSON.stringify(c.scenario) : null);
   if (sc !== null) { fs.writeFileSync(path.join(tmp, 'scenario.json'), sc); args.push('--scenario', path.join(tmp, 'scenario.json')); }

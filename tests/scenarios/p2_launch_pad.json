@@ -1,0 +1,52 @@
+{
+  "name": "p2_launch_pad",
+  "req": "AC-NIGHT-2: đứng trên bục (20,0,18) Đêm 2 → bay vy 14 + 24 m/s về đảo B, đáp trên đảo B (x > 42)",
+  "seed": 1,
+  "ticks": 120,
+  "night": 2,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
+    "motes": [],
+    "shades": [],
+    "drifters": [],
+    "player": {
+      "pos": [
+        20,
+        0,
+        17
+      ]
+    },
+    "charms": []
+  },
+  "inputs": null,
+  "expect": {
+    "absent": [
+      "player_hit"
+    ],
+    "snapshots": [
+      {
+        "tick": 40,
+        "path": "player.pos.1",
+        "gt": 3
+      },
+      {
+        "tick": 120,
+        "path": "player.grounded",
+        "value": true
+      },
+      {
+        "tick": 120,
+        "path": "player.pos.0",
+        "gt": 42
+      },
+      {
+        "tick": 120,
+        "path": "player.pos.1",
+        "value": 0
+      }
+    ]
+  }
+}

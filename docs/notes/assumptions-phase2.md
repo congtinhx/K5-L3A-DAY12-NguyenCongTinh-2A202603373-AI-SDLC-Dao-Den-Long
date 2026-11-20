@@ -38,6 +38,7 @@
 19. **Tạm dừng:** cạnh lên của `pause` bật/tắt. Tick bật tạm dừng dừng ngay sau bước đọc input. Tick bỏ tạm dừng chạy đủ bước. Các nút khác vẫn cập nhật trạng thái "trước" trong lúc dừng (bấm trong lúc dừng không kích hoạt sau khi tiếp tục).
 20. **Event `night_start {night}`** ghi với tick 0 ngay sau snapshot tick 0.
 21. **Snapshot:** `player.invuln` là boolean; `*_cd_s`, `charm_s`, `ttl_s`, `respawn_s` là giây còn lại (làm tròn 3 số); `ttl_s` = null với đom đóm random.
+23. **Xuất phát Đêm 3:** (0,0,−30) trên tầng 0, quay mặt +Z — vì (0,0,0) nằm trong tháp chuông. Đêm 2 xuất phát (0,0,0) tâm đảo A.
 22. **Tổng điểm game** = tổng các Đêm đã thắng (bản giao diện). Headless chạy 1 Đêm nên `score` là điểm của Đêm đó (cộng thưởng khi thắng).
 
 ## 3. Thứ tự tick (theo ticket, bắt buộc)

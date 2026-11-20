@@ -1,0 +1,51 @@
+{
+  "name": "p2_dash_basic",
+  "req": "AC-DASH-1: đứng yên quay +Z, lướt 12 tick × 14/60 = 2.8 m; hồi chiêu còn 71 tick ở tick 20",
+  "seed": 1,
+  "ticks": 20,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
+    "motes": [],
+    "shades": [],
+    "drifters": []
+  },
+  "inputs": {
+    "frames": [
+      {
+        "tick": 0,
+        "dash": true
+      }
+    ]
+  },
+  "expect": {
+    "events": [
+      {
+        "tick": 1,
+        "name": "dash",
+        "data": {}
+      }
+    ],
+    "event_count": {
+      "dash": 1
+    },
+    "snapshots": [
+      {
+        "tick": 20,
+        "path": "player.pos",
+        "value": [
+          0,
+          0,
+          2.8
+        ]
+      },
+      {
+        "tick": 20,
+        "path": "player.dash_cd_s",
+        "value": 1.183
+      }
+    ]
+  }
+}

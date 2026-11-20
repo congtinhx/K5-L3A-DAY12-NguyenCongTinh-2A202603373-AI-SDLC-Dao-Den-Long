@@ -1,6 +1,6 @@
 {
   "name": "interact_boundary_in",
-  "req": "interact_radius 2.5 tính là trong",
+  "req": "interact_radius chuẩn 2.0: đúng 2.0 m tính là trong",
   "seed": 1,
   "ticks": 5,
   "scenario": {
@@ -17,7 +17,7 @@
         "pos": [
           0,
           0,
-          2.5
+          2.0
         ]
       }
     ]
@@ -42,5 +42,6 @@
         }
       }
     ]
-  }
+  },
+  "changed_in_phase2": "interact_radius 2.5 → 2.0"
 }

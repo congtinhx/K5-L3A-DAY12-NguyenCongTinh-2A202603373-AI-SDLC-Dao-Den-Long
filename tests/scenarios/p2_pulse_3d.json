@@ -1,0 +1,56 @@
+{
+  "name": "p2_pulse_3d",
+  "req": "Tỏa Sáng đo 3D từ chân+0.8: Bóng Mực ở 4.9 m (3D 4.965) trúng, ở 4.95 m (3D 5.014) trượt",
+  "seed": 1,
+  "ticks": 5,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
+    "motes": [],
+    "shades": [
+      {
+        "id": "S1",
+        "pos": [
+          4.9,
+          0,
+          0
+        ]
+      },
+      {
+        "id": "S2",
+        "pos": [
+          0,
+          0,
+          -4.95
+        ]
+      }
+    ],
+    "drifters": [],
+    "player": {
+      "carried": 3
+    }
+  },
+  "inputs": {
+    "frames": [
+      {
+        "tick": 0,
+        "pulse": true
+      }
+    ]
+  },
+  "expect": {
+    "events": [
+      {
+        "tick": 1,
+        "name": "pulse",
+        "data": {
+          "stunned_ids": [
+            "S1"
+          ]
+        }
+      }
+    ]
+  }
+}

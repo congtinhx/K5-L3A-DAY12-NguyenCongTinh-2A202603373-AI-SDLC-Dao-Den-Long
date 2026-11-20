@@ -1,4 +1,7 @@
-import type { InputFrame, ScenarioSpec, Vec3 } from './types.ts';
+import type { DrifterState, InputFrame, ScenarioSpec, ShadeState, Vec3 } from './types.ts';
+
+const SHADE_STATES: ShadeState[] = ['spawning', 'wander', 'chase', 'recoil', 'stunned'];
+const DRIFTER_STATES: DrifterState[] = ['idle', 'chase', 'flee', 'removed'];
 
 /** Lỗi định dạng file inputs/scenario → headless thoát mã 2. */
 export class FormatError extends Error {}
@@ -42,7 +45,7 @@ export function parseInputs(text: string): InputFrame[] {
       out.move = [(m as number[])[0], (m as number[])[1]];
     }
     if ('cam_yaw_deg' in fr) { if (!isNum(fr.cam_yaw_deg)) fail(`${w}.cam_yaw_deg: cần số`); out.cam_yaw_deg = fr.cam_yaw_deg as number; }
-    for (const k of ['jump', 'interact', 'pulse', 'dash'] as const) if (k in fr) out[k] = bool(fr[k], `${w}.${k}`);
+    for (const k of ['jump', 'interact', 'pulse', 'dash', 'pause'] as const) if (k in fr) out[k] = bool(fr[k], `${w}.${k}`);
     frames.push(out);
   });
   return frames;
@@ -59,9 +62,14 @@ export function parseScenario(text: string, lanternIds: string[]): ScenarioSpec 
     if ('pos' in p) sc.player.pos = vec3(p.pos, 'scenario.player.pos');
     if ('carried' in p) sc.player.carried = nonNegInt(p.carried, 'scenario.player.carried');
     if ('flames' in p) sc.player.flames = nonNegInt(p.flames, 'scenario.player.flames');
+    for (const k of ['invuln_ticks', 'dash_cd_ticks', 'pulse_cd_ticks', 'charm_ticks'] as const) {
+      if (k in p) sc.player[k] = nonNegInt(p[k], `scenario.player.${k}`);
+    }
   }
   if ('random_motes' in r) sc.random_motes = bool(r.random_motes, 'scenario.random_motes');
   if ('random_shades' in r) sc.random_shades = bool(r.random_shades, 'scenario.random_shades');
+  if ('random_drifters' in r) sc.random_drifters = bool(r.random_drifters, 'scenario.random_drifters');
+  if ('wind_enabled' in r) sc.wind_enabled = bool(r.wind_enabled, 'scenario.wind_enabled');
   if ('motes' in r) {
     if (!Array.isArray(r.motes)) fail('scenario.motes: cần mảng');
     sc.motes = (r.motes as unknown[]).map((m, i) => vec3(m, `scenario.motes[${i}]`));
@@ -72,11 +80,43 @@ export function parseScenario(text: string, lanternIds: string[]): ScenarioSpec 
     sc.shades = (r.shades as unknown[]).map((s, i) => {
       if (!isObj(s)) fail(`scenario.shades[${i}]: cần object`);
       const so = s as Record<string, unknown>;
-      const out: { id?: string; pos: Vec3 } = { pos: vec3(so.pos, `scenario.shades[${i}].pos`) };
+      const out: { id?: string; pos: Vec3; state?: ShadeState; state_ticks_left?: number } = { pos: vec3(so.pos, `scenario.shades[${i}].pos`) };
+      if ('state' in so) {
+        if (!SHADE_STATES.includes(so.state as ShadeState)) fail(`scenario.shades[${i}].state: một trong ${SHADE_STATES.join(', ')}`);
+        out.state = so.state as ShadeState;
+      }
+      if ('state_ticks_left' in so) out.state_ticks_left = nonNegInt(so.state_ticks_left, `scenario.shades[${i}].state_ticks_left`);
       if ('id' in so) {
         if (typeof so.id !== 'string' || so.id === '' || seen.has(so.id)) fail(`scenario.shades[${i}].id: cần chuỗi, không trùng`);
         out.id = so.id as string; seen.add(out.id);
       }
+      return out;
+    });
+  }
+  if ('drifters' in r) {
+    if (!Array.isArray(r.drifters)) fail('scenario.drifters: cần mảng');
+    sc.drifters = (r.drifters as unknown[]).map((d, i) => {
+      const w = `scenario.drifters[${i}]`;
+      if (!isObj(d)) fail(`${w}: cần object`);
+      const o = d as Record<string, unknown>;
+      const out: { id?: string; pos: Vec3; state?: DrifterState; stolen?: number } = { pos: vec3(o.pos, `${w}.pos`) };
+      if ('id' in o) { if (typeof o.id !== 'string' || o.id === '') fail(`${w}.id: cần chuỗi`); out.id = o.id as string; }
+      if ('state' in o) { if (!DRIFTER_STATES.includes(o.state as DrifterState)) fail(`${w}.state: một trong ${DRIFTER_STATES.join(', ')}`); out.state = o.state as DrifterState; }
+      if ('stolen' in o) out.stolen = nonNegInt(o.stolen, `${w}.stolen`);
+      return out;
+    });
+  }
+  if ('charms' in r) {
+    if (!Array.isArray(r.charms)) fail('scenario.charms: cần mảng');
+    sc.charms = (r.charms as unknown[]).map((c, i) => {
+      const w = `scenario.charms[${i}]`;
+      if (!isObj(c)) fail(`${w}: cần object`);
+      const o = c as Record<string, unknown>;
+      const out: { id?: string; pos?: Vec3; available?: boolean; respawn_ticks?: number } = {};
+      if ('id' in o) { if (typeof o.id !== 'string' || o.id === '') fail(`${w}.id: cần chuỗi`); out.id = o.id as string; }
+      if ('pos' in o) out.pos = vec3(o.pos, `${w}.pos`);
+      if ('available' in o) out.available = bool(o.available, `${w}.available`);
+      if ('respawn_ticks' in o) out.respawn_ticks = nonNegInt(o.respawn_ticks, `${w}.respawn_ticks`);
       return out;
     });
   }

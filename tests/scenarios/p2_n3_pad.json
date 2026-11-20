@@ -1,0 +1,43 @@
+{
+  "name": "p2_n3_pad",
+  "req": "AC-NIGHT-3: bục (0,3,13) bắn vy 12 + 8 m/s hướng −Z → đáp tầng 2 (Y=6) ở tick 50, z = 13 − 49×8/60 = 6.467",
+  "seed": 1,
+  "ticks": 60,
+  "night": 3,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
+    "motes": [],
+    "shades": [],
+    "drifters": [],
+    "player": {
+      "pos": [
+        0,
+        3,
+        13
+      ]
+    },
+    "charms": []
+  },
+  "inputs": null,
+  "expect": {
+    "snapshots": [
+      {
+        "tick": 60,
+        "path": "player.pos",
+        "value": [
+          0,
+          6,
+          6.467
+        ]
+      },
+      {
+        "tick": 60,
+        "path": "player.grounded",
+        "value": true
+      }
+    ]
+  }
+}

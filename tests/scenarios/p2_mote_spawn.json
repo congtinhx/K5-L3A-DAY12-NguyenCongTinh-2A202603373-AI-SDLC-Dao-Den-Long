@@ -1,0 +1,25 @@
+{
+  "name": "p2_mote_spawn",
+  "req": "Đom đóm: 20 lúc đầu, +1 ở tick 240",
+  "seed": 9,
+  "ticks": 240,
+  "scenario": {
+    "random_shades": false,
+    "shades": []
+  },
+  "inputs": null,
+  "expect": {
+    "snapshots": [
+      {
+        "tick": 230,
+        "path": "motes_active",
+        "value": 20
+      },
+      {
+        "tick": 240,
+        "path": "motes_active",
+        "value": 21
+      }
+    ]
+  }
+}

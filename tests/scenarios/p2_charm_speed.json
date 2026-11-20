@@ -1,0 +1,72 @@
+{
+  "name": "p2_charm_speed",
+  "req": "AC-CHARM-1: nhặt Bùa Gió C1 ở (35,0,0) tick 1 → chạy 7.2 m/s: x = 34.6 + 9×0.12 = 35.68 ở tick 10",
+  "seed": 1,
+  "ticks": 10,
+  "night": 2,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
+    "motes": [],
+    "shades": [],
+    "drifters": [],
+    "player": {
+      "pos": [
+        34.5,
+        0,
+        0
+      ]
+    }
+  },
+  "inputs": {
+    "frames": [
+      {
+        "tick": 0,
+        "move": [
+          1,
+          0
+        ]
+      }
+    ]
+  },
+  "expect": {
+    "events": [
+      {
+        "tick": 1,
+        "name": "charm_picked",
+        "data": {
+          "charm_id": "C1",
+          "charm_ticks": 600
+        }
+      }
+    ],
+    "snapshots": [
+      {
+        "tick": 10,
+        "path": "player.pos",
+        "value": [
+          35.68,
+          0,
+          0
+        ]
+      },
+      {
+        "tick": 10,
+        "path": "player.charm_s",
+        "value": 9.85
+      },
+      {
+        "tick": 10,
+        "path": "charms.0.available",
+        "value": false
+      },
+      {
+        "tick": 10,
+        "path": "charms.0.respawn_s",
+        "value": 44.85
+      }
+    ]
+  }
+}

@@ -1,6 +1,6 @@
 {
   "name": "jump",
-  "req": "Nhảy: vy 6, g 20; đáp đất",
+  "req": "Nhảy chuẩn: vy 7, g 20 → y(10) = (70 − 110/6)/60 = 0.861; đáp đất trước tick 60",
   "seed": 1,
   "ticks": 60,
   "scenario": {
@@ -28,7 +28,7 @@
         "path": "player.pos",
         "value": [
           0,
-          0.694,
+          0.861,
           0
         ]
       },
@@ -42,5 +42,6 @@
         ]
       }
     ]
-  }
+  },
+  "changed_in_phase2": "Vận tốc nhảy 6 → 7 m/s"
 }

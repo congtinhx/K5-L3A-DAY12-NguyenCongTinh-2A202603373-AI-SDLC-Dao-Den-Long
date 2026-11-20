@@ -1,6 +1,6 @@
 {
   "name": "pulse_out_of_radius",
-  "req": "Bóng Mực ngoài 6 m không bị choáng; pulse vẫn tốn ánh sáng",
+  "req": "Bóng Mực ngoài 5 m (3D từ chân+0.8) không choáng; pulse vẫn tốn 3",
   "seed": 1,
   "ticks": 10,
   "scenario": {
@@ -48,8 +48,9 @@
       {
         "tick": 10,
         "path": "player.carried",
-        "value": 3
+        "value": 2
       }
     ]
-  }
+  },
+  "changed_in_phase2": "pulse_cost 2 → 3, bán kính 6 → 5 (3D)"
 }
