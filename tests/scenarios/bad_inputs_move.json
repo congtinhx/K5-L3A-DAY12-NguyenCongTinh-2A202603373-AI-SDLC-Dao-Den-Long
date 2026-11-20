@@ -1,0 +1,21 @@
+{
+  "name": "bad_inputs_move",
+  "req": "Contract: move ngoài [-1,1] → mã 2",
+  "seed": 1,
+  "ticks": 10,
+  "scenario": null,
+  "inputs": {
+    "frames": [
+      {
+        "tick": 0,
+        "move": [
+          2,
+          0
+        ]
+      }
+    ]
+  },
+  "expect": {
+    "exit_code": 2
+  }
+}

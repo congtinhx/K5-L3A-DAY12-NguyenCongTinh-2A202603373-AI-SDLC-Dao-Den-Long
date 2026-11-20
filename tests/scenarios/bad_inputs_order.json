@@ -1,0 +1,11 @@
+{
+  "name": "bad_inputs_order",
+  "req": "Contract: tick không tăng → mã 2",
+  "seed": 1,
+  "ticks": 10,
+  "scenario": null,
+  "inputs_raw": "{\"frames\":[{\"tick\":5},{\"tick\":3}]}",
+  "expect": {
+    "exit_code": 2
+  }
+}

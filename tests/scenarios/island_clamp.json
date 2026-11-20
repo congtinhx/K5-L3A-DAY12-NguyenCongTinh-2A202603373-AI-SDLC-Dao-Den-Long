@@ -1,0 +1,39 @@
+{
+  "name": "island_clamp",
+  "req": "Biên đảo 40 m (fall_enabled=false)",
+  "seed": 1,
+  "ticks": 500,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "motes": [],
+    "shades": []
+  },
+  "inputs": {
+    "frames": [
+      {
+        "tick": 0,
+        "move": [
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  "expect": {
+    "snapshots": [
+      {
+        "tick": 500,
+        "path": "player.pos",
+        "value": [
+          0,
+          0,
+          40
+        ]
+      }
+    ],
+    "absent": [
+      "player_hit"
+    ]
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "name": "default_start",
+  "req": "R0 màn mặc định: 5 đèn, 60 đom đóm, bắt đầu (0,0,0), 300 s",
+  "seed": 7,
+  "ticks": 0,
+  "scenario": null,
+  "inputs": null,
+  "expect": {
+    "exit_code": 0,
+    "end": {
+      "ticks": 0,
+      "state": "playing",
+      "score": 0
+    },
+    "snapshots": [
+      {
+        "tick": 0,
+        "path": "player.pos",
+        "value": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "tick": 0,
+        "path": "player.flames",
+        "value": 3
+      },
+      {
+        "tick": 0,
+        "path": "lanterns.length",
+        "value": 5
+      },
+      {
+        "tick": 0,
+        "path": "lanterns.0.pos",
+        "value": [
+          0,
+          0,
+          25
+        ]
+      },
+      {
+        "tick": 0,
+        "path": "motes_active",
+        "value": 60
+      },
+      {
+        "tick": 0,
+        "path": "time_left_s",
+        "value": 300
+      }
+    ]
+  }
+}

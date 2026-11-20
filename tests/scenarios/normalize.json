@@ -1,0 +1,36 @@
+{
+  "name": "normalize",
+  "req": "Contract C: vector dài hơn 1 được chuẩn hóa",
+  "seed": 1,
+  "ticks": 60,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "motes": [],
+    "shades": []
+  },
+  "inputs": {
+    "frames": [
+      {
+        "tick": 0,
+        "move": [
+          1,
+          1
+        ]
+      }
+    ]
+  },
+  "expect": {
+    "snapshots": [
+      {
+        "tick": 60,
+        "path": "player.pos",
+        "value": [
+          4.243,
+          0,
+          4.243
+        ]
+      }
+    ]
+  }
+}

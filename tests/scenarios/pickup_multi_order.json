@@ -1,0 +1,60 @@
+{
+  "name": "pickup_multi_order",
+  "req": "Nhặt nhiều con cùng tick: gần trước, hòa theo id, dừng khi đầy",
+  "seed": 1,
+  "ticks": 10,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "motes": [
+      [
+        0,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        -0.5
+      ],
+      [
+        1,
+        0,
+        0
+      ]
+    ],
+    "shades": [],
+    "player": {
+      "carried": 8
+    }
+  },
+  "inputs": null,
+  "expect": {
+    "events": [
+      {
+        "tick": 1,
+        "name": "mote_picked",
+        "data": {
+          "carried": 9
+        }
+      },
+      {
+        "tick": 1,
+        "name": "mote_picked",
+        "data": {
+          "carried": 10
+        }
+      }
+    ],
+    "event_count": {
+      "mote_picked": 2
+    },
+    "snapshots": [
+      {
+        "tick": 10,
+        "path": "motes.0.id",
+        "value": "M3"
+      }
+    ]
+  }
+}

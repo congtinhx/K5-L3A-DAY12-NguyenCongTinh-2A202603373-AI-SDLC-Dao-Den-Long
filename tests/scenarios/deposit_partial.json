@@ -1,0 +1,61 @@
+{
+  "name": "deposit_partial",
+  "req": "Nạp phần còn thiếu, giữ phần thừa",
+  "seed": 1,
+  "ticks": 10,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "motes": [],
+    "shades": [],
+    "player": {
+      "carried": 4
+    },
+    "lanterns": [
+      {
+        "id": "L1",
+        "pos": [
+          0,
+          0,
+          2
+        ],
+        "deposited": 8
+      }
+    ]
+  },
+  "inputs": {
+    "frames": [
+      {
+        "tick": 0,
+        "interact": true
+      }
+    ]
+  },
+  "expect": {
+    "events": [
+      {
+        "tick": 1,
+        "name": "deposit",
+        "data": {
+          "lantern_id": "L1",
+          "amount": 2,
+          "deposited": 10
+        }
+      },
+      {
+        "tick": 1,
+        "name": "lantern_lit",
+        "data": {
+          "lantern_id": "L1"
+        }
+      }
+    ],
+    "snapshots": [
+      {
+        "tick": 10,
+        "path": "player.carried",
+        "value": 2
+      }
+    ]
+  }
+}

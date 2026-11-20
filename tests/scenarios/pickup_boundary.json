@@ -1,0 +1,45 @@
+{
+  "name": "pickup_boundary",
+  "req": "Biên bán kính: 1.5 nhặt, 1.51 không",
+  "seed": 1,
+  "ticks": 10,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "motes": [
+      [
+        1.5,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        -1.51
+      ]
+    ],
+    "shades": []
+  },
+  "inputs": null,
+  "expect": {
+    "events": [
+      {
+        "tick": 1,
+        "name": "mote_picked",
+        "data": {
+          "carried": 1
+        }
+      }
+    ],
+    "event_count": {
+      "mote_picked": 1
+    },
+    "snapshots": [
+      {
+        "tick": 10,
+        "path": "motes.0.id",
+        "value": "M2"
+      }
+    ]
+  }
+}

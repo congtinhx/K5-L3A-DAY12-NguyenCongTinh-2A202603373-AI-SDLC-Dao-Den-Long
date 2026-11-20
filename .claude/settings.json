@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npm test --silent >/dev/null 2>&1 || { echo 'npm test dang do: sua cho xanh truoc khi ket thuc (xem AGENTS.md).' >&2; exit 2; }"
+          }
+        ]
+      }
+    ]
+  }
+}

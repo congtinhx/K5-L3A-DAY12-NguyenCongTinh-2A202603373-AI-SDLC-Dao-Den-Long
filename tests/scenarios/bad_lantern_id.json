@@ -1,0 +1,17 @@
+{
+  "name": "bad_lantern_id",
+  "req": "Scenario đèn không tồn tại → mã 2",
+  "seed": 1,
+  "ticks": 10,
+  "scenario": {
+    "lanterns": [
+      {
+        "id": "L9"
+      }
+    ]
+  },
+  "inputs": null,
+  "expect": {
+    "exit_code": 2
+  }
+}

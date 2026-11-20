@@ -1,0 +1,25 @@
+{
+  "name": "snapshot_cadence",
+  "req": "Contract E: snapshot mỗi --snapshot-every, dòng end cuối",
+  "seed": 1,
+  "ticks": 25,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "motes": [],
+    "shades": []
+  },
+  "inputs": null,
+  "expect": {
+    "exit_code": 0,
+    "snapshot_ticks": [
+      0,
+      10,
+      20
+    ],
+    "end": {
+      "ticks": 25,
+      "state": "playing"
+    }
+  }
+}

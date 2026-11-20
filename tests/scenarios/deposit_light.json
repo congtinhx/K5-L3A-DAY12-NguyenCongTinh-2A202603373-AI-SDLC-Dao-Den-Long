@@ -1,0 +1,70 @@
+{
+  "name": "deposit_light",
+  "req": "Nạp 10 vào đèn → deposit + lantern_lit cùng tick, +100",
+  "seed": 1,
+  "ticks": 10,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "motes": [],
+    "shades": [],
+    "player": {
+      "carried": 10
+    },
+    "lanterns": [
+      {
+        "id": "L1",
+        "pos": [
+          0,
+          0,
+          2
+        ]
+      }
+    ]
+  },
+  "inputs": {
+    "frames": [
+      {
+        "tick": 0,
+        "interact": true
+      }
+    ]
+  },
+  "expect": {
+    "events": [
+      {
+        "tick": 1,
+        "name": "deposit",
+        "data": {
+          "lantern_id": "L1",
+          "amount": 10,
+          "deposited": 10
+        }
+      },
+      {
+        "tick": 1,
+        "name": "lantern_lit",
+        "data": {
+          "lantern_id": "L1"
+        }
+      }
+    ],
+    "snapshots": [
+      {
+        "tick": 10,
+        "path": "score",
+        "value": 100
+      },
+      {
+        "tick": 10,
+        "path": "player.carried",
+        "value": 0
+      },
+      {
+        "tick": 10,
+        "path": "lanterns.0.lit",
+        "value": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "name": "interact_nearest",
+  "req": "Nhiều đèn trong tầm: chọn gần nhất",
+  "seed": 1,
+  "ticks": 5,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "motes": [],
+    "shades": [],
+    "player": {
+      "carried": 3
+    },
+    "lanterns": [
+      {
+        "id": "L1",
+        "pos": [
+          0,
+          0,
+          2
+        ]
+      },
+      {
+        "id": "L2",
+        "pos": [
+          0,
+          0,
+          -1.5
+        ]
+      }
+    ]
+  },
+  "inputs": {
+    "frames": [
+      {
+        "tick": 0,
+        "interact": true
+      }
+    ]
+  },
+  "expect": {
+    "events": [
+      {
+        "tick": 1,
+        "name": "deposit",
+        "data": {
+          "lantern_id": "L2",
+          "amount": 3,
+          "deposited": 3
+        }
+      }
+    ],
+    "event_count": {
+      "deposit": 1
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "name": "deposit_not_lit_yet",
+  "req": "Nạp chưa đủ thì chưa thắp, không cộng điểm",
+  "seed": 1,
+  "ticks": 10,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "motes": [],
+    "shades": [],
+    "player": {
+      "carried": 3
+    },
+    "lanterns": [
+      {
+        "id": "L1",
+        "pos": [
+          0,
+          0,
+          2
+        ]
+      }
+    ]
+  },
+  "inputs": {
+    "frames": [
+      {
+        "tick": 0,
+        "interact": true
+      }
+    ]
+  },
+  "expect": {
+    "events": [
+      {
+        "tick": 1,
+        "name": "deposit",
+        "data": {
+          "lantern_id": "L1",
+          "amount": 3,
+          "deposited": 3
+        }
+      }
+    ],
+    "absent": [
+      "lantern_lit"
+    ],
+    "snapshots": [
+      {
+        "tick": 10,
+        "path": "score",
+        "value": 0
+      }
+    ]
+  }
+}

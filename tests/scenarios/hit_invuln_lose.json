@@ -1,0 +1,72 @@
+{
+  "name": "hit_invuln_lose",
+  "req": "Bị chạm: -1 lửa, rơi floor(50%), bất tử 90 tick; hết lửa thì thua",
+  "seed": 1,
+  "ticks": 1000,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "motes": [],
+    "shades": [
+      {
+        "id": "S1",
+        "pos": [
+          0.5,
+          0,
+          0
+        ]
+      }
+    ],
+    "player": {
+      "carried": 5
+    }
+  },
+  "inputs": null,
+  "expect": {
+    "events": [
+      {
+        "tick": 1,
+        "name": "player_hit",
+        "data": {
+          "by": "shade",
+          "flames": 2,
+          "dropped": 2
+        }
+      },
+      {
+        "tick": 91,
+        "name": "player_hit",
+        "data": {
+          "by": "shade",
+          "flames": 1,
+          "dropped": 1
+        }
+      },
+      {
+        "tick": 181,
+        "name": "player_hit",
+        "data": {
+          "by": "shade",
+          "flames": 0,
+          "dropped": 1
+        }
+      },
+      {
+        "tick": 181,
+        "name": "game_over",
+        "data": {
+          "result": "lost",
+          "reason": "no_flames"
+        }
+      }
+    ],
+    "event_count": {
+      "player_hit": 3
+    },
+    "end": {
+      "ticks": 181,
+      "state": "lost",
+      "score": 0
+    }
+  }
+}

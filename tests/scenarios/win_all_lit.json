@@ -1,0 +1,74 @@
+{
+  "name": "win_all_lit",
+  "req": "Thắp đèn cuối → thắng; điểm = 100 + floor(99.98)×1 + 3×50 = 349",
+  "seed": 1,
+  "ticks": 100,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "motes": [],
+    "shades": [],
+    "player": {
+      "carried": 10
+    },
+    "time_left_s": 100,
+    "lanterns": [
+      {
+        "id": "L1",
+        "lit": true
+      },
+      {
+        "id": "L2",
+        "lit": true
+      },
+      {
+        "id": "L3",
+        "lit": true
+      },
+      {
+        "id": "L4",
+        "lit": true
+      },
+      {
+        "id": "L5",
+        "pos": [
+          0,
+          0,
+          2
+        ]
+      }
+    ]
+  },
+  "inputs": {
+    "frames": [
+      {
+        "tick": 0,
+        "interact": true
+      }
+    ]
+  },
+  "expect": {
+    "events": [
+      {
+        "tick": 1,
+        "name": "lantern_lit",
+        "data": {
+          "lantern_id": "L5"
+        }
+      },
+      {
+        "tick": 1,
+        "name": "game_over",
+        "data": {
+          "result": "won",
+          "reason": "all_lit"
+        }
+      }
+    ],
+    "end": {
+      "ticks": 1,
+      "state": "won",
+      "score": 349
+    }
+  }
+}

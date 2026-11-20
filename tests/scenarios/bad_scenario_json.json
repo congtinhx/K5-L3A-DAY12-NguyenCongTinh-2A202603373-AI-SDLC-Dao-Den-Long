@@ -1,0 +1,11 @@
+{
+  "name": "bad_scenario_json",
+  "req": "Contract: scenario không phải JSON → mã 2",
+  "seed": 1,
+  "ticks": 10,
+  "scenario_raw": "{oops",
+  "inputs": null,
+  "expect": {
+    "exit_code": 2
+  }
+}

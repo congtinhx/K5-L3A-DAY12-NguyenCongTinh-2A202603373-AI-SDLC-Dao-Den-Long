@@ -1,0 +1,36 @@
+{
+  "name": "move_right_yaw0",
+  "req": "Contract C: move [1,0], yaw 0 → +X",
+  "seed": 1,
+  "ticks": 10,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "motes": [],
+    "shades": []
+  },
+  "inputs": {
+    "frames": [
+      {
+        "tick": 0,
+        "move": [
+          1,
+          0
+        ]
+      }
+    ]
+  },
+  "expect": {
+    "snapshots": [
+      {
+        "tick": 10,
+        "path": "player.pos",
+        "value": [
+          1,
+          0,
+          0
+        ]
+      }
+    ]
+  }
+}

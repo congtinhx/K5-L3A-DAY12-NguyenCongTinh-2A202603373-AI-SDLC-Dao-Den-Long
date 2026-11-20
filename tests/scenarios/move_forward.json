@@ -1,0 +1,46 @@
+{
+  "name": "move_forward",
+  "req": "Contract C: move [0,1], yaw 0 → +Z, 6 m/s",
+  "seed": 1,
+  "ticks": 60,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "motes": [],
+    "shades": []
+  },
+  "inputs": {
+    "frames": [
+      {
+        "tick": 0,
+        "move": [
+          0,
+          1
+        ],
+        "cam_yaw_deg": 0
+      }
+    ]
+  },
+  "expect": {
+    "snapshots": [
+      {
+        "tick": 10,
+        "path": "player.pos",
+        "value": [
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "tick": 60,
+        "path": "player.pos",
+        "value": [
+          0,
+          0,
+          6
+        ]
+      }
+    ]
+  }
+}

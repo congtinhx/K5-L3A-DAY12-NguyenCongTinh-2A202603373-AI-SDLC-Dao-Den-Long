@@ -1,0 +1,25 @@
+{
+  "name": "shade_spawn",
+  "req": "Bóng Mực tự sinh ở 10 s, id S1",
+  "seed": 3,
+  "ticks": 700,
+  "scenario": {
+    "random_motes": false,
+    "motes": []
+  },
+  "inputs": null,
+  "expect": {
+    "events": [
+      {
+        "tick": 600,
+        "name": "shade_spawned",
+        "data": {
+          "id": "S1"
+        }
+      }
+    ],
+    "event_count": {
+      "shade_spawned": 1
+    }
+  }
+}

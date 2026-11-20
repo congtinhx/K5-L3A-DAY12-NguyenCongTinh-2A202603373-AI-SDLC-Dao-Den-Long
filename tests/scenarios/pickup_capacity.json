@@ -1,0 +1,39 @@
+{
+  "name": "pickup_capacity",
+  "req": "Đầy 10 thì không nhặt",
+  "seed": 1,
+  "ticks": 10,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "motes": [
+      [
+        0,
+        0,
+        1
+      ]
+    ],
+    "shades": [],
+    "player": {
+      "carried": 10
+    }
+  },
+  "inputs": null,
+  "expect": {
+    "absent": [
+      "mote_picked"
+    ],
+    "snapshots": [
+      {
+        "tick": 10,
+        "path": "motes_active",
+        "value": 1
+      },
+      {
+        "tick": 10,
+        "path": "player.carried",
+        "value": 10
+      }
+    ]
+  }
+}

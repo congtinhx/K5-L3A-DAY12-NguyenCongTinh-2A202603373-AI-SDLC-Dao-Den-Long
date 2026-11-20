@@ -1,0 +1,55 @@
+{
+  "name": "pickup_walk",
+  "req": "Nhặt khi khoảng cách ≤ 1.5: đi 3.5 m = 35 tick",
+  "seed": 1,
+  "ticks": 40,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "motes": [
+      [
+        0,
+        0,
+        5
+      ]
+    ],
+    "shades": []
+  },
+  "inputs": {
+    "frames": [
+      {
+        "tick": 0,
+        "move": [
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  "expect": {
+    "events": [
+      {
+        "tick": 35,
+        "name": "mote_picked",
+        "data": {
+          "carried": 1
+        }
+      }
+    ],
+    "event_count": {
+      "mote_picked": 1
+    },
+    "snapshots": [
+      {
+        "tick": 40,
+        "path": "score",
+        "value": 10
+      },
+      {
+        "tick": 40,
+        "path": "motes_active",
+        "value": 0
+      }
+    ]
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "name": "pulse_cooldown",
+  "req": "Cooldown 60 tick",
+  "seed": 1,
+  "ticks": 80,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "motes": [],
+    "shades": [],
+    "player": {
+      "carried": 10
+    }
+  },
+  "inputs": {
+    "frames": [
+      {
+        "tick": 0,
+        "pulse": true
+      },
+      {
+        "tick": 1,
+        "pulse": false
+      },
+      {
+        "tick": 30,
+        "pulse": true
+      },
+      {
+        "tick": 31,
+        "pulse": false
+      },
+      {
+        "tick": 70,
+        "pulse": true
+      },
+      {
+        "tick": 71,
+        "pulse": false
+      }
+    ]
+  },
+  "expect": {
+    "events": [
+      {
+        "tick": 1,
+        "name": "pulse"
+      },
+      {
+        "tick": 71,
+        "name": "pulse"
+      }
+    ],
+    "event_count": {
+      "pulse": 2
+    },
+    "snapshots": [
+      {
+        "tick": 80,
+        "path": "player.carried",
+        "value": 6
+      }
+    ]
+  }
+}

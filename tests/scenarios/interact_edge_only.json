@@ -1,0 +1,15 @@
+{
+  "name": "interact_edge_only",
+  "req": "Giữ interact không nạp lặp (chỉ cạnh false→true): còn 5 đom đóm và đèn L2 chưa thắp trong tầm nhưng không nạp thêm",
+  "seed": 1,
+  "ticks": 30,
+  "scenario": { "random_motes": false, "random_shades": false, "motes": [], "shades": [],
+    "player": { "carried": 10 },
+    "lanterns": [ { "id": "L1", "pos": [0, 0, 2], "deposited": 5 }, { "id": "L2", "pos": [0, 0, -2.2] } ] },
+  "inputs": { "frames": [ { "tick": 0, "interact": true } ] },
+  "expect": {
+    "events": [ { "tick": 1, "name": "deposit", "data": { "lantern_id": "L1", "amount": 5, "deposited": 10 } } ],
+    "event_count": { "deposit": 1 },
+    "snapshots": [ { "tick": 30, "path": "player.carried", "value": 5 } ]
+  }
+}

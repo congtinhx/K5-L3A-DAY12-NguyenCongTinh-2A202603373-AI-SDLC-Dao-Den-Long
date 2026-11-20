@@ -1,0 +1,46 @@
+{
+  "name": "jump",
+  "req": "Nhảy: vy 6, g 20; đáp đất",
+  "seed": 1,
+  "ticks": 60,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "motes": [],
+    "shades": []
+  },
+  "inputs": {
+    "frames": [
+      {
+        "tick": 0,
+        "jump": true
+      },
+      {
+        "tick": 1,
+        "jump": false
+      }
+    ]
+  },
+  "expect": {
+    "snapshots": [
+      {
+        "tick": 10,
+        "path": "player.pos",
+        "value": [
+          0,
+          0.694,
+          0
+        ]
+      },
+      {
+        "tick": 60,
+        "path": "player.pos",
+        "value": [
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  }
+}
