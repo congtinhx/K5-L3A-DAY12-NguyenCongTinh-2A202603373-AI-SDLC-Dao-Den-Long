@@ -55,3 +55,8 @@ Công cụ: Claude (Opus) trong Claude app, có shell trên máy và trình duy�
 **AI sai ở đâu:** scenario `p3_refuel_prefers_receivable` có mô tả không khớp với điều nó thật sự kiểm (trạng thái "đèn đầy" không tới được) — phát hiện khi đọc lại kỳ vọng sau khi test đạt; đổi tên thành `p3_refuel_small` và ghi rõ giới hạn trong traceability.
 
 **Token (ước tính thô):** ~250k token đầu vào, ~35k đầu ra cho Phase 3. Tiết kiệm: sửa core bằng một lần patch có kiểm tra thay vì nhiều lượt; không chạy lại bot; chỉ chạy `npm test` 2 lần + verify 1 lần.
+
+## Phase 4
+**Cách làm (90 phút):** ưu tiên phần chấm tự động (soak, contract v1.3) → bench (cảnh trong trang + launcher Chrome) → bảng xếp hạng (logic thuần + unit test → server lưu đĩa → UI) → tiếp cận → tài liệu/retro → release.
+**AI sai & phát hiện:** soak RSS ×1.29 lần đầu → đo heap chứng minh không rò rỉ, tắt JIT tối ưu (có ghi lý do); bench 1.1 FPS → InstancedMesh (42 FPS); `moteCoreMat` dùng trước khai báo (dải lỗi trên trang); `??` với biến môi trường rỗng.
+**Token (ước tính):** ~550k vào / ~60k ra. Xem tổng hợp ở `retro.md`.

@@ -6,3 +6,4 @@ out/
 .env.*
 *.log
 docs/proof/ci/
+data/

@@ -1,6 +1,6 @@
 # AGENTS.md — Đảo Đèn Lồng
 
-Game 3D (Three.js, trình duyệt), **3 Đêm**, + chế độ headless theo **Test Contract v1.2** (`docs/lab/ticket-02.txt` + `ticket-03.txt`). Quyết định thiết kế: `docs/adr/`. Breaking changes: `CHANGELOG.md`.
+Game 3D (Three.js, trình duyệt), **3 Đêm**, + chế độ headless theo **Test Contract v1.3** (`docs/lab/ticket-02.txt` + `ticket-03.txt`). Quyết định thiết kế: `docs/adr/`. Breaking changes: `CHANGELOG.md`.
 Không có dependency npm: Node ≥ 22.18 chạy TypeScript trực tiếp (type stripping). Three.js nạp từ CDN qua importmap.
 
 ## Lệnh
@@ -11,6 +11,9 @@ Không có dependency npm: Node ≥ 22.18 chạy TypeScript trực tiếp (type 
 - `npm test` mất ~35 s (mỗi scenario chạy CLI thật) — đừng chạy nhiều lần trong một lệnh có timeout 120 s.
 - Headless: `node src/headless/cli.ts --seed 1 --night 1|2|3 --ticks 600 --out out/run.jsonl [--scenario f] [--inputs f]`.
 - Bot: `node tools/bot.ts --seed 5 --night 1` (sinh inputs; dùng làm fixture).
+- Bench: `npm run bench` (cần Chrome/Edge; trang `#bench` chạy cảnh trực tiếp). Soak: `npm run soak`. Bảng xếp hạng: `node tools/serve.ts --export-leaderboard out.json`.
+- Render nhiều thực thể dùng **InstancedMesh + material dùng chung** (bench 200 Bóng Mực); không tạo geometry/material trong vòng lặp vẽ.
+- Cảnh bench chỉ bật `sim.bench = true` — không đổi luật/headless.
 
 ## Luật bắt buộc
 - Luật game = `docs/notes/assumptions-phase2.md` (ưu tiên) + `assumptions-phase1.md`. **Không tự bịa luật**; luật mới phải ghi vào file assumptions trước.

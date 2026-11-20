@@ -1,22 +1,17 @@
-// Server tĩnh không dependency: phục vụ web/, game.contract.json và src/**/*.ts (bỏ kiểu TS khi phục vụ).
-import http from 'node:http';
+// run_cmd: node tools/serve.ts            → mở game ở http://localhost:5173
+//          node tools/serve.ts --export-leaderboard out.json → xuất bảng xếp hạng {"entries": [...]} rồi thoát
 import fs from 'node:fs';
 import path from 'node:path';
-import { stripTypeScriptTypes } from 'node:module';
+import { createServer, readLeaderboard } from './server.ts';
 
-const ROOT = path.resolve(import.meta.dirname, '..');
+const i = process.argv.indexOf('--export-leaderboard');
+if (i >= 0) {
+  const out = process.argv[i + 1];
+  if (!out) { console.error('thiếu đường dẫn: --export-leaderboard out.json'); process.exit(1); }
+  fs.mkdirSync(path.dirname(path.resolve(out)), { recursive: true });
+  fs.writeFileSync(out, JSON.stringify({ entries: readLeaderboard() }, null, 2) + '\n');
+  console.log(`Đã xuất ${readLeaderboard().length} mục → ${out}`);
+  process.exit(0);
+}
 const PORT = Number(process.env.PORT ?? 5173);
-const TYPES: Record<string, string> = { '.html': 'text/html; charset=utf-8', '.json': 'application/json', '.js': 'text/javascript', '.ts': 'text/javascript', '.png': 'image/png' };
-
-http.createServer((req, res) => {
-  const url = decodeURIComponent((req.url ?? '/').split('?')[0]);
-  let file = url === '/' ? path.join(ROOT, 'web', 'index.html')
-    : url === '/game.contract.json' ? path.join(ROOT, 'game.contract.json')
-    : url.startsWith('/src/') ? path.join(ROOT, url) : path.join(ROOT, 'web', url);
-  file = path.resolve(file);
-  if (!file.startsWith(ROOT) || !fs.existsSync(file) || fs.statSync(file).isDirectory()) { res.writeHead(404); res.end('not found'); return; }
-  let body: string | Buffer = fs.readFileSync(file);
-  if (file.endsWith('.ts')) body = stripTypeScriptTypes(body.toString('utf8'));
-  res.writeHead(200, { 'content-type': TYPES[path.extname(file)] ?? 'application/octet-stream', 'cache-control': 'no-store' });
-  res.end(body);
-}).listen(PORT, () => console.log(`Đảo Đèn Lồng: mở http://localhost:${PORT}  (Ctrl+C để dừng)`));
+createServer().listen(PORT, () => console.log(`Đảo Đèn Lồng: mở http://localhost:${PORT}  (Ctrl+C để dừng)`));

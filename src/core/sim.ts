@@ -102,6 +102,8 @@ export class Sim {
   wind = { active: false, dir: 0, left: 0 };
   nextMote = 1; nextShade = 1; nextDrifter = 1;
   prev = { jump: false, interact: false, pulse: false, dash: false, pause: false };
+  /** Cảnh benchmark (Ticket-04 §1): tắt sinh thực thể, sát thương, nhặt, hao dầu, điều kiện kết thúc. */
+  bench = false;
   readonly K: { stun: number; invuln: number; pulseCd: number; dashCd: number; dash: number };
 
   constructor(tuning: Tuning, seed: number, night = 1, scenario: ScenarioSpec | null = null) {
@@ -270,7 +272,7 @@ export class Sim {
     if (this.windEnabled && st % WIND_EVERY === 0) { this.wind = { active: true, dir: this.rng.next() * 360, left: WIND_TICKS }; }
 
     // 2b. dầu: hao 1/60 mỗi tick + Bóng Mực đang drain hút 5/60 mỗi tick; ngay sau đó đèn fuel ≤ 0 tắt
-    const decay = Math.round(T.fuel_decay_per_s), drain = Math.round(T.drain_per_s);
+    const decay = this.bench ? 0 : Math.round(T.fuel_decay_per_s), drain = this.bench ? 0 : Math.round(T.drain_per_s);
     for (const l of this.lanterns) if (l.lit) l.fuelT -= decay;
     for (const s of this.shades) {
       if (s.state !== 'drain' || !s.target) continue;
@@ -343,7 +345,7 @@ export class Sim {
     const active = p.respawnWait === 0;
 
     // 4. nhặt đom đóm, bùa
-    if (active && p.carried < this.capacity) {
+    if (active && !this.bench && p.carried < this.capacity) {
       const near = this.motes
         .filter((m) => m.pickFrom <= t && Math.abs(p.y - m.y) <= PICK_DY + EPS)
         .map((m) => ({ m, d: dXZ(m.x, m.z, p.x, p.z) }))
@@ -515,7 +517,7 @@ export class Sim {
     }
 
     // 9. chạm: Gió Lạc cướp trước, rồi Bóng Mực (id tăng dần)
-    if (active) {
+    if (active && !this.bench) {
       for (const d of [...this.drifters].sort((a, b) => cmpId(a.id, b.id))) {
         if ((d.state !== 'idle' && d.state !== 'chase') || d.dropped || p.carried <= 0) continue;
         if (dXZ(d.x, d.z, p.x, p.z) > DRIFTER_TOUCH + EPS) continue;
@@ -544,6 +546,7 @@ export class Sim {
     }
 
     // 10. sinh theo lịch
+    if (this.bench) return ev;
     if (this.randomMotes && st % MOTE_EVERY === 0 && this.motes.length < MOTE_CAP) {
       const used = new Set(this.motes.filter((m) => m.kind === 'random').map((m) => m.point));
       const free = this.map.moteSpawns.map((_, i) => i).filter((i) => !used.has(i));

@@ -6,7 +6,7 @@ import os from 'node:os';
 import path from 'node:path';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
-const PHASE = process.env.PHASE ?? 'phase-3';
+const PHASE = process.env.PHASE ?? 'phase-4';
 const OUT = path.join(ROOT, 'docs', 'proof', PHASE);
 const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'ddl-verify-'));
 fs.mkdirSync(OUT, { recursive: true });
@@ -75,6 +75,22 @@ const bad = cli(1, ['--seed', '1', '--ticks', '10', '--inputs', path.join(TMP, '
 check('File inputs hỏng → mã 2', bad.status === 2, `exit ${bad.status}`);
 const n4 = cli(4, ['--seed', '1', '--ticks', '10'], path.join(TMP, 'y.jsonl'));
 check('--night 4 → lỗi (mã ≠ 0)', n4.status !== 0, `exit ${n4.status}`);
+
+// 7. Soak (Ticket-04 §2) và xuất bảng xếp hạng (§3)
+const so = path.join(TMP, 'soak.json');
+const sr = spawnSync(process.execPath, ['--expose-gc', '--no-opt', '--no-maglev', 'tools/soak.ts', '--seed', '7', '--nights', '10', '--out', so], { cwd: ROOT, encoding: 'utf8', env: { ...process.env, NODE_NO_WARNINGS: '1' } });
+const sj = fs.existsSync(so) ? JSON.parse(fs.readFileSync(so, 'utf8')) : {};
+check('Soak 10 Đêm: crashes = 0, mem_end ≤ 1.2 × mem_start', sr.status === 0 && sj.crashes === 0 && sj.mem_end_mb <= 1.2 * sj.mem_start_mb,
+  `crashes ${sj.crashes}, RSS ${sj.mem_start_mb} → ${sj.mem_end_mb} MB, heap ${sj.heap_start_mb} → ${sj.heap_end_mb} MB, ${sj.duration_s} s`);
+const lbFile = path.join(TMP, 'lb', 'leaderboard.json'), lbOut = path.join(TMP, 'lb-out.json');
+fs.mkdirSync(path.dirname(lbFile), { recursive: true });
+fs.writeFileSync(lbFile, JSON.stringify({ entries: [
+  { name: 'beta', score: 50, nights_won: 1, achieved_at: '2026-11-20T10:00:00+07:00', seed: 1 },
+  { name: 'alpha', score: 50, nights_won: 1, achieved_at: '2026-11-20T09:00:00+07:00', seed: 1 },
+  { name: 'gamma', score: 90, nights_won: 2, achieved_at: '2026-11-20T11:00:00+07:00', seed: 1 }] }));
+const lr = spawnSync(process.execPath, ['tools/serve.ts', '--export-leaderboard', lbOut], { cwd: ROOT, encoding: 'utf8', env: { ...process.env, NODE_NO_WARNINGS: '1', DDL_LEADERBOARD: lbFile } });
+const order = fs.existsSync(lbOut) ? JSON.parse(fs.readFileSync(lbOut, 'utf8')).entries.map((e: { name: string }) => e.name).join(',') : '';
+check('--export-leaderboard: đúng thứ tự (điểm giảm, bằng điểm ai trước đứng trên)', lr.status === 0 && order === 'gamma,alpha,beta', `thứ tự: ${order}`);
 
 const report = `# Verify report — ${PHASE}
 

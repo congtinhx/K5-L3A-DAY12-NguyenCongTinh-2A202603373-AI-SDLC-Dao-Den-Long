@@ -21,6 +21,10 @@ const copyTs = (srcDir: string) => {
 };
 copyTs(path.join(ROOT, 'src', 'core'));
 copyTs(path.join(ROOT, 'src', 'render'));
-fs.writeFileSync(path.join(OUT, 'index.html'), fs.readFileSync(path.join(ROOT, 'web', 'index.html'), 'utf8').replace('/src/render/main.ts', './src/render/main.js'));
+const vendored = fs.existsSync(path.join(ROOT, 'web', 'vendor', 'three.module.js'));
+if (vendored) { fs.mkdirSync(path.join(OUT, 'vendor'), { recursive: true }); fs.copyFileSync(path.join(ROOT, 'web', 'vendor', 'three.module.js'), path.join(OUT, 'vendor', 'three.module.js')); }
+fs.writeFileSync(path.join(OUT, 'index.html'), fs.readFileSync(path.join(ROOT, 'web', 'index.html'), 'utf8')
+  .replace('/src/render/main.ts', './src/render/main.js')
+  .replace('"/vendor/three.module.js"', vendored ? '"./vendor/three.module.js"' : '"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js"'));
 fs.copyFileSync(path.join(ROOT, 'game.contract.json'), path.join(OUT, 'game.contract.json'));
 console.log(`build OK (Node ${process.versions.node}) → dist/web; headless: node src/headless/cli.ts`);

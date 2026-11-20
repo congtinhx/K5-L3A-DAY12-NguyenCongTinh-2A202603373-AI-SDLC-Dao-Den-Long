@@ -1,15 +1,20 @@
 {
   "name": "dao-den-long",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "description": "Đảo Đèn Lồng — game 3D (Three.js) + headless theo Test Contract v1.0",
-  "engines": { "node": ">=22.18" },
+  "engines": {
+    "node": ">=22.18"
+  },
   "scripts": {
     "build": "node tools/build.ts",
     "start": "node tools/serve.ts",
     "headless": "node src/headless/cli.ts",
     "test": "node --test \"tests/**/*.test.ts\"",
-    "verify": "node tools/verify.ts"
+    "verify": "node tools/verify.ts",
+    "bench": "node tools/bench.ts --seed 42 --duration 30 --out bench.json",
+    "soak": "node --expose-gc --no-opt --no-maglev tools/soak.ts --seed 7 --nights 10 --out soak.json",
+    "export-leaderboard": "node tools/serve.ts --export-leaderboard leaderboard.json"
   }
 }

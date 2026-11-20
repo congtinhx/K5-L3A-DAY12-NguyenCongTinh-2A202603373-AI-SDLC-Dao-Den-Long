@@ -40,7 +40,8 @@ test('cmpId so theo số: S2 < S10', () => {
 });
 
 test('Tuning trong game.contract.json khớp số chuẩn Ticket-02 + Ticket-03', () => {
-  assert.equal(contract.contract_version, '1.2');
+  assert.equal(contract.contract_version, '1.3'); // Ticket-04
+  assert.ok(contract.bench_cmd && contract.soak_cmd);
   assert.deepEqual([T.player_speed, T.pickup_radius, T.interact_radius, T.pulse_cost, T.pulse_radius, T.pulse_cooldown_s, T.pulse_stun_s],
     [6, 1, 2, 3, 5, 3, 2]);
   assert.deepEqual([T.dash_speed, T.dash_duration_s, T.dash_cooldown_s, T.shade_speed, T.fall_enabled], [14, 0.2, 1.5, 4, true]);

@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## [1.0.0 / Phase 4] — Contract v1.3 "Bình minh"
+### Added
+- `bench_cmd` (`node tools/bench.ts`): cảnh benchmark chuẩn trong Chrome 1280×720, vsync tắt, xuất `bench.json` (avg_fps, p1_low_fps, frame_ms_p95, frames, load_ms, peak_mem_mb…).
+- `soak_cmd` (`node --expose-gc --no-opt --no-maglev tools/soak.ts`): 10 Đêm liên tiếp, xuất `soak.json`.
+- Bảng xếp hạng cục bộ top 10 (lưu đĩa `data/leaderboard.json`), màn hình từ menu, nhập tên sau Bình Minh/khi thua, `--export-leaderboard`.
+- Tiếp cận: đổi phím (báo trùng, khôi phục mặc định, lưu), phụ đề/chỉ báo (Bóng Mực xuất hiện + mũi tên mép màn hình, gió sắp thổi, 10 s cuối, đèn sắp cạn dầu), giảm chuyển động (tắt rung camera, chớp màn hình), chữ ≥ 18 px + chữ lớn ×1.25.
+- Three.js có thể đặt cục bộ ở `web/vendor/` để chơi offline.
+### Changed
+- `run_cmd` = `node tools/serve.ts` (server có API bảng xếp hạng). Bóng Mực và đom đóm vẽ bằng InstancedMesh (bench 200 Bóng Mực: 1 → 42 FPS trong khung trình duyệt nhúng).
+### BREAKING CHANGES
+- `contract_version` "1.3"; Sim có cờ `bench` (chỉ dùng cho cảnh benchmark). Không đổi luật/headless v1.0–v1.2.
+
 ## [Phase 3] — Contract v1.2 "Đèn cạn dầu"
 ### BREAKING CHANGES
 - **Luật thắng:** bỏ thắng sớm khi thắp hết đèn. Thắng chỉ ở tick bình minh nếu còn sống và số đèn đang sáng ≥ ceil(0.6 × tổng). `game_over.reason`: `all_lit` **bị bỏ**, thêm `dawn_survived`.
