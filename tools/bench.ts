@@ -65,7 +65,7 @@ server.listen(0, '127.0.0.1', () => {
   const url = `http://127.0.0.1:${port}/?bench=1&seed=${seed}&duration=${duration}`;
   child = spawn(browser, [
     `--user-data-dir=${profile}`, '--no-first-run', '--no-default-browser-check', '--disable-extensions',
-    '--window-size=1280,720', '--window-position=0,0', `--app=${url}`,
+    '--window-size=1280,720', '--window-position=0,0', '--force-device-scale-factor=1', `--app=${url}`,
     '--disable-gpu-vsync', '--disable-frame-rate-limit', // tắt vsync
     '--disable-background-timer-throttling', '--disable-renderer-backgrounding', '--disable-backgrounding-occluded-windows',
   ], { stdio: 'ignore' });

@@ -470,10 +470,15 @@ export class Sim {
         let weak: Lantern | null = null;
         if (s.state === 'wander') {
           // mục tiêu: đèn sáng có fuel < 30 gần nhất → đèn tắt gần nhất → điểm ngẫu nhiên
-          const near = (pred: (l: Lantern) => boolean) => this.lanterns.filter(pred)
-            .map((l) => ({ l, d: dXZ(l.x, l.z, s.x, s.z) })).sort((a, b) => a.d - b.d || cmpId(a.l.id, b.l.id))[0]?.l ?? null;
-          weak = near((l) => l.lit && l.fuelT < LOW);
-          const goal = weak ?? near((l) => !l.lit);
+          // tìm gần nhất (bằng nhau thì id nhỏ hơn) không cấp phát mảng — tránh GC giật khung khi có 200 Bóng Mực
+          let wl: Lantern | null = null, wd = Infinity, ul: Lantern | null = null, ud = Infinity;
+          for (const l of this.lanterns) {
+            const dl = dXZ(l.x, l.z, s.x, s.z);
+            if (l.lit && l.fuelT < LOW) { if (dl < wd || (dl === wd && wl && cmpId(l.id, wl.id) < 0)) { wl = l; wd = dl; } }
+            else if (!l.lit) { if (dl < ud || (dl === ud && ul && cmpId(l.id, ul.id) < 0)) { ul = l; ud = dl; } }
+          }
+          weak = wl;
+          const goal = weak ?? ul;
           if (goal) { tx = goal.x; tz = goal.z; }
           else {
             if (dXZ(s.x, s.z, s.wx, s.wz) < 0.5) {

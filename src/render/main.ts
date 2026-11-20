@@ -24,6 +24,9 @@ const INTRO: Record<number, string> = {
 
 const tuning: Tuning = parseTuning(await (await fetch('game.contract.json')).json());
 const $ = (id: string) => document.getElementById(id)!;
+/** Chỉ ghi DOM khi nội dung đổi (tránh layout + rác mỗi khung). */
+const htmlCache = new Map<string, string>();
+const setHTML = (id: string, h: string) => { if (htmlCache.get(id) !== h) { htmlCache.set(id, h); $(id).innerHTML = h; } };
 // Tham số qua ?query hoặc #hash (trang artifact chỉ giữ #hash), ví dụ #fps&night=2
 const params = new URLSearchParams(`${location.search.slice(1)}&${location.hash.slice(1)}`);
 const audio = new Audio();
@@ -417,17 +420,18 @@ function sync(dt: number, time: number): void {
 let lastWhole = -1;
 function hud(): void {
   const p = sim.player, tl = Math.max(0, sim.timeLeft);
-  $('hud-flames').textContent = '🔥'.repeat(p.flames) + '·'.repeat(Math.max(0, tuning.flames - p.flames));
+  setHTML('hud-flames', '🔥'.repeat(p.flames) + '·'.repeat(Math.max(0, tuning.flames - p.flames)));
   const clock = $('hud-clock');
-  clock.textContent = `${String(Math.floor(tl / 60)).padStart(2, '0')}:${String(Math.floor(tl % 60)).padStart(2, '0')}`;
+  let clockText = `${String(Math.floor(tl / 60)).padStart(2, '0')}:${String(Math.floor(tl % 60)).padStart(2, '0')}`;
   clock.classList.toggle('danger', tl <= 30);
   clock.classList.toggle('cb', settings.cb);
-  if (tl <= 30 && settings.cb) clock.textContent = `⚠ ${clock.textContent}`;
+  if (tl <= 30 && settings.cb) clockText = `⚠ ${clockText}`;
+  setHTML('hud-clock', clockText);
   const whole = Math.ceil(tl);
   if (tl <= 10 && whole !== lastWhole && mode === 'play') audio.play('tick');
   lastWhole = whole;
-  $('hud-right').innerHTML = `Đèn sáng <b>${sim.litCount}/${sim.lanterns.length}</b> (cần ${sim.winNeed})<br>Điểm <b>${sim.score}</b>${totalScore ? `<br><span style="opacity:.7">Tổng ${totalScore}</span>` : ''}`;
-  $('hud-bar').innerHTML = Array.from({ length: sim.capacity }, (_, i) => `<i class="${i < p.carried ? 'on' : ''}"></i>`).join('') + `<span style="margin-left:8px">${p.carried}/${sim.capacity}</span>`;
+  setHTML('hud-right', `Đèn sáng <b>${sim.litCount}/${sim.lanterns.length}</b> (cần ${sim.winNeed})<br>Điểm <b>${sim.score}</b>${totalScore ? `<br><span style="opacity:.7">Tổng ${totalScore}</span>` : ''}`);
+  setHTML('hud-bar', Array.from({ length: sim.capacity }, (_, i) => `<i class="${i < p.carried ? 'on' : ''}"></i>`).join('') + `<span style="margin-left:8px">${p.carried}/${sim.capacity}</span>`);
   const cd = (id: string, left: number, total: number, ready: boolean) => {
     const el = $(id); (el.querySelector('.fill') as HTMLElement).style.height = `${(1 - left / total) * 100}%`; el.classList.toggle('off', !ready);
   };
