@@ -1,6 +1,6 @@
 # Đảo Đèn Lồng — v1.0.0 (Day 12 AI SDLC · Nguyễn Công Tình · 2A202603373)
 
-> **Video demo:** _xem Release [v1.0.0](../../releases/tag/v1.0.0) (đính kèm `demo.mp4`)_ · Tài liệu đề bài: [`docs/lab/`](docs/lab/README.md)
+> **Video demo:** [`docs/demo/demo.mp4`](docs/demo/demo.mp4) (cũng đính kèm Release [v1.0.0](../../releases/tag/v1.0.0)) · Tài liệu đề bài: [`docs/lab/`](docs/lab/README.md)
 
 ![Ảnh chụp game](docs/img/screenshot.jpg)
 
