@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Đảo Đèn Lồng — Đêm 1: Đảo Bến</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #0b0614; overflow: hidden; font-family: system-ui, sans-serif; color: #ffe9c4; }
+  canvas { display: block; }
+  #hud { position: fixed; top: 12px; left: 12px; background: rgba(20,10,35,.65); padding: 10px 14px; border-radius: 10px; line-height: 1.6; font-size: 15px; min-width: 210px; }
+  #hud b { color: #ffb347; }
+  #help { position: fixed; bottom: 10px; left: 12px; font-size: 12px; opacity: .75; }
+  #overlay { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; flex-direction: column; background: rgba(10,4,20,.6); text-align: center; }
+  #overlay h1 { font-size: 46px; margin: 0 0 8px; color: #ffcf7a; }
+  #overlay.lost h1 { color: #b48cff; }
+</style>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js" } }
+</script>
+</head>
+<body>
+<div id="hud"></div>
+<div id="help">WASD/↑↓: đi · chuột kéo hoặc J/L: xoay camera · Space: nhảy · E: nạp đèn · Q/F: tỏa sáng · R: chơi lại</div>
+<div id="overlay"><h1 id="ov-title"></h1><div id="ov-text"></div></div>
+<script type="module" src="/src/render/main.ts"></script>
+</body>
+</html>
