@@ -21,6 +21,7 @@ Không có dependency npm: Node ≥ 22.18 chạy TypeScript trực tiếp (type 
 ## Cấm
 - Sửa kỳ vọng trong `tests/scenarios/*.json` để test đạt. Kỳ vọng tính tay từ luật; nếu luật đổi, ghi lý do trong `docs/notes/`.
 - `test.skip`/xóa test không kèm lý do. Sửa tay file trong `docs/proof/`.
+- Scenario mới phải "phá thử" được: đổi tạm code sai đi một chút thì test phải đỏ (đã gặp test luôn đạt ở Phase 1).
 
 ## Xong việc nghĩa là
 `npm test` xanh, `npm run verify` xanh, đã cập nhật `docs/proof/phase-N/traceability.md`. Hook Stop chặn kết thúc khi test đỏ.

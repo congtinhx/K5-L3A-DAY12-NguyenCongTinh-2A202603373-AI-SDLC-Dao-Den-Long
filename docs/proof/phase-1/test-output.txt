@@ -1,0 +1,238 @@
+TAP version 13
+# Subtest: bad_inputs_move — Contract: move ngoài [-1,1] → mã 2
+ok 1 - bad_inputs_move — Contract: move ngoài [-1,1] → mã 2
+  ---
+  duration_ms: 1592.111465
+  type: 'test'
+  ...
+# Subtest: bad_inputs_order — Contract: tick không tăng → mã 2
+ok 2 - bad_inputs_order — Contract: tick không tăng → mã 2
+  ---
+  duration_ms: 628.867972
+  type: 'test'
+  ...
+# Subtest: bad_lantern_id — Scenario đèn không tồn tại → mã 2
+ok 3 - bad_lantern_id — Scenario đèn không tồn tại → mã 2
+  ---
+  duration_ms: 867.694694
+  type: 'test'
+  ...
+# Subtest: bad_scenario_json — Contract: scenario không phải JSON → mã 2
+ok 4 - bad_scenario_json — Contract: scenario không phải JSON → mã 2
+  ---
+  duration_ms: 783.441504
+  type: 'test'
+  ...
+# Subtest: cam_yaw_90 — Contract C: công thức xoay, yaw 90 + move [0,1] → +X
+ok 5 - cam_yaw_90 — Contract C: công thức xoay, yaw 90 + move [0,1] → +X
+  ---
+  duration_ms: 488.200515
+  type: 'test'
+  ...
+# Subtest: dawn_lose — Hết giờ → thua dawn
+ok 6 - dawn_lose — Hết giờ → thua dawn
+  ---
+  duration_ms: 387.465091
+  type: 'test'
+  ...
+# Subtest: default_start — R0 màn mặc định: 5 đèn, 60 đom đóm, bắt đầu (0,0,0), 300 s
+ok 7 - default_start — R0 màn mặc định: 5 đèn, 60 đom đóm, bắt đầu (0,0,0), 300 s
+  ---
+  duration_ms: 382.449345
+  type: 'test'
+  ...
+# Subtest: deposit_light — Nạp 10 vào đèn → deposit + lantern_lit cùng tick, +100
+ok 8 - deposit_light — Nạp 10 vào đèn → deposit + lantern_lit cùng tick, +100
+  ---
+  duration_ms: 378.103131
+  type: 'test'
+  ...
+# Subtest: deposit_not_lit_yet — Nạp chưa đủ thì chưa thắp, không cộng điểm
+ok 9 - deposit_not_lit_yet — Nạp chưa đủ thì chưa thắp, không cộng điểm
+  ---
+  duration_ms: 473.931945
+  type: 'test'
+  ...
+# Subtest: deposit_partial — Nạp phần còn thiếu, giữ phần thừa
+ok 10 - deposit_partial — Nạp phần còn thiếu, giữ phần thừa
+  ---
+  duration_ms: 486.088932
+  type: 'test'
+  ...
+# Subtest: hit_invuln_lose — Bị chạm: -1 lửa, rơi floor(50%), bất tử 90 tick; hết lửa thì thua
+ok 11 - hit_invuln_lose — Bị chạm: -1 lửa, rơi floor(50%), bất tử 90 tick; hết lửa thì thua
+  ---
+  duration_ms: 509.583197
+  type: 'test'
+  ...
+# Subtest: interact_boundary_in — interact_radius 2.5 tính là trong
+ok 12 - interact_boundary_in — interact_radius 2.5 tính là trong
+  ---
+  duration_ms: 490.733119
+  type: 'test'
+  ...
+# Subtest: interact_edge_only — Giữ interact không nạp lặp (chỉ cạnh false→true): còn 5 đom đóm và đèn L2 chưa thắp trong tầm nhưng không nạp thêm
+ok 13 - interact_edge_only — Giữ interact không nạp lặp (chỉ cạnh false→true): còn 5 đom đóm và đèn L2 chưa thắp trong tầm nhưng không nạp thêm
+  ---
+  duration_ms: 460.484047
+  type: 'test'
+  ...
+# Subtest: interact_nearest — Nhiều đèn trong tầm: chọn gần nhất
+ok 14 - interact_nearest — Nhiều đèn trong tầm: chọn gần nhất
+  ---
+  duration_ms: 775.687442
+  type: 'test'
+  ...
+# Subtest: interact_out_of_range — Ngoài 2.5 m không nạp
+ok 15 - interact_out_of_range — Ngoài 2.5 m không nạp
+  ---
+  duration_ms: 861.091005
+  type: 'test'
+  ...
+# Subtest: island_clamp — Biên đảo 40 m (fall_enabled=false)
+ok 16 - island_clamp — Biên đảo 40 m (fall_enabled=false)
+  ---
+  duration_ms: 953.83705
+  type: 'test'
+  ...
+# Subtest: jump — Nhảy: vy 6, g 20; đáp đất
+ok 17 - jump — Nhảy: vy 6, g 20; đáp đất
+  ---
+  duration_ms: 1328.028232
+  type: 'test'
+  ...
+# Subtest: move_forward — Contract C: move [0,1], yaw 0 → +Z, 6 m/s
+ok 18 - move_forward — Contract C: move [0,1], yaw 0 → +Z, 6 m/s
+  ---
+  duration_ms: 649.675688
+  type: 'test'
+  ...
+# Subtest: move_right_yaw0 — Contract C: move [1,0], yaw 0 → +X
+ok 19 - move_right_yaw0 — Contract C: move [1,0], yaw 0 → +X
+  ---
+  duration_ms: 753.697298
+  type: 'test'
+  ...
+# Subtest: normalize — Contract C: vector dài hơn 1 được chuẩn hóa
+ok 20 - normalize — Contract C: vector dài hơn 1 được chuẩn hóa
+  ---
+  duration_ms: 579.969765
+  type: 'test'
+  ...
+# Subtest: pickup_boundary — Biên bán kính: 1.5 nhặt, 1.51 không
+ok 21 - pickup_boundary — Biên bán kính: 1.5 nhặt, 1.51 không
+  ---
+  duration_ms: 516.900542
+  type: 'test'
+  ...
+# Subtest: pickup_capacity — Đầy 10 thì không nhặt
+ok 22 - pickup_capacity — Đầy 10 thì không nhặt
+  ---
+  duration_ms: 441.49702
+  type: 'test'
+  ...
+# Subtest: pickup_multi_order — Nhặt nhiều con cùng tick: gần trước, hòa theo id, dừng khi đầy
+ok 23 - pickup_multi_order — Nhặt nhiều con cùng tick: gần trước, hòa theo id, dừng khi đầy
+  ---
+  duration_ms: 405.857767
+  type: 'test'
+  ...
+# Subtest: pickup_walk — Nhặt khi khoảng cách ≤ 1.5: đi 3.5 m = 35 tick
+ok 24 - pickup_walk — Nhặt khi khoảng cách ≤ 1.5: đi 3.5 m = 35 tick
+  ---
+  duration_ms: 402.910786
+  type: 'test'
+  ...
+# Subtest: pulse_cooldown — Cooldown 60 tick
+ok 25 - pulse_cooldown — Cooldown 60 tick
+  ---
+  duration_ms: 383.230195
+  type: 'test'
+  ...
+# Subtest: pulse_not_enough_light — Thiếu ánh sáng (carried < 2) thì không pulse
+ok 26 - pulse_not_enough_light — Thiếu ánh sáng (carried < 2) thì không pulse
+  ---
+  duration_ms: 402.911601
+  type: 'test'
+  ...
+# Subtest: pulse_out_of_radius — Bóng Mực ngoài 6 m không bị choáng; pulse vẫn tốn ánh sáng
+ok 27 - pulse_out_of_radius — Bóng Mực ngoài 6 m không bị choáng; pulse vẫn tốn ánh sáng
+  ---
+  duration_ms: 598.701263
+  type: 'test'
+  ...
+# Subtest: pulse_stun_push — Pulse: tốn 2, choáng 180 tick, đẩy 4 m, +20; hết choáng thì đuổi tiếp
+ok 28 - pulse_stun_push — Pulse: tốn 2, choáng 180 tick, đẩy 4 m, +20; hết choáng thì đuổi tiếp
+  ---
+  duration_ms: 540.260805
+  type: 'test'
+  ...
+# Subtest: safe_radius — Bóng Mực không vào trong 6 m quanh đèn đã thắp; đặt sẵn lit không cộng điểm
+ok 29 - safe_radius — Bóng Mực không vào trong 6 m quanh đèn đã thắp; đặt sẵn lit không cộng điểm
+  ---
+  duration_ms: 427.132141
+  type: 'test'
+  ...
+# Subtest: shade_spawn — Bóng Mực tự sinh ở 10 s, id S1
+ok 30 - shade_spawn — Bóng Mực tự sinh ở 10 s, id S1
+  ---
+  duration_ms: 381.211926
+  type: 'test'
+  ...
+# Subtest: snapshot_cadence — Contract E: snapshot mỗi --snapshot-every, dòng end cuối
+ok 31 - snapshot_cadence — Contract E: snapshot mỗi --snapshot-every, dòng end cuối
+  ---
+  duration_ms: 394.587294
+  type: 'test'
+  ...
+# Subtest: win_all_lit — Thắp đèn cuối → thắng; điểm = 100 + floor(99.98)×1 + 3×50 = 349
+ok 32 - win_all_lit — Thắp đèn cuối → thắng; điểm = 100 + floor(99.98)×1 + 3×50 = 349
+  ---
+  duration_ms: 391.700039
+  type: 'test'
+  ...
+# Subtest: Rng: cùng seed cùng chuỗi, khác seed khác chuỗi, trong [0,1)
+ok 33 - Rng: cùng seed cùng chuỗi, khác seed khác chuỗi, trong [0,1)
+  ---
+  duration_ms: 11.36841
+  type: 'test'
+  ...
+# Subtest: InputTimeline: trường vắng giữ giá trị cũ, mặc định khi chưa có frame
+ok 34 - InputTimeline: trường vắng giữ giá trị cũ, mặc định khi chưa có frame
+  ---
+  duration_ms: 2.467401
+  type: 'test'
+  ...
+# Subtest: parseInputs: lỗi định dạng ném FormatError
+ok 35 - parseInputs: lỗi định dạng ném FormatError
+  ---
+  duration_ms: 4.432613
+  type: 'test'
+  ...
+# Subtest: cmpId so theo số: S2 < S10
+ok 36 - cmpId so theo số: S2 < S10
+  ---
+  duration_ms: 0.804458
+  type: 'test'
+  ...
+# Subtest: Tuning đọc từ game.contract.json khớp số trong assumptions
+ok 37 - Tuning đọc từ game.contract.json khớp số trong assumptions
+  ---
+  duration_ms: 2.265208
+  type: 'test'
+  ...
+# Subtest: Sim: game mặc định không bao giờ có player_hit by fall (fall_enabled=false)
+ok 38 - Sim: game mặc định không bao giờ có player_hit by fall (fall_enabled=false)
+  ---
+  duration_ms: 68.087917
+  type: 'test'
+  ...
+1..38
+# tests 38
+# suites 0
+# pass 38
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms …
