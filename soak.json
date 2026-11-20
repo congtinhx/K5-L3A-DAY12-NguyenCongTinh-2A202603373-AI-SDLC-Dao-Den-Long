@@ -1,0 +1,25 @@
+{
+  "nights": 10,
+  "crashes": 0,
+  "results": [
+    "lost",
+    "lost",
+    "lost",
+    "lost",
+    "lost",
+    "lost",
+    "lost",
+    "lost",
+    "lost",
+    "lost"
+  ],
+  "mem_start_mb": 76.6,
+  "mem_end_mb": 79.8,
+  "duration_s": 1.9,
+  "ticks": 20778,
+  "gc_exposed": true,
+  "heap_start_mb": 7.6,
+  "heap_end_mb": 7.8,
+  "node": "v22.23.4",
+  "v8_flags": "--expose-gc --no-opt --no-maglev"
+}
