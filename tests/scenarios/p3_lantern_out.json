@@ -1,0 +1,60 @@
+{
+  "name": "p3_lantern_out",
+  "req": "fuel 1 → hết dầu ở tick 60: lantern_out, tắt, deposited 0, ever_lit true",
+  "seed": 1,
+  "ticks": 70,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
+    "motes": [],
+    "shades": [],
+    "drifters": [],
+    "lanterns": [
+      {
+        "id": "L1",
+        "lit": true,
+        "fuel": 1,
+        "deposited": 10
+      }
+    ]
+  },
+  "inputs": null,
+  "expect": {
+    "events": [
+      {
+        "tick": 60,
+        "name": "lantern_out",
+        "data": {
+          "lantern_id": "L1"
+        }
+      }
+    ],
+    "event_count": {
+      "lantern_out": 1
+    },
+    "snapshots": [
+      {
+        "tick": 70,
+        "path": "lanterns.0.lit",
+        "value": false
+      },
+      {
+        "tick": 70,
+        "path": "lanterns.0.deposited",
+        "value": 0
+      },
+      {
+        "tick": 70,
+        "path": "lanterns.0.ever_lit",
+        "value": true
+      },
+      {
+        "tick": 70,
+        "path": "lanterns.0.fuel",
+        "value": 0
+      }
+    ]
+  }
+}

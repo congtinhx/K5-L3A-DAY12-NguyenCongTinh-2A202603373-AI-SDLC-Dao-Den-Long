@@ -39,13 +39,15 @@ test('cmpId so theo số: S2 < S10', () => {
   assert.ok(cmpId('S2', 'S10') < 0);
 });
 
-test('Tuning trong game.contract.json khớp số chuẩn Ticket-02', () => {
-  assert.equal(contract.contract_version, '1.1');
+test('Tuning trong game.contract.json khớp số chuẩn Ticket-02 + Ticket-03', () => {
+  assert.equal(contract.contract_version, '1.2');
   assert.deepEqual([T.player_speed, T.pickup_radius, T.interact_radius, T.pulse_cost, T.pulse_radius, T.pulse_cooldown_s, T.pulse_stun_s],
     [6, 1, 2, 3, 5, 3, 2]);
   assert.deepEqual([T.dash_speed, T.dash_duration_s, T.dash_cooldown_s, T.shade_speed, T.fall_enabled], [14, 0.2, 1.5, 4, true]);
-  assert.deepEqual([T.night1_duration_s, T.night2_duration_s, T.night3_duration_s], [300, 330, 360]);
-  assert.deepEqual(T.score, { per_mote: 10, per_lantern: 100, per_stun: 5, per_second_left: 2, per_flame_left: 50 });
+  // Ticket-03 [THAY THẾ]: thời lượng 240/270/300, điểm mới, các khóa dầu
+  assert.deepEqual([T.night1_duration_s, T.night2_duration_s, T.night3_duration_s], [240, 270, 300]);
+  assert.deepEqual([T.fuel_max, T.fuel_decay_per_s, T.fuel_per_mote, T.relight_cost, T.win_ratio, T.drain_per_s, T.low_fuel_threshold, T.capacity_max], [100, 1, 10, 5, 0.6, 5, 30, 20]);
+  assert.deepEqual([T.score.per_mote, T.score.per_lantern, T.score.per_relight, T.score.per_stun, T.score.per_stun_drain, T.score.per_lantern_at_dawn, T.score.per_second_left, T.score.per_flame_left], [5, 100, 40, 5, 15, 50, 0, 50]);
 });
 
 test('Bản đồ chuẩn: điểm sinh và đèn mỗi Đêm', () => {

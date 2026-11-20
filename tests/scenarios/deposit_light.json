@@ -1,6 +1,6 @@
 {
   "name": "deposit_light",
-  "req": "Nạp 10 → deposit + lantern_lit cùng tick; điểm 10×10 + 100 = 200",
+  "req": "Nạp 10 → deposit + lantern_lit (relight false) cùng tick; điểm 10×5 + 100 = 150; fuel 100, sức chứa 12",
   "seed": 1,
   "ticks": 10,
   "scenario": {
@@ -45,7 +45,8 @@
         "tick": 1,
         "name": "lantern_lit",
         "data": {
-          "lantern_id": "L1"
+          "lantern_id": "L1",
+          "relight": false
         }
       }
     ],
@@ -53,7 +54,7 @@
       {
         "tick": 10,
         "path": "score",
-        "value": 200
+        "value": 150
       },
       {
         "tick": 10,
@@ -64,8 +65,19 @@
         "tick": 10,
         "path": "lanterns.0.lit",
         "value": true
+      },
+      {
+        "tick": 10,
+        "path": "player.capacity",
+        "value": 12
+      },
+      {
+        "tick": 10,
+        "path": "lanterns.0.ever_lit",
+        "value": true
       }
     ]
   },
-  "changed_in_phase2": "Điểm chuẩn: +10 mỗi đom đóm NẠP (Phase 1 cộng khi nhặt)"
+  "changed_in_phase2": "Điểm chuẩn: +10 mỗi đom đóm NẠP (Phase 1 cộng khi nhặt)",
+  "changed_in_phase3": "Ticket-03: +5 mỗi đom đóm nạp (cũ +10); lantern_lit có relight; sức chứa tăng"
 }

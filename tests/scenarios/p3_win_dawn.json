@@ -1,0 +1,48 @@
+{
+  "name": "p3_win_dawn",
+  "req": "Bình minh với 3/5 đèn sáng (≥ ceil(0.6×5)) → won dawn_survived; điểm 3×(50 + floor(99.0)) + 3×50 = 597",
+  "seed": 1,
+  "ticks": 100,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
+    "motes": [],
+    "shades": [],
+    "drifters": [],
+    "time_left_s": 1,
+    "lanterns": [
+      {
+        "id": "L1",
+        "lit": true
+      },
+      {
+        "id": "L2",
+        "lit": true
+      },
+      {
+        "id": "L3",
+        "lit": true
+      }
+    ]
+  },
+  "inputs": null,
+  "expect": {
+    "events": [
+      {
+        "tick": 60,
+        "name": "game_over",
+        "data": {
+          "result": "won",
+          "reason": "dawn_survived"
+        }
+      }
+    ],
+    "end": {
+      "ticks": 60,
+      "state": "won",
+      "score": 597
+    }
+  }
+}

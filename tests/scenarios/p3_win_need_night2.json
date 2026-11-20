@@ -1,0 +1,43 @@
+{
+  "name": "p3_win_need_night2",
+  "req": "Đêm 2 cần ceil(0.6×6) = 4: 4 đèn sáng lúc bình minh → thắng",
+  "seed": 1,
+  "ticks": 100,
+  "night": 2,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
+    "motes": [],
+    "shades": [],
+    "drifters": [],
+    "time_left_s": 1,
+    "charms": [],
+    "lanterns": [
+      {
+        "id": "L1",
+        "lit": true
+      },
+      {
+        "id": "L2",
+        "lit": true
+      },
+      {
+        "id": "L3",
+        "lit": true
+      },
+      {
+        "id": "L4",
+        "lit": true
+      }
+    ]
+  },
+  "inputs": null,
+  "expect": {
+    "end": {
+      "ticks": 60,
+      "state": "won"
+    }
+  }
+}

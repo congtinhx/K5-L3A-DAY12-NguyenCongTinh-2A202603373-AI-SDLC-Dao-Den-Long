@@ -1,0 +1,80 @@
+{
+  "name": "p3_relight",
+  "req": "Thắp lại đèn ever_lit chỉ cần 5: lantern_lit relight true, +5×5 + 40 = 65, relit_count 1, fuel 100 → 99.7 ở tick 20, sức chứa 12",
+  "seed": 1,
+  "ticks": 20,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
+    "motes": [],
+    "shades": [],
+    "drifters": [],
+    "player": {
+      "carried": 5
+    },
+    "lanterns": [
+      {
+        "id": "L1",
+        "pos": [
+          0,
+          0,
+          2
+        ],
+        "ever_lit": true
+      }
+    ]
+  },
+  "inputs": {
+    "frames": [
+      {
+        "tick": 0,
+        "interact": true
+      }
+    ]
+  },
+  "expect": {
+    "events": [
+      {
+        "tick": 1,
+        "name": "deposit",
+        "data": {
+          "lantern_id": "L1",
+          "amount": 5,
+          "deposited": 5
+        }
+      },
+      {
+        "tick": 1,
+        "name": "lantern_lit",
+        "data": {
+          "lantern_id": "L1",
+          "relight": true
+        }
+      }
+    ],
+    "snapshots": [
+      {
+        "tick": 20,
+        "path": "score",
+        "value": 65
+      },
+      {
+        "tick": 20,
+        "path": "lanterns.0.relit_count",
+        "value": 1
+      },
+      {
+        "tick": 20,
+        "path": "lanterns.0.fuel",
+        "value": 99.7
+      },
+      {
+        "tick": 20,
+        "path": "player.capacity",
+        "value": 12
+      }
+    ]
+  }
+}

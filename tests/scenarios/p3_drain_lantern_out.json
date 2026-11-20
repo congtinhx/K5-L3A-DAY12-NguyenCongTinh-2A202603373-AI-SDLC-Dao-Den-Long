@@ -1,0 +1,69 @@
+{
+  "name": "p3_drain_lantern_out",
+  "req": "Đang drain mà đèn tắt → lantern_out, Bóng Mực về wander",
+  "seed": 1,
+  "ticks": 20,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
+    "motes": [],
+    "shades": [
+      {
+        "id": "S1",
+        "pos": [
+          11,
+          0,
+          0
+        ],
+        "state": "drain",
+        "target_lantern_id": "L1"
+      }
+    ],
+    "drifters": [],
+    "player": {
+      "pos": [
+        -20,
+        0,
+        0
+      ]
+    },
+    "lanterns": [
+      {
+        "id": "L1",
+        "pos": [
+          10,
+          0,
+          0
+        ],
+        "lit": true,
+        "fuel": 0.1
+      }
+    ]
+  },
+  "inputs": null,
+  "expect": {
+    "events": [
+      {
+        "tick": 1,
+        "name": "lantern_out",
+        "data": {
+          "lantern_id": "L1"
+        }
+      }
+    ],
+    "snapshots": [
+      {
+        "tick": 10,
+        "path": "shades.0.state",
+        "value": "wander"
+      },
+      {
+        "tick": 10,
+        "path": "lanterns.0.lit",
+        "value": false
+      }
+    ]
+  }
+}

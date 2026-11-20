@@ -1,0 +1,76 @@
+{
+  "name": "p3_refuel_evict",
+  "req": "Châm dầu đèn yếu lên ≥ 30 khi có Bóng Mực trong 6 m → đẩy ra mép trong 30 tick, không gây hit",
+  "seed": 1,
+  "ticks": 40,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
+    "motes": [],
+    "shades": [
+      {
+        "id": "S1",
+        "pos": [
+          0,
+          0,
+          3.5
+        ],
+        "state": "drain",
+        "target_lantern_id": "L1"
+      }
+    ],
+    "drifters": [],
+    "player": {
+      "carried": 10
+    },
+    "lanterns": [
+      {
+        "id": "L1",
+        "pos": [
+          0,
+          0,
+          2
+        ],
+        "lit": true,
+        "fuel": 20
+      }
+    ]
+  },
+  "inputs": {
+    "frames": [
+      {
+        "tick": 0,
+        "interact": true
+      }
+    ]
+  },
+  "expect": {
+    "events": [
+      {
+        "tick": 1,
+        "name": "refuel",
+        "data": {
+          "lantern_id": "L1",
+          "amount": 9,
+          "fuel": 100
+        }
+      }
+    ],
+    "absent": [
+      "player_hit"
+    ],
+    "snapshots": [
+      {
+        "tick": 30,
+        "path": "shades.0.pos",
+        "value": [
+          0,
+          0,
+          8
+        ]
+      }
+    ]
+  }
+}

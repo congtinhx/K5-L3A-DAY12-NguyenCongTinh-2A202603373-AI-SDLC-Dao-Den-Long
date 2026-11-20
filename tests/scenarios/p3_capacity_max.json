@@ -1,0 +1,28 @@
+{
+  "name": "p3_capacity_max",
+  "req": "Sức chứa = 10 + 2×6 = 22 → tối đa 20",
+  "seed": 1,
+  "ticks": 0,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
+    "motes": [],
+    "shades": [],
+    "drifters": [],
+    "player": {
+      "successful_lights": 6
+    }
+  },
+  "inputs": null,
+  "expect": {
+    "snapshots": [
+      {
+        "tick": 0,
+        "path": "player.capacity",
+        "value": 20
+      }
+    ]
+  }
+}

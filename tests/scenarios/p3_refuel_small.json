@@ -1,0 +1,76 @@
+{
+  "name": "p3_refuel_small",
+  "req": "Châm dầu nhỏ: đèn vừa thắp (100) hao 2 tick còn 99.97 → used = ceil(0.03/10) = 1, fuel 100; sức chứa 12 cho phép mang 12",
+  "seed": 1,
+  "ticks": 10,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
+    "motes": [],
+    "shades": [],
+    "drifters": [],
+    "player": {
+      "carried": 12,
+      "successful_lights": 1
+    },
+    "lanterns": [
+      {
+        "id": "L1",
+        "pos": [
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "id": "L2",
+        "pos": [
+          0,
+          0,
+          -1.5
+        ]
+      }
+    ]
+  },
+  "inputs": {
+    "frames": [
+      {
+        "tick": 0,
+        "interact": true
+      },
+      {
+        "tick": 1,
+        "interact": false
+      },
+      {
+        "tick": 2,
+        "interact": true
+      }
+    ]
+  },
+  "expect": {
+    "events": [
+      {
+        "tick": 1,
+        "name": "lantern_lit",
+        "data": {
+          "lantern_id": "L1"
+        }
+      },
+      {
+        "tick": 3,
+        "name": "refuel",
+        "data": {
+          "lantern_id": "L1",
+          "amount": 1,
+          "fuel": 100
+        }
+      }
+    ],
+    "event_count": {
+      "lantern_lit": 1
+    }
+  }
+}

@@ -1,6 +1,6 @@
 {
   "name": "deposit_not_lit_yet",
-  "req": "Nạp 3 chưa đủ thì chưa thắp; điểm 3×10 = 30",
+  "req": "Nạp 3 chưa đủ thì chưa thắp; điểm 3×5 = 15",
   "seed": 1,
   "ticks": 10,
   "scenario": {
@@ -49,9 +49,10 @@
       {
         "tick": 10,
         "path": "score",
-        "value": 30
+        "value": 15
       }
     ]
   },
-  "changed_in_phase2": "Điểm chuẩn: +10 mỗi đom đóm nạp"
+  "changed_in_phase2": "Điểm chuẩn: +10 mỗi đom đóm nạp",
+  "changed_in_phase3": "Ticket-03: +5 mỗi đom đóm nạp"
 }

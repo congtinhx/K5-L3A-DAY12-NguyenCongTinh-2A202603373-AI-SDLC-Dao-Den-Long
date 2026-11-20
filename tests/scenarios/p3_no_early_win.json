@@ -1,17 +1,19 @@
 {
-  "name": "win_all_lit",
-  "req": "Thắng: 10×10 + 100 + floor(99.98)×2 + 3×50 = 548",
+  "name": "p3_no_early_win",
+  "req": "Thắp đủ 5/5 đèn KHÔNG kết thúc Đêm; điểm 10×5 + 100 = 150",
   "seed": 1,
-  "ticks": 100,
+  "ticks": 10,
   "scenario": {
     "random_motes": false,
     "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
     "motes": [],
     "shades": [],
+    "drifters": [],
     "player": {
       "carried": 10
     },
-    "time_left_s": 100,
     "lanterns": [
       {
         "id": "L1",
@@ -53,23 +55,24 @@
         "tick": 1,
         "name": "lantern_lit",
         "data": {
-          "lantern_id": "L5"
-        }
-      },
-      {
-        "tick": 1,
-        "name": "game_over",
-        "data": {
-          "result": "won",
-          "reason": "all_lit"
+          "lantern_id": "L5",
+          "relight": false
         }
       }
     ],
+    "absent": [
+      "game_over"
+    ],
     "end": {
-      "ticks": 1,
-      "state": "won",
-      "score": 548
-    }
-  },
-  "changed_in_phase2": "Điểm chuẩn (+10/đom đóm nạp, giây ×2)"
+      "ticks": 10,
+      "state": "playing"
+    },
+    "snapshots": [
+      {
+        "tick": 10,
+        "path": "score",
+        "value": 150
+      }
+    ]
+  }
 }

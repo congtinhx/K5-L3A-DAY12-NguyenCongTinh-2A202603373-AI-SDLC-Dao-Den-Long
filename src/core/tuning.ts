@@ -7,13 +7,14 @@ export function parseTuning(contract: unknown): Tuning {
   const nums = ['player_speed', 'carry_capacity', 'lantern_cost', 'lantern_count_night1', 'pickup_radius',
     'interact_radius', 'pulse_cost', 'pulse_radius', 'night1_duration_s', 'flames', 'invuln_s', 'hit_drop_ratio',
     'pulse_stun_s', 'pulse_push_m', 'pulse_cooldown_s', 'safe_radius', 'shade_speed', 'shade_hit_radius',
-    'night2_duration_s', 'night3_duration_s', 'dash_speed', 'dash_duration_s', 'dash_cooldown_s'];
+    'night2_duration_s', 'night3_duration_s', 'dash_speed', 'dash_duration_s', 'dash_cooldown_s',
+    'fuel_max', 'fuel_decay_per_s', 'fuel_per_mote', 'relight_cost', 'win_ratio', 'drain_per_s', 'low_fuel_threshold', 'capacity_max'];
   for (const k of nums) {
     if (typeof t[k] !== 'number' || !Number.isFinite(t[k] as number)) throw new Error(`tuning.${k} phải là số`);
   }
   if (typeof t.fall_enabled !== 'boolean') throw new Error('tuning.fall_enabled phải là boolean');
   const s = t.score as Record<string, unknown> | undefined;
-  for (const k of ['per_mote', 'per_lantern', 'per_stun', 'per_second_left', 'per_flame_left']) {
+  for (const k of ['per_mote', 'per_lantern', 'per_stun', 'per_second_left', 'per_flame_left', 'per_relight', 'per_stun_drain', 'per_lantern_at_dawn']) {
     if (typeof s?.[k] !== 'number') throw new Error(`tuning.score.${k} phải là số`);
   }
   return t as unknown as Tuning;

@@ -1,0 +1,81 @@
+{
+  "name": "p3_drain",
+  "req": "Bóng Mực wander đi tới đèn yếu (fuel 25 < 30), cách 2 m ở tick 20 → drain; hút 5/s + hao 1/s; fuel_drain ở tick 80 với fuel (1500−80−300)/60 = 18.7",
+  "seed": 1,
+  "ticks": 90,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
+    "motes": [],
+    "shades": [
+      {
+        "id": "S1",
+        "pos": [
+          12.5,
+          0,
+          0
+        ]
+      }
+    ],
+    "drifters": [],
+    "player": {
+      "pos": [
+        -20,
+        0,
+        0
+      ]
+    },
+    "lanterns": [
+      {
+        "id": "L1",
+        "pos": [
+          10,
+          0,
+          0
+        ],
+        "lit": true,
+        "fuel": 25
+      }
+    ]
+  },
+  "inputs": null,
+  "expect": {
+    "events": [
+      {
+        "tick": 80,
+        "name": "fuel_drain",
+        "data": {
+          "lantern_id": "L1",
+          "shade_id": "S1",
+          "fuel": 18.7
+        }
+      }
+    ],
+    "event_count": {
+      "fuel_drain": 1
+    },
+    "snapshots": [
+      {
+        "tick": 10,
+        "path": "shades.0.state",
+        "value": "wander"
+      },
+      {
+        "tick": 30,
+        "path": "shades.0.state",
+        "value": "drain"
+      },
+      {
+        "tick": 30,
+        "path": "shades.0.pos",
+        "value": [
+          12,
+          0,
+          0
+        ]
+      }
+    ]
+  }
+}

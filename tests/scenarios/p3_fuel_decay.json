@@ -1,0 +1,36 @@
+{
+  "name": "p3_fuel_decay",
+  "req": "Đèn sáng hao 1 fuel/giây: 100 → 90.0 sau 600 tick",
+  "seed": 1,
+  "ticks": 600,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
+    "motes": [],
+    "shades": [],
+    "drifters": [],
+    "lanterns": [
+      {
+        "id": "L1",
+        "lit": true
+      }
+    ]
+  },
+  "inputs": null,
+  "expect": {
+    "snapshots": [
+      {
+        "tick": 0,
+        "path": "lanterns.0.fuel",
+        "value": 100
+      },
+      {
+        "tick": 600,
+        "path": "lanterns.0.fuel",
+        "value": 90
+      }
+    ]
+  }
+}

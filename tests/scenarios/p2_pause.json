@@ -66,7 +66,7 @@
       {
         "tick": 20,
         "path": "time_left_s",
-        "value": 299.833
+        "value": 239.833
       },
       {
         "tick": 20,
@@ -97,5 +97,6 @@
         ]
       }
     ]
-  }
+  },
+  "changed_in_phase3": "Ticket-03: Đêm 1 = 240 s → time_left 240 − 10/60 = 239.833"
 }

@@ -1,0 +1,74 @@
+{
+  "name": "p3_drain_pulse",
+  "req": "Tỏa Sáng trúng Bóng Mực đang drain → +15 (thay vì +5), choáng",
+  "seed": 1,
+  "ticks": 10,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
+    "motes": [],
+    "shades": [
+      {
+        "id": "S1",
+        "pos": [
+          3.5,
+          0,
+          0
+        ],
+        "state": "drain",
+        "target_lantern_id": "L1"
+      }
+    ],
+    "drifters": [],
+    "player": {
+      "carried": 3
+    },
+    "lanterns": [
+      {
+        "id": "L1",
+        "pos": [
+          5,
+          0,
+          0
+        ],
+        "lit": true,
+        "fuel": 20
+      }
+    ]
+  },
+  "inputs": {
+    "frames": [
+      {
+        "tick": 0,
+        "pulse": true
+      }
+    ]
+  },
+  "expect": {
+    "events": [
+      {
+        "tick": 1,
+        "name": "pulse",
+        "data": {
+          "stunned_ids": [
+            "S1"
+          ]
+        }
+      }
+    ],
+    "snapshots": [
+      {
+        "tick": 10,
+        "path": "score",
+        "value": 15
+      },
+      {
+        "tick": 10,
+        "path": "shades.0.state",
+        "value": "stunned"
+      }
+    ]
+  }
+}

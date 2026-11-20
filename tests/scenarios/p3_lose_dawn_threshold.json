@@ -1,0 +1,44 @@
+{
+  "name": "p3_lose_dawn_threshold",
+  "req": "Bình minh với 2/5 đèn sáng (< 3) → lost dawn",
+  "seed": 1,
+  "ticks": 100,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
+    "motes": [],
+    "shades": [],
+    "drifters": [],
+    "time_left_s": 1,
+    "lanterns": [
+      {
+        "id": "L1",
+        "lit": true
+      },
+      {
+        "id": "L2",
+        "lit": true
+      }
+    ]
+  },
+  "inputs": null,
+  "expect": {
+    "events": [
+      {
+        "tick": 60,
+        "name": "game_over",
+        "data": {
+          "result": "lost",
+          "reason": "dawn"
+        }
+      }
+    ],
+    "end": {
+      "ticks": 60,
+      "state": "lost",
+      "score": 0
+    }
+  }
+}

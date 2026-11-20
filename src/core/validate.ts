@@ -1,6 +1,6 @@
 import type { DrifterState, InputFrame, ScenarioSpec, ShadeState, Vec3 } from './types.ts';
 
-const SHADE_STATES: ShadeState[] = ['spawning', 'wander', 'chase', 'recoil', 'stunned'];
+const SHADE_STATES: ShadeState[] = ['spawning', 'wander', 'chase', 'recoil', 'stunned', 'drain'];
 const DRIFTER_STATES: DrifterState[] = ['idle', 'chase', 'flee', 'removed'];
 
 /** Lỗi định dạng file inputs/scenario → headless thoát mã 2. */
@@ -62,7 +62,7 @@ export function parseScenario(text: string, lanternIds: string[]): ScenarioSpec 
     if ('pos' in p) sc.player.pos = vec3(p.pos, 'scenario.player.pos');
     if ('carried' in p) sc.player.carried = nonNegInt(p.carried, 'scenario.player.carried');
     if ('flames' in p) sc.player.flames = nonNegInt(p.flames, 'scenario.player.flames');
-    for (const k of ['invuln_ticks', 'dash_cd_ticks', 'pulse_cd_ticks', 'charm_ticks'] as const) {
+    for (const k of ['invuln_ticks', 'dash_cd_ticks', 'pulse_cd_ticks', 'charm_ticks', 'successful_lights'] as const) {
       if (k in p) sc.player[k] = nonNegInt(p[k], `scenario.player.${k}`);
     }
   }
@@ -80,7 +80,11 @@ export function parseScenario(text: string, lanternIds: string[]): ScenarioSpec 
     sc.shades = (r.shades as unknown[]).map((s, i) => {
       if (!isObj(s)) fail(`scenario.shades[${i}]: cần object`);
       const so = s as Record<string, unknown>;
-      const out: { id?: string; pos: Vec3; state?: ShadeState; state_ticks_left?: number } = { pos: vec3(so.pos, `scenario.shades[${i}].pos`) };
+      const out: { id?: string; pos: Vec3; state?: ShadeState; state_ticks_left?: number; target_lantern_id?: string } = { pos: vec3(so.pos, `scenario.shades[${i}].pos`) };
+      if ('target_lantern_id' in so) {
+        if (typeof so.target_lantern_id !== 'string' || !lanternIds.includes(so.target_lantern_id)) fail(`scenario.shades[${i}].target_lantern_id: phải là một trong ${lanternIds.join(', ')}`);
+        out.target_lantern_id = so.target_lantern_id as string;
+      }
       if ('state' in so) {
         if (!SHADE_STATES.includes(so.state as ShadeState)) fail(`scenario.shades[${i}].state: một trong ${SHADE_STATES.join(', ')}`);
         out.state = so.state as ShadeState;
@@ -127,7 +131,9 @@ export function parseScenario(text: string, lanternIds: string[]): ScenarioSpec 
       if (!isObj(l)) fail(`${w}: cần object`);
       const lo = l as Record<string, unknown>;
       if (typeof lo.id !== 'string' || !lanternIds.includes(lo.id)) fail(`${w}.id: phải là một trong ${lanternIds.join(', ')}`);
-      const out: { id: string; pos?: Vec3; deposited?: number; lit?: boolean } = { id: lo.id as string };
+      const out: { id: string; pos?: Vec3; deposited?: number; lit?: boolean; fuel?: number; ever_lit?: boolean } = { id: lo.id as string };
+      if ('fuel' in lo) { if (!isNum(lo.fuel) || (lo.fuel as number) < 0 || (lo.fuel as number) > 100) fail(`${w}.fuel: cần số trong [0, 100]`); out.fuel = lo.fuel as number; }
+      if ('ever_lit' in lo) out.ever_lit = bool(lo.ever_lit, `${w}.ever_lit`);
       if ('pos' in lo) out.pos = vec3(lo.pos, `${w}.pos`);
       if ('deposited' in lo) out.deposited = nonNegInt(lo.deposited, `${w}.deposited`);
       if ('lit' in lo) out.lit = bool(lo.lit, `${w}.lit`);

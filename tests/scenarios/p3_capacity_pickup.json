@@ -1,0 +1,37 @@
+{
+  "name": "p3_capacity_pickup",
+  "req": "Sức chứa 12 (1 lần thắp): mang 11 vẫn nhặt được",
+  "seed": 1,
+  "ticks": 5,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
+    "motes": [
+      [
+        0,
+        0,
+        0.5
+      ]
+    ],
+    "shades": [],
+    "drifters": [],
+    "player": {
+      "carried": 11,
+      "successful_lights": 1
+    }
+  },
+  "inputs": null,
+  "expect": {
+    "events": [
+      {
+        "tick": 1,
+        "name": "mote_picked",
+        "data": {
+          "carried": 12
+        }
+      }
+    ]
+  }
+}

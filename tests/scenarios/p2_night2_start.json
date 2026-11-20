@@ -1,6 +1,6 @@
 {
   "name": "p2_night2_start",
-  "req": "AC-NIGHT-1: Đêm 2 có 6 đèn chuẩn, 330 s, bùa C1 (35,0,0), 20 đom đóm",
+  "req": "AC-NIGHT-1: Đêm 2 có 6 đèn chuẩn, 270 s, bùa C1 (35,0,0), 20 đom đóm",
   "seed": 1,
   "ticks": 0,
   "night": 2,
@@ -34,7 +34,7 @@
       {
         "tick": 0,
         "path": "time_left_s",
-        "value": 330
+        "value": 270
       },
       {
         "tick": 0,
@@ -56,5 +56,6 @@
         "value": 2
       }
     ]
-  }
+  },
+  "changed_in_phase3": "Ticket-03: Đêm 2 = 270 s"
 }

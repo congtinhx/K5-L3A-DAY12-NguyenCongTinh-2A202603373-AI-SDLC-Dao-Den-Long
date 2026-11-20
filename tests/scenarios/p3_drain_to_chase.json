@@ -1,0 +1,54 @@
+{
+  "name": "p3_drain_to_chase",
+  "req": "Đang drain mà Mây vào trong 6 m → chase",
+  "seed": 1,
+  "ticks": 1,
+  "snapshot_every": 1,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
+    "motes": [],
+    "shades": [
+      {
+        "id": "S1",
+        "pos": [
+          5.5,
+          0,
+          0
+        ],
+        "state": "drain",
+        "target_lantern_id": "L1"
+      }
+    ],
+    "drifters": [],
+    "lanterns": [
+      {
+        "id": "L1",
+        "pos": [
+          5,
+          0,
+          0
+        ],
+        "lit": true,
+        "fuel": 20
+      }
+    ]
+  },
+  "inputs": null,
+  "expect": {
+    "snapshots": [
+      {
+        "tick": 0,
+        "path": "shades.0.state",
+        "value": "drain"
+      },
+      {
+        "tick": 1,
+        "path": "shades.0.state",
+        "value": "chase"
+      }
+    ]
+  }
+}

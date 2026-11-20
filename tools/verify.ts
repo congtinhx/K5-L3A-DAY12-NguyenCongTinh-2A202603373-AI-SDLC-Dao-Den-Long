@@ -6,7 +6,7 @@ import os from 'node:os';
 import path from 'node:path';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
-const PHASE = process.env.PHASE ?? 'phase-2';
+const PHASE = process.env.PHASE ?? 'phase-3';
 const OUT = path.join(ROOT, 'docs', 'proof', PHASE);
 const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'ddl-verify-'));
 fs.mkdirSync(OUT, { recursive: true });
@@ -42,7 +42,7 @@ for (const night of [1, 2, 3]) {
   check(`Đêm ${night}: tốc độ ≤ 30 s cho 21 600 tick`, ms <= 30000 && fEnd.ticks === 21600, `${ms.toFixed(0)} ms gồm khởi động Node; end ${JSON.stringify(fEnd)}`);
   // 4. Schema v1.1
   const L = lines(a), snaps = L.filter((x) => x.type === 'snapshot');
-  const SH = ['spawning', 'wander', 'chase', 'recoil', 'stunned'], DR = ['idle', 'chase', 'flee', 'removed'];
+  const SH = ['spawning', 'wander', 'chase', 'recoil', 'stunned', 'drain'], DR = ['idle', 'chase', 'flee', 'removed'];
   const bad: string[] = [];
   if (!(L[0].type === 'snapshot' && L[0].tick === 0)) bad.push('dòng đầu không phải snapshot tick 0');
   if (!(L[1].type === 'event' && L[1].name === 'night_start' && L[1].data.night === night)) bad.push('thiếu night_start');
@@ -52,13 +52,14 @@ for (const night of [1, 2, 3]) {
     if (s.night !== night || typeof s.wind?.active !== 'boolean' || typeof s.wind?.dir_deg !== 'number') bad.push(`tick ${s.tick}: night/wind`);
     for (const k of ['pos', 'vel']) if (!Array.isArray(p[k]) || p[k].length !== 3) bad.push(`tick ${s.tick}: player.${k}`);
     for (const k of ['grounded', 'invuln']) if (typeof p[k] !== 'boolean') bad.push(`tick ${s.tick}: player.${k}`);
-    for (const k of ['dash_cd_s', 'pulse_cd_s', 'charm_s', 'flames', 'carried']) if (typeof p[k] !== 'number') bad.push(`tick ${s.tick}: player.${k}`);
+    for (const k of ['dash_cd_s', 'pulse_cd_s', 'charm_s', 'flames', 'carried', 'capacity']) if (typeof p[k] !== 'number') bad.push(`tick ${s.tick}: player.${k}`);
+    if (!s.lanterns.every((l: { fuel: unknown; ever_lit: unknown; relit_count: unknown; lit: boolean }) => typeof l.fuel === 'number' && typeof l.ever_lit === 'boolean' && typeof l.relit_count === 'number' && (l.lit || l.fuel === 0))) bad.push(`tick ${s.tick}: lanterns v1.2`);
     if (!s.shades.every((x: { state: string }) => SH.includes(x.state))) bad.push(`tick ${s.tick}: tên trạng thái Bóng Mực`);
     if (!s.drifters.every((x: { state: string; stolen: number }) => DR.includes(x.state) && typeof x.stolen === 'number')) bad.push(`tick ${s.tick}: drifters`);
     if (!s.motes.every((m: { kind: string; ttl_s: unknown }) => ['random', 'dropped'].includes(m.kind) && (m.kind === 'random' ? m.ttl_s === null : typeof m.ttl_s === 'number'))) bad.push(`tick ${s.tick}: motes`);
     if (!s.charms.every((c: { available: unknown; respawn_s: unknown }) => typeof c.available === 'boolean' && typeof c.respawn_s === 'number')) bad.push(`tick ${s.tick}: charms`);
   }
-  check(`Đêm ${night}: schema JSONL v1.1`, bad.length === 0, bad.length ? bad.slice(0, 3).join('; ') : `${snaps.length} snapshot, ${L.filter((x) => x.type === 'event').length} event, kết thúc ${JSON.stringify(L[L.length - 1])}`);
+  check(`Đêm ${night}: schema JSONL v1.2`, bad.length === 0, bad.length ? bad.slice(0, 3).join('; ') : `${snaps.length} snapshot, ${L.filter((x) => x.type === 'event').length} event, kết thúc ${JSON.stringify(L[L.length - 1])}`);
 }
 
 // 5. Bot tự chơi (inputs sinh bởi tools/bot.ts) phát lại qua CLI — chứng minh chơi trọn Đêm 1 không lỗi
@@ -66,7 +67,7 @@ const bo = path.join(TMP, 'bot.jsonl');
 const br = cli(1, ['--seed', '5', '--ticks', '21600', '--inputs', path.join(ROOT, 'tests', 'fixtures', 'bot-seed5-n1.inputs.json')], bo);
 const BL = lines(bo), bend = BL[BL.length - 1];
 check('Bot tự chơi Đêm 1 (seed 5) tới hết Đêm, phát lại qua CLI', br.status === 0 && bend.type === 'end' && bend.state !== 'playing',
-  `end ${JSON.stringify(bend)}; đèn thắp ×${BL.filter((x) => x.name === 'lantern_lit').length}. Bot đơn giản **chưa thắng** với số chuẩn (xem eval-phase2.md)`);
+  `end ${JSON.stringify(bend)}; đèn thắp ×${BL.filter((x) => x.name === 'lantern_lit').length}. Bot đơn giản chưa châm dầu/chưa thắng (xem eval)`);
 
 // 6. Mã thoát lỗi
 fs.writeFileSync(path.join(TMP, 'bad.json'), '{oops');

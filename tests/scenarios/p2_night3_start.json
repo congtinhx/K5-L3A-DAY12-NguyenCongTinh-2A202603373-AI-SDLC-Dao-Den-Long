@@ -1,6 +1,6 @@
 {
   "name": "p2_night3_start",
-  "req": "AC-NIGHT-1: Đêm 3 có 7 đèn chuẩn (L1 trên tầng 2), 360 s, 2 bùa",
+  "req": "AC-NIGHT-1: Đêm 3 có 7 đèn chuẩn (L1 trên tầng 2), 300 s, 2 bùa",
   "seed": 1,
   "ticks": 0,
   "night": 3,
@@ -34,7 +34,7 @@
       {
         "tick": 0,
         "path": "time_left_s",
-        "value": 360
+        "value": 300
       },
       {
         "tick": 0,
@@ -51,5 +51,6 @@
         ]
       }
     ]
-  }
+  },
+  "changed_in_phase3": "Ticket-03: Đêm 3 = 300 s"
 }

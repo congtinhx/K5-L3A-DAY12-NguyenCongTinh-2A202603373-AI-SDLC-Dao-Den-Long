@@ -1,0 +1,48 @@
+{
+  "name": "p3_no_safe_low_fuel",
+  "req": "Đèn fuel < 30 mất vùng an toàn: Bóng Mực chase đi xuyên vào gần đèn (đèn fuel 29) và chạm Mây",
+  "seed": 1,
+  "ticks": 120,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
+    "motes": [],
+    "shades": [
+      {
+        "id": "S1",
+        "pos": [
+          5,
+          0,
+          0
+        ]
+      }
+    ],
+    "drifters": [],
+    "lanterns": [
+      {
+        "id": "L1",
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "lit": true,
+        "fuel": 29
+      }
+    ]
+  },
+  "inputs": null,
+  "expect": {
+    "events": [
+      {
+        "tick": 60,
+        "name": "player_hit",
+        "data": {
+          "by": "shade"
+        }
+      }
+    ]
+  }
+}

@@ -1,6 +1,6 @@
 {
   "name": "default_start",
-  "req": "Màn mặc định: 5 đèn chuẩn, 20 đom đóm, (0,0,0), 300 s",
+  "req": "Màn mặc định: 5 đèn chuẩn, 20 đom đóm, (0,0,0), 240 s",
   "seed": 7,
   "ticks": 0,
   "scenario": null,
@@ -67,7 +67,7 @@
       {
         "tick": 0,
         "path": "time_left_s",
-        "value": 300
+        "value": 240
       },
       {
         "tick": 0,
@@ -78,8 +78,19 @@
         "tick": 0,
         "path": "player.grounded",
         "value": true
+      },
+      {
+        "tick": 0,
+        "path": "player.capacity",
+        "value": 10
+      },
+      {
+        "tick": 0,
+        "path": "lanterns.0.fuel",
+        "value": 0
       }
     ]
   },
-  "changed_in_phase2": "Ticket-02: 20 đom đóm ban đầu (không còn 60)"
+  "changed_in_phase2": "Ticket-02: 20 đom đóm ban đầu (không còn 60)",
+  "changed_in_phase3": "Ticket-03: Đêm 1 = 240 s; thêm kiểm tra capacity 10, fuel 0"
 }

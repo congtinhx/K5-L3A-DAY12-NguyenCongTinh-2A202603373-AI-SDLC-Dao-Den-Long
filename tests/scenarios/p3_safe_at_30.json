@@ -1,0 +1,53 @@
+{
+  "name": "p3_safe_at_30",
+  "req": "Đúng fuel 30 vẫn còn vùng an toàn (tick 1 sau hao là 29.98 < 30 → mất): đèn fuel 40 thì chặn ở 6 m",
+  "seed": 1,
+  "ticks": 120,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
+    "motes": [],
+    "shades": [
+      {
+        "id": "S1",
+        "pos": [
+          10,
+          0,
+          0
+        ]
+      }
+    ],
+    "drifters": [],
+    "lanterns": [
+      {
+        "id": "L1",
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "lit": true,
+        "fuel": 40
+      }
+    ]
+  },
+  "inputs": null,
+  "expect": {
+    "absent": [
+      "player_hit"
+    ],
+    "snapshots": [
+      {
+        "tick": 120,
+        "path": "shades.0.pos",
+        "value": [
+          6,
+          0,
+          0
+        ]
+      }
+    ]
+  }
+}

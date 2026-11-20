@@ -1,0 +1,67 @@
+{
+  "name": "p3_refuel",
+  "req": "Châm dầu: fuel 50 → (sau hao) 49.98, used = min(10, ceil(50.02/10)) = 6, fuel = 100, +30 điểm",
+  "seed": 1,
+  "ticks": 10,
+  "scenario": {
+    "random_motes": false,
+    "random_shades": false,
+    "random_drifters": false,
+    "wind_enabled": false,
+    "motes": [],
+    "shades": [],
+    "drifters": [],
+    "player": {
+      "carried": 10
+    },
+    "lanterns": [
+      {
+        "id": "L1",
+        "pos": [
+          0,
+          0,
+          2
+        ],
+        "lit": true,
+        "fuel": 50
+      }
+    ]
+  },
+  "inputs": {
+    "frames": [
+      {
+        "tick": 0,
+        "interact": true
+      }
+    ]
+  },
+  "expect": {
+    "events": [
+      {
+        "tick": 1,
+        "name": "refuel",
+        "data": {
+          "lantern_id": "L1",
+          "amount": 6,
+          "fuel": 100
+        }
+      }
+    ],
+    "absent": [
+      "deposit",
+      "lantern_lit"
+    ],
+    "snapshots": [
+      {
+        "tick": 10,
+        "path": "player.carried",
+        "value": 4
+      },
+      {
+        "tick": 10,
+        "path": "score",
+        "value": 30
+      }
+    ]
+  }
+}
